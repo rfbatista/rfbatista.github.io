@@ -30,7 +30,7 @@ weight = 1
   rss = true # generate rss feed. default value is false
   googleAnalyticsAsync = true # use asynchronous tracking. Synchronous tracking by default
   showAllPostsArchive = false # default
-  description = "Hello, my name is Renan I am a software engineer, developer, programmer, software designer whatever you identify me but I am really into solving problems with code."
+  description = "Hello, my name is Renan I am a software engineer, developer, programmer, software designer whatever you identify me but I am really love to solve problems with code."
 
   showAllPostsOnHomePage = false # default
   postsOnHomePage = 0 # this option will be ignored if showAllPostsOnHomePage is set to true
