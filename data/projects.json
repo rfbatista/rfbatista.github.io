@@ -1,0 +1,9 @@
+{
+  "list": [
+    {
+      "name":"Loqui",
+      "url":"https://github.com/rfbatista/loqui",
+      "desc":"A better chatbot engine for domain specific use cases."
+    }
+  ]
+}
