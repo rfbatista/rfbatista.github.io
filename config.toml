@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "https://rfbatista.github.io/"
 title = "rfbatista"
 theme = "hugo-theme-console"
 languageCode = "en-us"
