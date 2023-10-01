@@ -1,5 +1,5 @@
 baseurl = "https://example.com/"
-title = "rfbatista"
+title = "console-demo"
 theme = "hugo-theme-console"
 languageCode = "en-us"
 
