@@ -4,3 +4,4 @@ deploy:
 	sh ./scripts/deploy.sh
 install:
 	sh ./scripts/install.sh
+	
