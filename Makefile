@@ -1,5 +1,5 @@
 server:
-	sh ./scripts/server.sh
+	 hugo server -wDs . -d dev
 deploy:
 	sh ./scripts/deploy.sh
 install:

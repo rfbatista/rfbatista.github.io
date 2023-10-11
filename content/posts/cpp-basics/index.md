@@ -9,7 +9,8 @@ tags = ["c++"]
 # Variaveis
 Toda variável segue esse formato: **tipo**  **nome da variavel** = **inicialização (opcional)**
 Ex.:
-```
+
+```cpp
 int i1 = 2;
 int i2, i3 = 5; //i2 não é inicializado
 floar pi = 3.14159

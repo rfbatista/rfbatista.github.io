@@ -2,13 +2,6 @@
 <h1>{{ .Title }}</h1>
 
 {{ .PublishDate.Format "Jan. 2, 2006" }}
-<div>
-<div class="flex flex-row">
-    {{ range .Params.tags }}
-        <div class="bg-blue-100 mx-1">{{ . }}</div>
-    {{ end }}
-</ul>
-</div>
 {{ with .Params.linkedin }}
     // <a href="{{ . }}">Linkedin</a>
 {{ end }}
@@ -16,8 +9,6 @@
     // <a href="{{ . }}">Twitter</a>
 {{ end }}
 <br/><br/>
-<article>
 {{ .Content }}
-</article>
 {{ template "_internal/disqus.html" . }}
 {{ end }}
