@@ -56,7 +56,7 @@ name = name + ", hello world "
 ```
 
 # Constantes
-```
+```cpp
 const int c1 = 2;
 ```
 
