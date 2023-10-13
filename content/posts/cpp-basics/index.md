@@ -2,6 +2,7 @@
 title = "C++ Basics"
 date = "2023-10-02"
 tags = ["c++"]
+draft = true
 +++
 
 # C++ Basics

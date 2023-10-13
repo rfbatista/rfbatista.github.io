@@ -6,6 +6,7 @@
 <div class="posts-list">
 {{ range sort .Data.Pages "Date" "desc" }}
     {{ if not .Params.private }}
+                {{ if ne .Draft true}}
         <div class="post">
             <p>
                 <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>    
@@ -13,6 +14,7 @@
                 {{ .Summary }}
             </p>
         </div>
+                {{ end }}
     {{ end }}
 {{ end }}
 </div>

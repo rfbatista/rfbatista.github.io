@@ -2,6 +2,7 @@
 title = "Gorrotinas e Canais"
 date = "2023-10-02"
 tags = ["Golang", "data-structures"]
+draft = true
 +++
 
 ```

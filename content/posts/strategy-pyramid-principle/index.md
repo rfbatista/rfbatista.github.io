@@ -2,6 +2,7 @@
 title = "The Pyramid Principle"
 date = "2023-10-02"
 tags = ["Strategy"]
+draft = true
 +++
 
 The Pyramid Principle

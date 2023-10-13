@@ -2,6 +2,7 @@
 title = "GO - Strings"
 date = "2023-10-02"
 tags = ["Golang", "data-structures"]
+draft = true
 +++
 Uma string é uma sequencia imutavel de bytes
 As strings de text são convencionalmente interpretadas como sequencias ed pontos de código Unicode (`runas`) codificadas em UTF-8.
