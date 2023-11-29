@@ -4,7 +4,9 @@ date = "2023-10-02"
 tags = ["Golang"]
 draft = true
 +++
+
 # Array
+
 Um array é uma sequencia de tamanho fixo de zero ou mais elements
 
 ```
@@ -22,12 +24,14 @@ q = [4]int{1,2,3,4} // erro de compilação: não é permitido atribuir [4]int a
 Arrays são inflexiveis
 
 # Fatias (slices)
+
 Uma fatia representa um sequencia de tamanho variavel cujo elementos tem o mesmo tipo.
 Uma fatia tem tres elementos:
-- um ponteiro: aponta para o primeiro elemento do array acessivelpela fatia
+
+- um ponteiro: aponta para o primeiro elemento do array acessivel pela fatia
 - tamanho: número de elementos da fatia, não pode exceder a capacidade
 - capacidade: numero de elementos entre o inicio da fatia e o final do array subjacente
-As funções:
+  As funções:
 - `len` - retorna o tamanho
 - `cap` - retorna a capacidade
 
@@ -35,23 +39,28 @@ Uma fatia pode ser extendia além de seu tamanho, mas não além da sua capacida
 Como uma fatia contém um ponteiro para o `array subjacente` isso permite que uma função modifique os elementos do `array subjacete`
 
 ### Make
+
 ```
 make([]T, len)
 make([]T, len, cap) // mesmo que make ([]T, cap)[:len]
 ```
 
 ### Função append
+
 ```
 u := [11]int{}
 y := u[:10]
 fmt.Println(u, y)
 z := append(y, 2, 3)
 ```
-Esta função vai extender o slice caso a capacidade do `array subjacente` seja suficiente para  encaixar os novos elementos, caso contrário é criado um novo `array subjacente` com capacidade suficiente para encaixar os novos elementos.
+
+Esta função vai extender o slice caso a capacidade do `array subjacente` seja suficiente para encaixar os novos elementos, caso contrário é criado um novo `array subjacente` com capacidade suficiente para encaixar os novos elementos.
 
 # Mapas
+
 É uma referência a uma tabela hash, escrito como `map[K]V`
 Requisitos:
+
 - Todas as chaves são do mesmo tipo
 - Todos os valores são do mesmo tipo
 - Mas as chaves e valores não precisam ser do mesmo tipo
@@ -61,12 +70,14 @@ Requisitos:
 ages := make(map[string]int)
 deletes(ages, "alice") // remove o elemento com a chave "alice"
 ```
+
 - Um elemento de mapa não é uma variavels, então não podemos obter seu endereço (adicionar um novo elemento pode alterar os endereços por isso não é possivel acessar o ponteiro)
-- Não é possivel atribuir valores a um mapa não alocado 
-` ages["carol"] =  21 // pânico: atribuição a uma entrada em um mapa nil`
+- Não é possivel atribuir valores a um mapa não alocado
+  ` ages["carol"] =  21 // pânico: atribuição a uma entrada em um mapa nil`
 - Acessar um elemento do mapa sempre ira retornar um valor, para verificar podemos fazer essa operação:
-`age, ok := ages["bob"]; !ok { //bob não é uma chave nesse mapa
+  `age, ok := ages["bob"]; !ok { //bob não é uma chave nesse mapa
 - Mudanças nos mapas realizadas por funções serão efetuadas no mapara original sem a necessidade de passar ponteiros. Exemplo:
+
 ```
 import (
 	"fmt"
@@ -107,8 +118,11 @@ func reallocatePtr(m *map[string]int) {
 ```
 
 # Estruturas
+
 A estrutura é um tipo de dado que agregra diferentes tipos em uma unica entidade.
+
 - Não é possivel acessar campos não exportados em outros pacores
+
 ```
 package p
 type T struct{a, b int}
@@ -116,22 +130,29 @@ package p
 va _ = p.T{a: 1, b:2 } // erro de compilação: não é possivel referencias a, b
 va _ = p.T{1, 2} // erro de compilação: não é possivel referencias a, b
 ```
+
 - se todos os campos de uma estrutura são comparaveis, então a estrutura é comparável
+
 ### Campos anônimos
+
 ```
 type Circle struct {
 	Point
 	Radius int
 }
 ```
+
 Com o campo anônimo podemos acessar várivaeis correspondentes ao tipo anonimo diretamente na raiz:
+
 ```
 var c Circle
 c.X = 10 // se não fosse anonimo precisariamos acessar assim x.Point.X = 10
 c.Y = 10
 
 ```
+
 Porém para popular os campos na inicialização precisamos declarar os tipos especificados
+
 ```
 c := Circle{Point{x: 1, y: 2}, 10}
 ```
