@@ -4,7 +4,6 @@ date = "2023-07-15"
 tags = ["Golang", "data-structures"]
 draft = false
 +++
-
 ```
 go f() // cria uma nova gorrotina que chama f()
 ```
