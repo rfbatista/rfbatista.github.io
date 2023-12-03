@@ -20,6 +20,10 @@ pygmentsCodeFences=true
   url = "posts/"
   
   [[params.navlinks]]
+  name = "wiki/"
+  url = "wiki/"
+
+  [[params.navlinks]]
   name = "photos/"
   url = "photos/"
 

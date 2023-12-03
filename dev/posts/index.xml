@@ -6,38 +6,86 @@
     <description>Recent content in Posts on rfbatista</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>1 dollar personal project Pt. 1 - Lightsail configuration </title>
+      <title>Quick tip: Find and replace with Neovim</title>
+      <link>http://localhost:1313/posts/find-replace-neovim/</link>
+      <pubDate>Sun, 03 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/find-replace-neovim/</guid>
+      <description>Use telescope live_grep to search for what you want to replace:
+Populate the results to the quick fix list with ctrl + q
+Then run find and replace:
+:cdo s/search/replace/g The :cdo will execute the specified command in every entry in the quick fix list.
+After that, every entry have to be saved, you can go in every buffer and save manually or to save every buffer:
+:cdo update References Quickfix Telescope </description>
+    </item>
+    <item>
+      <title>1 dollar side project Pt. 1 - Lightsail configuration </title>
       <link>http://localhost:1313/posts/1-dollar-startup-pt1/</link>
       <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/1-dollar-startup-pt1/</guid>
-      <description>Some context I have been using AWS lightsail services for my personal projects for some months now, and it proved to me to be quite powerful and cheap. There is a lot of options for backend-as-a-service, database-as-a-service, or whatever-as-a-service, but, or it make you really dependent on that provider (make it hard to change afterwards) or it became too expensive, and the most important I really like the complete control of what is going on in my services.</description>
+      <description>Some context I have been using AWS lightsail services for my personal projects for some months now, and it proved to me to be quite powerful and cheap. There is a lot of options for backend-as-a-service, database-as-a-service, or whatever-as-a-service, but, or it make you really dependent on that provider (make it hard to change afterwards) or it became too expensive. In my side projects the most important thing for me is the complete control of what is going on in my services.</description>
     </item>
-    
     <item>
       <title>C&#43;&#43; Basics</title>
       <link>http://localhost:1313/posts/cpp-basics/</link>
       <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/cpp-basics/</guid>
       <description>C++ Basics Variaveis Toda variável segue esse formato: tipo nome da variavel = inicialização (opcional) Ex.:
 int i1 = 2; int i2, i3 = 5; //i2 não é inicializado floar pi = 3.14159 char c1 = &amp;#39;a&amp;#39;, c2 = 35; Tipos pŕe definidos ![[Pasted image 20230827112516.png]]
 Caracteres e Strings O tipo char pode ser utilizado para armazenar caracteres
 char c = &amp;#39;f&amp;#39; Você pode representar qualquer letra que encaixe em 8 bits em um caractere.</description>
     </item>
-    
     <item>
-      <title>Find and replace with Neovim</title>
-      <link>http://localhost:1313/posts/find-replace-neovim/</link>
-      <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/find-replace-neovim/</guid>
-      <description>Use telescope to search for what you want to replace, populate the results to quick fix list with ctrl + q.
-cdo s/search/replace/g
-cdo update</description>
+      <title>Funcoes em Golang</title>
+      <link>http://localhost:1313/posts/go-funcoes/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/go-funcoes/</guid>
+      <description>Declaração de funções func nome(lista-de-parametros) (lista-de-resultados) Estratégias de tratamento de erro Propagar o error de forma que a falha em uma subrotina torne-se uma falha na rotina que fez a chamada fmt.Errorf(&amp;#34;novo error %s&amp;#34;, variavel_string, err) // cria erros descritivos ao prefixar sucessivamento informações adicionais As strings das mensagens de erro não devem começar com a letra maiusculas pois as mensagens de erro com frequencia são encadeadas Funções variádicas É uma função que pode ser chamda com um número váriavel de argumentos.</description>
     </item>
-    
+    <item>
+      <title>GO - Tipos compostos</title>
+      <link>http://localhost:1313/posts/go-tipo-compostos/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/go-tipo-compostos/</guid>
+      <description>Array Um array é uma sequencia de tamanho fixo de zero ou mais elements
+var q [3]int = [3]int{1,2,3} q := [...]int{1,2,3} // com a reticencia o tamano será determinado pela quantidade de inicializadores O tamanho de um array faz parte do seu tipo
+q := [3]int{1,2,3} q = [4]int{1,2,3,4} // erro de compilação: não é permitido atribuir [4]int a [3]int Arrays são inflexiveis
+Fatias (slices) Uma fatia representa um sequencia de tamanho variavel cujo elementos tem o mesmo tipo.</description>
+    </item>
+    <item>
+      <title>GO - Workspace</title>
+      <link>http://localhost:1313/posts/go-workspace/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/go-workspace/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gorrotinas e Canais</title>
+      <link>http://localhost:1313/posts/go-gorrotinas-canais/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/go-gorrotinas-canais/</guid>
+      <description>go f() // cria uma nova gorrotina que chama f() Canais Os canais sãos os meios de comunicação entre as gorrotinas Cada canal é um comunicador de um tipo particular
+ch := make(chan int) // ch é do tipo chan int Um canal é uma referência a estrutura criada por make
+instrução de envio: ch &amp;lt;-x instrução de recpção em uma instrução de atribuição: x = &amp;lt;-ch instrução de recepção com resultado descartado: &amp;lt;-ch Para fechar um canal close(ch)</description>
+    </item>
+    <item>
+      <title>IO Pipes</title>
+      <link>http://localhost:1313/posts/io-pipes/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/io-pipes/</guid>
+      <description>With io.Pipe we have a convenient way to connect a writer to a reader, really similar to how channels work
+pr, pw := io.Pipe() References justforfunc #19: mastering io.Pipes</description>
+    </item>
+    <item>
+      <title>The Pyramid Principle</title>
+      <link>http://localhost:1313/posts/strategy-pyramid-principle/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/strategy-pyramid-principle/</guid>
+      <description>The Pyramid Principle
+https://medium.com/lessons-from-mckinsey/the-pyramid-principle-f0885dd3c5c7
+Time order: if there is a sequence of events that form a cause-effect relationship, you should present the ideas in time order. Structural order: break a singular thought into its parts, ensuring that you have covered all of the major supporting ideas. Degree order: present supporting ideas in rank order of importance, most to least important. </description>
+    </item>
   </channel>
 </rss>

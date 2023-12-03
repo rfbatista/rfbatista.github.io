@@ -1,2 +1,3 @@
 
-teste
+I'm a software engineer proficient in both Go (Golang), Python, Javascript (NodeJS) and C++. With a strong focus on efficiency and scalability, I've delivered high-performance solutions in areas such as cloud-based microservices and system-level programming. My commitment to clean code and rigorous testing ensures the development of robust, maintainable applications. I thrive in collaborative, dynamic environments and possess the skills to drive projects from inception to successful completion. My dual expertise in Go and Javascript makes me a versatile asset ready to tackle diverse technical challenges and contribute to innovative projects.
+

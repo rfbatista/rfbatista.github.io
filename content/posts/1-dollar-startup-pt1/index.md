@@ -2,6 +2,7 @@
 title = "1 dollar side project Pt. 1 - Lightsail configuration "
 date = "2023-10-02"
 tags = ["aws", "lightsail", "devops", "golang"]
+draft = true
 +++
 
 # Some context

@@ -1,12 +1,32 @@
 +++
-title = "Find and replace with Neovim"
-date = "2023-10-01"
+title = "Quick tip: Find and replace with Neovim"
+date = "2023-12-03"
 tags = ["neovim"]
-draft = true
+draft = false
 +++
 
-Use telescope to search for what you want to replace, populate the results to quick fix list with ctrl + q.
+Use telescope live_grep to search for what you want to replace:
 
-cdo s/search/replace/g
+![](./1.png)
 
-cdo update
+Populate the results to the *quick fix list* with `ctrl + q`
+
+![](./2.png)
+
+
+Then run find and replace: 
+```sh
+:cdo s/search/replace/g
+```
+The :cdo will execute the specified command in every entry in the quick fix list.
+
+![](./5.png)
+
+After that, every entry have to be saved, you can go in every buffer and save manually or to save every buffer:
+```sh
+:cdo update
+```
+
+# References
+- [Quickfix](https://neovim.io/doc/user/quickfix.html)
+- [Telescope](https://github.com/nvim-telescope/telescope.nvim)

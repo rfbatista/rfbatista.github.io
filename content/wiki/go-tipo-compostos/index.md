@@ -1,8 +1,8 @@
 +++
 title = "GO - Tipos compostos"
-date = "2023-10-02"
+date = "2023-04-19"
 tags = ["Golang"]
-draft = true
+draft = false
 +++
 # Array
 Um array é uma sequencia de tamanho fixo de zero ou mais elements

@@ -1,6 +1,6 @@
 +++
 title = "Funcoes em Golang"
-date = "2023-10-02"
+date = "2023-04-02"
 tags = ["Golang", "data-structures"]
 draft = true
 +++

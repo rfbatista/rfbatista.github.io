@@ -6,15 +6,14 @@
     <description>Recent content in lightsail on rfbatista</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/lightsail/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/lightsail/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>1 dollar personal project Pt. 1 - Lightsail configuration </title>
+      <title>1 dollar side project Pt. 1 - Lightsail configuration </title>
       <link>http://localhost:1313/posts/1-dollar-startup-pt1/</link>
       <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/posts/1-dollar-startup-pt1/</guid>
-      <description>Some context I have been using AWS lightsail services for my personal projects for some months now, and it proved to me to be quite powerful and cheap. There is a lot of options for backend-as-a-service, database-as-a-service, or whatever-as-a-service, but, or it make you really dependent on that provider (make it hard to change afterwards) or it became too expensive, and the most important I really like the complete control of what is going on in my services.</description>
+      <description>Some context I have been using AWS lightsail services for my personal projects for some months now, and it proved to me to be quite powerful and cheap. There is a lot of options for backend-as-a-service, database-as-a-service, or whatever-as-a-service, but, or it make you really dependent on that provider (make it hard to change afterwards) or it became too expensive. In my side projects the most important thing for me is the complete control of what is going on in my services.</description>
     </item>
-    
   </channel>
 </rss>
