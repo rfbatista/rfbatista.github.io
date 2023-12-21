@@ -1,0 +1,57 @@
+#name {
+  font-size: 35px;
+}
+
+section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+section.skills {
+  clear: both;
+  padding-top: 10px;
+  border-top: 1px solid var(--secondary-color);
+  color: var(--global-font-color);
+}
+
+
+section.posts {
+  clear: both;
+  padding-top: 10px;
+  border-top: 1px solid var(--secondary-color);
+  color: var(--global-font-color);
+}
+
+section.photos {
+  clear: both;
+  padding-top: 10px;
+  border-top: 1px solid var(--secondary-color);
+  color: var(--global-font-color);
+}
+
+section > h2,
+section > dl {
+  width: 100%;
+}
+
+section.title > aside {
+  width: calc((100% - 2 * 24px) / 3);
+}
+dt {
+  float: left;
+  margin-right: 10%;
+  max-width: 40%;
+  font-weight: bold;
+}
+
+dd {
+  color: grey;
+  margin-left: 50%;
+  margin-bottom: 0.5em;
+}
+
+dd::after {
+  content: " ";
+  display: block;
+  clear: left;
+}
