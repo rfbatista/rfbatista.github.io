@@ -14,6 +14,12 @@ section.skills {
   color: var(--global-font-color);
 }
 
+section.projects {
+  clear: both;
+  padding-top: 0px;
+  border-top: 1px solid var(--secondary-color);
+  color: var(--global-font-color);
+}
 
 section.posts {
   clear: both;
@@ -29,14 +35,15 @@ section.photos {
   color: var(--global-font-color);
 }
 
-section > h2,
-section > dl {
+section>h2,
+section>dl {
   width: 100%;
 }
 
-section.title > aside {
+section.title>aside {
   width: calc((100% - 2 * 24px) / 3);
 }
+
 dt {
   float: left;
   margin-right: 10%;
