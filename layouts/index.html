@@ -43,8 +43,7 @@
       <h1>Latest posts</h1>
 
       <div class="posts-list">
-        {{ with .Site.GetPage "/posts" }}
-        {{ range first 3 (sort .Data.Pages "Date" "desc")}}
+        {{ range first 3 .Site.Taxonomies.categories.post }}
         {{ if ne .Draft true}}
         <div class="post">
           <p>
@@ -53,7 +52,6 @@
           {{ .Summary }}
           </p>
         </div>
-        {{ end }}
         {{ end }}
         {{ end }}
       </div>

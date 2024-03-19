@@ -2,11 +2,13 @@
 title = "Quick tip: Find and replace with Neovim"
 date = "2023-12-03"
 tags = ["neovim"]
+categories = ["post"]
 draft = false
 +++
 
-In this article I describe how to replace some word on multiple files in neovim. The first step
-is to use `:Telescope live_grep` to search for what you want to replace:
+In this article I describe how to replace some word on multiple files using neovim. 
+
+Use `:Telescope live_grep` to search for what you want to replace:
 
 ![](./1.png)
 
