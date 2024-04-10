@@ -2,6 +2,7 @@
 title = "Game Engine Architecture - Jason Gregory"
 date = "2024-03-16"
 tags = ["game-engine", "book"]
+categories = ["book"]
 draft = false
 +++
 

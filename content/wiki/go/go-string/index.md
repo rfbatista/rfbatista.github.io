@@ -5,8 +5,8 @@ tags = ["Golang", "data-structures"]
 draft = false
 +++
 
-Uma string é uma sequencia imutavel de bytes
-As strings de text são convencionalmente interpretadas como sequencias de pontos de código Unicode (`runas`) codificadas em UTF-8.
+Uma string é uma sequencia imutavel de bytes.
+As strings são convencionalmente interpretadas como sequencias de pontos de código Unicode (`runas`) codificadas em UTF-8.
 
 A função `len`devolve o número de bytes não de runas
 
