@@ -32,6 +32,10 @@ pygmentsCodeFences=true
   name = "photos/"
   url = "photos/"
 
+  [[params.navlinks]]
+  name = "lists/"
+  url = "lists/"
+
 [taxonomies]
    tag = "tags"
    category = "categories"
