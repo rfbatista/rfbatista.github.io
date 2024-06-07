@@ -36,6 +36,10 @@ pygmentsCodeFences=true
   name = "lists/"
   url = "lists/"
 
+  [[params.navlinks]]
+  name = "ml/"
+  url = "ml/"
+
 [taxonomies]
    tag = "tags"
    category = "categories"
