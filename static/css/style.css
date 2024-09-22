@@ -62,3 +62,10 @@ dd::after {
   display: block;
   clear: left;
 }
+
+p > code {
+  background-color: #eff1f5;
+  color: #4c4f69;
+  border: 1px solid var(--secondary-color);
+  padding: 3px;
+}
