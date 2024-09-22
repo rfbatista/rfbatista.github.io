@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
-    <link rel="stylesheet" href="{{ "css/animate-4.1.1.min.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "css/console.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "css/syntax.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    <!-- <link rel="stylesheet" href="{{ "css/animate-4.1.1.min.css" | absURL }}"> -->
+    <link rel="stylesheet" href="{{ "css/console.css" | absURL }}?{{ .Site.LastChange.Unix }}">
+    <link rel="stylesheet" href="{{ "css/syntax.css" | absURL }}?{{ .Site.LastChange.Unix }}">
+    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}?{{ .Site.LastChange.Unix }}">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" /> -->
     {{ `
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

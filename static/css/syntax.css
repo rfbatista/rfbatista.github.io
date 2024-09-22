@@ -212,7 +212,6 @@ div {
 }
 
 pre code {
-    overflow-x: scroll;
     padding: 0;
     margin: 0;
     display: inline-block;
