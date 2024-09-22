@@ -42,14 +42,12 @@
     <section class="posts">
       <h1>Latest posts</h1>
 
-      <div class="posts-list">
+      <div class="">
         {{ range first 3 .Site.Taxonomies.categories.post }}
         {{ if ne .Draft true}}
         <div class="post">
-          <p>
           <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
           <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
-          </p>
         </div>
         {{ end }}
         {{ end }}

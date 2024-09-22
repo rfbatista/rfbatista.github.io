@@ -17,10 +17,6 @@ pygmentsCodeFences=true
   animateStyle = "animated zoomIn fast" 
 
   [[params.navlinks]]
-  name = "about/"
-  url = "about/"
-
-  [[params.navlinks]]
   name = "posts/"
   url = "posts/"
   

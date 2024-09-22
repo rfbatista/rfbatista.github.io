@@ -1,7 +1,7 @@
 +++
 title = "Understanding and Validating JWT Tokens with AWS Cognito"
-date = "2023-12-03"
-tags = ["neovim"]
+date = "2024-05-16"
+tags = ["aws", "aws cognito"]
 categories = ["post"]
 draft = false
 +++

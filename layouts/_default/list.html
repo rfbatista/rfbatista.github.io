@@ -1,21 +1,16 @@
 {{ define "main" }}
 <h1>{{ .Page.Title }}</h1>
-<br/>
+<br />
 {{ .Content }}
 
-<div class="posts-list">
-{{ range sort .Data.Pages "Date" "desc" }}
-    {{ if not .Params.private }}
-                {{ if ne .Draft true}}
-        <div class="post">
-            <p>
-                <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>    
-                <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
-            </p>
-        </div>
-                {{ end }}
-    {{ end }}
-{{ end }}
+<div class="">
+  {{ range sort .Data.Pages "Date" "desc" }} {{ if not .Params.private }} {{ if
+  ne .Draft true}}
+  <div class="post">
+    <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
+    <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
+  </div>
+  {{ end }} {{ end }} {{ end }}
 </div>
 
 {{ end }}
