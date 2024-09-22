@@ -1,7 +1,7 @@
 +++
 title = "GO - Tipos compostos"
 date = "2023-04-19"
-tags = ["Golang"]
+tags = ["golang"]
 draft = false
 +++
 
@@ -9,14 +9,14 @@ draft = false
 
 Um array é uma sequencia de tamanho fixo de zero ou mais elements
 
-```
+```go
 var q [3]int = [3]int{1,2,3}
 q := [...]int{1,2,3} // com a reticencia o tamano será determinado pela quantidade de inicializadores
 ```
 
 O tamanho de um array faz parte do seu tipo
 
-```
+```go
 q := [3]int{1,2,3}
 q = [4]int{1,2,3,4} // erro de compilação: não é permitido atribuir [4]int a [3]int
 ```
@@ -40,14 +40,14 @@ Como uma fatia contém um ponteiro para o `array subjacente` isso permite que um
 
 ### Make
 
-```
+```go
 make([]T, len)
 make([]T, len, cap) // mesmo que make ([]T, cap)[:len]
 ```
 
 ### Função append
 
-```
+```go
 u := [11]int{}
 y := u[:10]
 fmt.Println(u, y)
@@ -66,7 +66,7 @@ Requisitos:
 - Mas as chaves e valores não precisam ser do mesmo tipo
 - O tipo da chave `K` deve ser comparavel
 
-```
+```go
 ages := make(map[string]int)
 deletes(ages, "alice") // remove o elemento com a chave "alice"
 ```
@@ -78,7 +78,7 @@ deletes(ages, "alice") // remove o elemento com a chave "alice"
   `age, ok := ages["bob"]; !ok { //bob não é uma chave nesse mapa
 - Mudanças nos mapas realizadas por funções serão efetuadas no mapara original sem a necessidade de passar ponteiros. Exemplo:
 
-```
+```go
 import (
 	"fmt"
 )
@@ -123,7 +123,7 @@ A estrutura é um tipo de dado que agregra diferentes tipos em uma unica entidad
 
 - Não é possivel acessar campos não exportados em outros pacores
 
-```
+```go
 package p
 type T struct{a, b int}
 package p
@@ -135,7 +135,7 @@ va _ = p.T{1, 2} // erro de compilação: não é possivel referencias a, b
 
 ### Campos anônimos
 
-```
+```go
 type Circle struct {
 	Point
 	Radius int
@@ -144,7 +144,7 @@ type Circle struct {
 
 Com o campo anônimo podemos acessar várivaeis correspondentes ao tipo anonimo diretamente na raiz:
 
-```
+```go
 var c Circle
 c.X = 10 // se não fosse anonimo precisariamos acessar assim x.Point.X = 10
 c.Y = 10
@@ -153,10 +153,10 @@ c.Y = 10
 
 Porém para popular os campos na inicialização precisamos declarar os tipos especificados
 
-```
+```go
 c := Circle{Point{x: 1, y: 2}, 10}
 ```
 
-```
+```go
 pp := &Point{1, 2}
 ```

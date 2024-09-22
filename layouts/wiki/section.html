@@ -7,11 +7,21 @@ The notes are not final, they are always a working progress, where I can organiz
 <br />
 
 <ul>
-  {{ range .Site.Taxonomies.tags }}
-  <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
-    {{ .Count }}
-  </li>
-  {{end}}
+  {{ range $tag, $pages := .Site.Taxonomies.tags }}
+    {{ $wikiPages := where $pages "Section" "wiki" }}
+    {{ if gt (len $wikiPages) 0 }}
+      <li>
+        <strong>{{ $tag }} ({{ len $wikiPages }})</strong>
+        <ul>
+          {{ range $wikiPages }}
+            <li>
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      </li>
+    {{ end }}
+  {{ end }}
 </ul>
 
 {{ end }}

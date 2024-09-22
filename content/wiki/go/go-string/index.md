@@ -1,7 +1,7 @@
 +++
 title = "GO - Strings"
 date = "2023-09-11"
-tags = ["Golang", "data-structures"]
+tags = ["golang"]
 draft = false
 +++
 

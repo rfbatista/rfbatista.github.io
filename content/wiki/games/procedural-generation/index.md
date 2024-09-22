@@ -1,7 +1,7 @@
 +++
 title = "Procedural Generation"
 date = "2024-02-03"
-tags = ["games", "procedural generation"]
+tags = ["games"]
 draft = false
 +++
 

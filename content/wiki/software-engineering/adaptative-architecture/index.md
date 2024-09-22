@@ -1,7 +1,7 @@
 +++
 title = "Adaptive, Socio-Technical Systems with Architecture for Flow: Wardley Maps, DDD, and Team Topologies"
 date = "2023-11-23"
-tags = ["article"]
+tags = ["software engineering"]
 draft = true
 +++
 

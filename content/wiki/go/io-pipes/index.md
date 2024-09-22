@@ -1,7 +1,7 @@
 +++
 title = "IO Pipes"
 date = "2023-10-15"
-tags = ["Golang"]
+tags = ["golang"]
 draft = false
 +++
 

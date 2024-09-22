@@ -1,7 +1,7 @@
 +++
 title = "The Software Architecture of Pali"
 date = "2023-11-23"
-tags = ["game"]
+tags = ["research"]
 draft = true
 +++
 

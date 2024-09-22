@@ -1,7 +1,7 @@
 +++
 title = "The Humble Programmer"
 date = "2024-02-21"
-tags = ["article"]
+tags = ["software engineering"]
 draft = false
 +++
 
@@ -11,4 +11,4 @@ draft = false
 4. vital abstraction patterns
 5. avoid to write smart programs
 
-(https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html)[https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html]
+[https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html](https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html)

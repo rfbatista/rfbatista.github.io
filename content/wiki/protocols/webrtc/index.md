@@ -1,7 +1,7 @@
 +++
 title = "WebRTC"
 date = "2023-11-02"
-tags = ["webrtc", "protocol"]
+tags = ["protocols"]
 draft = false
 +++
 

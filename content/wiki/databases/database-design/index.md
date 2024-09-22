@@ -1,7 +1,7 @@
 +++
 title = "Database design"
 date = "2024-02-03"
-tags = ["database"]
+tags = ["databases"]
 draft = false
 +++
 (https://cs-people.bu.edu/mathan/publications/fnt23-athanassoulis.pdf?utm_source=hackernewsletter&utm_medium=email&utm_term=books)[https://cs-people.bu.edu/mathan/publications/fnt23-athanassoulis.pdf?utm_source=hackernewsletter&utm_medium=email&utm_term=books]

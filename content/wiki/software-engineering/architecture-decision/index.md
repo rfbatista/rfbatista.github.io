@@ -1,7 +1,7 @@
 +++
-title = "Architecture decision"
+title = "Architecture Decision Record"
 date = "2024-02-21"
-tags = ["architecture"]
+tags = ["software engineering"]
 draft = false
 +++
 

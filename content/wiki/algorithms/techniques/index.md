@@ -5,7 +5,7 @@ tags = ["algorithms"]
 draft = false
 +++
 
-# 2 pointers approachs
+## 2 pointers approachs
 i points to the last unique element, j iterates through the array
 ```go
 i := 0

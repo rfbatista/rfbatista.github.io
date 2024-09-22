@@ -1,20 +1,20 @@
 +++
-title = "Funcoes em Golang"
+title = "Funções em Golang"
 date = "2023-04-02"
-tags = ["Golang", "data-structures"]
+tags = ["golang"]
 draft = true
 +++
 
-# Declaração de funções
+## Declaração de funções
 
-```
+```go
 func nome(lista-de-parametros) (lista-de-resultados)
 ```
 
 # Estratégias de tratamento de erro
 - Propagar o error de forma que a falha em uma subrotina torne-se uma falha na rotina que fez a chamada
 
-```
+```go
 fmt.Errorf("novo error %s", variavel_string, err) // cria erros descritivos ao prefixar sucessivamento informações adicionais
 ```
 
@@ -22,7 +22,7 @@ fmt.Errorf("novo error %s", variavel_string, err) // cria erros descritivos ao p
 
 # Funções variádicas
 É uma função que pode ser chamda com um número váriavel de argumentos.
-```
+```go
 func sum(vals ...int) int {
 	total := 0
 	for _, val := range vals {
@@ -36,7 +36,7 @@ func sum(vals ...int) int {
 - Instrução utilizada para adiar a excução de uma função até o término da função onde está incluida.
 - É frequentemente incluida em pares? lock/unlock, garantir que recursos alocados sejam liberados
 - depuração de funções complexas
-```
+```go
 func bigSlowOperation(){
 	defer trace("op")() 
 	// ... tarefas executadas
@@ -52,7 +52,7 @@ func trace(msg string) func(){
 Muitos erros são capturados em tempo de execução, porém outros como desreferenciar um ponteiro `nil` exige verificações em tempo de execução. Quando o runtime do Go identifica esses erros, um pânico é gerado.
 
 # Recuperação
-```
+```go
 func Parse(input string) (s *Syntax, err error){
 	defer func(){
 		if p := recover(); p != nil {

@@ -1,7 +1,7 @@
 +++
 title = "Dependency injection system for Go"
 date = "2024-02-03"
-tags = ["Golang", "libraries"]
+tags = ["golang"]
 draft = false
 +++
 

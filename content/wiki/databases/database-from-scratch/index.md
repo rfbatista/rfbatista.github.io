@@ -1,7 +1,7 @@
 +++
 title = "Database from scratch"
 date = "2024-02-06"
-tags = ["golang", "database"]
+tags = ["databases"]
 draft = false
 +++
 

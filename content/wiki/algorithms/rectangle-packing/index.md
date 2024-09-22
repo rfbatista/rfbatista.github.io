@@ -1,7 +1,7 @@
 +++
 title = "Reactangle Packing Algorithms"
 date = "2024-02-21"
-tags = ["architecture"]
+tags = ["algorithms"]
 draft = false
 +++
 

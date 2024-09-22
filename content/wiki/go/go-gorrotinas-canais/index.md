@@ -1,17 +1,18 @@
 +++
 title = "Gorrotinas e Canais"
 date = "2023-07-15"
-tags = ["Golang", "data-structures"]
+tags = ["golang"]
 draft = false
 +++
-```
+```go
 go f() // cria uma nova gorrotina que chama f()
 ```
 
 # Canais
 Os canais sãos os meios de comunicação entre as gorrotinas
 Cada canal é um comunicador de um tipo particular
-```
+
+```go
 ch := make(chan int) // ch é do tipo chan int
 ```
 Um canal é uma referência a estrutura criada por make
@@ -32,7 +33,7 @@ Um canal é uma referência a estrutura criada por make
 Uma gorrotina sem buffer bloquei a gorrotina que envia até o receptor executar a recepção e também bloquei a recptora até receber um envio.
 - Canais sem buffer faz com que as gorotinas fiquem sincronizadas, isso é um dos casos de uso para utilização de canais sem buffer
 
-```
+```go
 func main(){
 	conn, err := net.Dial("tcp", "localhost:8000")
 	if err != nil {
@@ -54,7 +55,7 @@ func main(){
 
 # Pipelines
 Gorrotinas podem ser conectadas de formar que a saida de uma seja a entrada de outra, isso se chama `pipeline`
-```
+```go
 func main(){
 	naturals := make(chan int)
 	squares := make(chan int)
@@ -92,7 +93,7 @@ Canais com buffers, garantem o envio de mensagens para uma fila com tamanho pref
 - `gorotinas com vazamento de memoria (Ex.: com bloqueio do canal) não serao coletadas automaticamente, ocupando permanentemente espaço de memória`
 
 # Looping em paralelo
-```
+```go
 for _, f := range filenames {
 	go func(){
 		thumbnail.Imagefile(f) // *** INCORRETO ***
@@ -107,7 +108,7 @@ for _, f := range filenames {
 ```
 No exemplo acima acessamos a váriavel f internamente na gorrotina, porém o uso neste caso é incorreto pois a variavel `f` é atualizada a cada iteração do loop
 
-```
+```go
 
 for _, f := range filenames {
 	go func(f string){
@@ -125,7 +126,7 @@ for range filenames {
 ```
 
 # Impondo limites em concorrencia
-```
+```go
 var tokens = make(chan struct{}, 20)
 
 func crawl(url string)[] string {

@@ -1,7 +1,7 @@
 +++
 title = "PyTorch"
 date = "2023-10-15"
-tags = ["neural-networks", "machine-learning", "ai", "pytorch"]
+tags = ["machine-learning"]
 draft = false
 +++
 

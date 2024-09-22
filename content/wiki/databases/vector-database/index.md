@@ -1,7 +1,7 @@
 +++
 title = "Vector Databases"
 date = "2024-02-18"
-tags = ["vector-databases", "databases"]
+tags = ["databases"]
 draft = false
 +++
 

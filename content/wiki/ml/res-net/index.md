@@ -1,7 +1,7 @@
 +++
 title = "ResNet"
 date = "2023-10-15"
-tags = ["neural-networks", "machine-learning", "ai"]
+tags = ["machine-learning"]
 draft = false
 +++
 
