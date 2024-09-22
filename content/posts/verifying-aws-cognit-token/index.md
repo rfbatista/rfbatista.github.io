@@ -32,6 +32,7 @@ if err != nil {
     fmt.Printf("Failed to fetch AWS JWKS: %s\n", err)
     return false
 }
+```
 
 ## Parsing the JWT Token
 Once you have the JWKS, you can parse the token using the cached keys. This ensures the token's signature is valid:
@@ -64,6 +65,5 @@ if iss != "https://cognito-idp.<Region>.amazonaws.com/<userPoolId>" {
 
 You can securely validate JWT tokens issued by AWS Cognito using the jwx library. This ensures the token’s signature and claims are valid before granting access to your protected resources.
 
-```
 # References
 [https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html)
