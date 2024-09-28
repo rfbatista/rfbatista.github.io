@@ -1,7 +1,6 @@
 +++
 title = "Infrastructure Checklist"
 tags = ["devops"]
-categories = ["post"]
 draft = false
 +++
 
