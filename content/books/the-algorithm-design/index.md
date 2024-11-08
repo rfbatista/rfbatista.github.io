@@ -18,3 +18,40 @@ Podemos expressar algoritmos nas seguintes formas:
 1. Linguagem natural (Português)
 2. Pseudocode
 3. Linaguage de Programação
+
+# Analise de algoritmos
+
+- modelo RAM 
+- analise assintótica
+
+## Case complexity
+
+- worst case
+- average case
+- best case
+
+## The Big OH Notation
+
+
+# Estrutura de Dados
+
+Mudanças na estrutura de dados não mudam um algoritmo correto mas influencia na sua performance.
+
+
+Tres abstrações de dados fundamentais:
+1. containers
+2. dicionarios
+3. filas de prioridade (priority queue)
+
+## Contiguous vs Linked Data Structures
+
+- Contiguous means that it is composable of a single slab of memory
+- Linked distincts chucks of memory bound together by pointers
+
+## Arrays
+- constant-time access given the index
+- space effiency no metadata needed so no space is wasted
+- memory locality
+
+## Linked List
+pagina 69 ----

@@ -10,7 +10,6 @@ draft = false
 
 - Focus and act on what you can control and influence instead of what you can’t.
 
-
 2. Begin with the end in mind 
 
 - Define clear measures of success and a plan to achieve them.
