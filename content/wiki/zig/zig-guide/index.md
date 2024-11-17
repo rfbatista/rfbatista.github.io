@@ -69,7 +69,7 @@ test "for" {
 Todos os argumentos de funções são imutáveis.
 
 # Defer
-
+é util para garantir que recursos sejam limpados quando não forem mais necessários (Exatamente o mesmo padrão em golang)
 ```zig
 const expect = @import("std").testing.expect;
 
@@ -115,7 +115,8 @@ test "error union" {
 }
 ```
 
-*errdefer* :
+## *errdefer*
+é similar ao defer porém somente é executado quando a função retornar com um erro
 
 ```zig
 var problems: u32 = 98;
@@ -129,6 +130,22 @@ test "errdefer" {
     failFnCounter() catch |err| {
         try expect(err == error.Oops);
         try expect(problems == 99);
+        return;
+    };
+}
+```
+
+## catch
+o catch é usando no exemplo abaixo com a tecnica `payload capturing` seguida de um trecho de codigo. Nesse cenario o código só é executado se 
+ocorrer algum erro na `failingFunction`
+```zig 
+fn failingFunction() error{Oops}!void {
+    return error.Oops;
+}
+
+test "returning an error" {
+    failingFunction() catch |err| {
+        try expect(err == error.Oops);
         return;
     };
 }

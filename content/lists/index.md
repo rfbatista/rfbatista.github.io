@@ -7,6 +7,8 @@
 - https://dotink.co/
 - https://martin.kleppmann.com/
 
+- [John Washam](https://startupnextdoor.com/)
+
 ## Articles
 
 - [Probabilistic Filters By Example](https://bdupras.github.io/filter-tutorial/)
