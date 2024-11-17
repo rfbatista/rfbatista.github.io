@@ -1,7 +1,7 @@
 +++
 title = "Infrastructure Checklist"
 tags = ["devops"]
-draft = false
+draft = true 
 +++
 
 | Task               |   |
