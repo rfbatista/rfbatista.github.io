@@ -1,8 +1,8 @@
 +++
 title = "EKS"
 tags = ["devops"]
-categories = ["post"]
-draft = false
+categories = ["aws"]
+draft = true
 +++
 
 # Load Balancers

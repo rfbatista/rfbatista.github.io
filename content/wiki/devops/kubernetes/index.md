@@ -1,6 +1,6 @@
 +++
 title = "Kubernetes"
-tags = ["devops"]
+tags = ["devops", "kubernetes"]
 categories = ["post"]
 draft = false
 +++
