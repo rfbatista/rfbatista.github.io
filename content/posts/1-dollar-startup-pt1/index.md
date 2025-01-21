@@ -27,14 +27,14 @@ I will not enter in a step by step, on how to create an AWS account, I will just
 I recommend for you to install [Google Authenticator](https://apps.apple.com/br/app/google-authenticator/id388497605) and enable Two-Factor Authentication (2FA) in your AWS account to have another layer of security. And to create 2 users, one with complete control of your account and another with limited control (Lightsail, Codebuild, Codedeploy, Codepipeline, Budget) and just use the latter to do the work.
 
 
-2. Create a IAM User
+# 2. Create a IAM User
 
 - Open the IAM console, create a role with policy as codedeploy. Also create a user with programmatic access with s3codedeploybucket policy.
 - Open the lightsail console, create an instance with Amazon Linux 2 OS. Choose the instance plan and define the script for installation of codedeploy agent. Then give the key-value tag and click on create instance. Once the instance is created, we can see all the configuration of the instance and can check if the codedeploy agent service is running.
 
-3. Register the Lightsail Instance with CodeDeploy and Configure of application in CodeDeploy
+# 3. Register the Lightsail Instance with CodeDeploy and Configure of application in CodeDeploy
 
-4. Create CodeDeploy Application 
+# 4. Create CodeDeploy Application 
 
  Create an application named DollarProject with EC2/On-premises compute platform. Also create a deployment group with required parameters named DemoDeploymentGroup.
 
