@@ -1,7 +1,7 @@
 +++
 title = "NeuralSearchX: Serving a Multi-billion-parameter Reranker for Multilingual Metasearch at a Low Cost"
 date = "2024-02-03"
-tags = ["databases"]
+tags = ["recomendation"]
 draft = false
 +++
 

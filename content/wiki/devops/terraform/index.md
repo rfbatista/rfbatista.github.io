@@ -132,7 +132,7 @@ If you have different components, each one with its state and backend, how do yo
 
 The first step is to add output variables to your component:
 
-```tf 
+```tf
 output "address" {
     value = aws_db_instance.example.address
     description = "Connect to the database at this endpoint"
@@ -142,9 +142,10 @@ output "port" {
     description = "The port the database is listening on"
 }
 ```
+
 When you run `terraform apply` those variables values will be stored in the terraform state. To read from terraform state in S3 you could do this:
 
-```tf 
+```tf
 data "terraform_remote_state" "db" {
     backend = "s3"
 }
@@ -155,3 +156,10 @@ config = {
     region = "us-east-2"
 }
 ```
+
+Using `terraform_remote_state` implie access to the entire state snapshot, which could post a security risk. The alterantive
+is to use an external tool (https://developer.hashicorp.com/terraform/language/state/remote-state-data#alternative-ways-to-share-data-between-configurations)[https://developer.hashicorp.com/terraform/language/state/remote-state-data#alternative-ways-to-share-data-between-configurations] like Amazon SSM Parameter Store or HashiCorp Consul
+
+# References
+
+[20 Terraform Best Practices to Improve your TF workflow](https://spacelift.io/blog/terraform-best-practices)
