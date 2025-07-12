@@ -45,3 +45,7 @@ Scaling Yourself - https://www.youtube.com/watch?v=FS1mnISoG7U
 
 - https://home.mlops.community/
 - https://home.mlops.community/public/blogs/the-minimum-set-of-must-haves-for-mlops
+
+## LLAMA.CPP
+
+- https://blog.steelph0enix.dev/posts/llama-cpp-guide/
