@@ -20,6 +20,11 @@
 - [Are you a elit devops performer](https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance)
 - [What does it mean to be turing complete](https://samwho.dev/turing-machines/#what-does-it-mean-to-be-turing-complete)
 
+### Frontend
+
+- [Why React Query](https://ui.dev/why-react-query)
+- [NextJs why or why not](https://www.reddit.com/r/reactjs/comments/1fogphw/next_js_why_or_why_not/)
+
 ### devops
 
 - [Building Hashicorp Nomad Cluster With Raspberry Pi. Part 1](https://bored-dev.com/posts/building-hashicorp-nomad-cluster-with-raspberry-pi-part-1/)
@@ -34,6 +39,7 @@ https://www.youtube.com/@spiritual_brother
 - https://www.youtube.com/@mlopslearners
 
 ## Real-time applications
+
 - [Building Real-time Apps with Go | Azim Pulat](https://www.youtube.com/watch?v=3qGxVYJF3IU)
 
 ## Talks
