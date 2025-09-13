@@ -5,6 +5,12 @@ tags = ["architecture"]
 draft = false
 +++
 
+# Registry
+
+# Node
+
+# Actor
+
 # References
 
 [10 Lessons From Implementing The Actor Model • Vagif Abilov • GOTO 2023](https://www.youtube.com/watch?v=PEbQ-s19wKo)
