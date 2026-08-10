@@ -1,3 +1,3 @@
 +++
-title = "Digital Garden"
+title = "Wiki"
 +++

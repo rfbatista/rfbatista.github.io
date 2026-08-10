@@ -5,30 +5,42 @@
       <header>
         <h1 id="name">Renan Donato</h1>
         <p>
-          I am a software engineer in Brazil
+          Faço IA rodar <strong>localmente</strong>, em <strong>português</strong>, em hardware <strong>acessível</strong>.
+        </p>
+        <p>
+          Trabalho com inferência de LLMs e estou pesquisando e construindo, em público,
+          um assistente de voz que roda em casa — do wake word ao TTS, em português brasileiro,
+          sem enviar suas conversas para a nuvem de ninguém. Projeto pessoal, aberto e documentado aqui.
         </p>
       </header>
       <dl>
-        <dt>Accounts</dt>
+        <dt>Contas</dt>
         <dd><a href="https://github.com/rfbatista">GitHub</a>,
           <a href="https://twitter.com/rfbatista1">Twitter</a>,
-          <a href="https://www.linkedin.com/in/renanbatista/">LinkedIn</a>,
+          <a href="https://www.linkedin.com/in/renanbatista/">LinkedIn</a>
+        </dd>
+        <dt>E-mail</dt>
+        <dd>contato@renandonato.com.br</dd>
       </dl>
-      <dt>Mail</dt>
-      <dd>contato@renandonato.com.br</dd>
     </section>
     <section class="skills">
-      <h1>Skills</h1>
+      <h1>Sobre o que escrevo</h1>
       <dl>
-        <dt>Programming Languages</dt>
-        <dd> Go, JavaScript, Python, C++, C and Zig </dd>
-        <dt>Languages</dt>
-        <dd>Portuguese (native), English (business)</dd>
+        <dt>Benchmarks em PT-BR</dt>
+        <dd>Whisper, TTS e wake word em Raspberry Pi e ESP32 — latência, qualidade e custo, com números reproduzíveis</dd>
+        <dt>Inferência explicada</dt>
+        <dd>Quantização, KV cache, llama.cpp vs vLLM — e o que isso significa para rodar IA na sua casa</dd>
+        <dt>Diário de construção</dt>
+        <dd>As decisões de arquitetura do protótipo, fracassos incluídos</dd>
+        <dt>Privacidade &amp; soberania</dt>
+        <dd>Local-first como arquitetura, LGPD e o que os assistentes de nuvem realmente enviam</dd>
       </dl>
     </section>
     <section class="projects">
-      <h1>Projects</h1>
+      <h1>Projetos</h1>
       <dl>
+        <dt>Assistente de voz local em PT-BR</dt>
+        <dd>Protótipo em pesquisa: wake word, ASR e TTS em português, em hardware de prateleira</dd>
         <dt>Go Hydrate</dt>
         <dd>https://github.com/rfbatista/gohydrate</dd>
         <dt>My dotfiles</dt>
@@ -40,42 +52,18 @@
       </dl>
     </section>
     <section class="posts">
-      <h1>Latest posts</h1>
+      <h1>Escritos recentes</h1>
 
       <div class="">
-        {{ range first 3 .Site.Taxonomies.categories.post }}
-        {{ if ne .Draft true}}
+        {{ range first 5 (where (where .Site.RegularPages "Section" "posts") "Draft" false) }}
         <div class="post">
-          <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
+          <div class="date">{{ .PublishDate.Format "02/01/2006" }}</div>
           <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
         </div>
         {{ end }}
-        {{ end }}
       </div>
-    </section>
-    <section class="photos">
-
-      <h1>Latest photos</h1>
-
-      <div class="image-grid">
-        {{ with .Site.GetPage "/photos" }}
-        {{ range first 6 (sort .Data.Pages "Date" "desc")}}
-        <a href="{{ .Permalink }}" title="{{ .Title }}">
-          {{ $image := .Page.Resources.GetMatch .Params.image }}
-          {{ with $image }}
-          {{ $thumb := .Resize "200x" }}
-          <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" class="img-responsive object-contain h-48 w-96">
-          {{end}}
-        </a>
-        {{ end }}
-        {{ end }}
-      </div>
-
     </section>
   </article>
 </main>
 <br />
-
-
-
 {{ end }}

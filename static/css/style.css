@@ -69,3 +69,20 @@ p > code {
   border: 1px solid var(--secondary-color);
   padding: 3px;
 }
+
+/* --- posicionamento / rodapé --- */
+
+.site-footer {
+  clear: both;
+  margin-top: 30px;
+  color: var(--global-font-color);
+}
+
+.site-footer .footer-archive a {
+  margin-right: 8px;
+}
+
+.site-footer .footer-note {
+  color: grey;
+  font-size: 0.85em;
+}

@@ -1,6 +1,6 @@
 baseurl = "https://rfbatista.github.io/"
 title = "rfbatista"
-languageCode = "en-us"
+languageCode = "pt-br"
 pygmentsUseClasses=true
 pygmentsCodeFences=true
 
@@ -9,24 +9,40 @@ pygmentsCodeFences=true
     ID = 'G-T41ZMHMLD4'
 
 [params]
+  description = "Faço IA rodar localmente, em português, em hardware acessível. Benchmarks, inferência de LLMs e o diário de construção de um assistente de voz local em PT-BR."
+
   # Cutting off the page title to two chars for mobile (console-demo -> co)
   titleCutting = true
 
   # Set the animation style -- https://animate.style/
   # To disable animations, please remove or comment animationStyle parameter
-  animateStyle = "animated zoomIn fast" 
+  animateStyle = "animated zoomIn fast"
+
 
   [[params.navlinks]]
-  name = "posts/"
+  name = "escritos/"
   url = "posts/"
-  
+
   [[params.navlinks]]
+  name = "sobre/"
+  url = "about/"
+
+  # Arquivo — seções antigas, acessíveis pelo rodapé
+  [[params.archivelinks]]
   name = "wiki/"
   url = "wiki/"
 
-  [[params.navlinks]]
-  name = "lists/"
+  [[params.archivelinks]]
+  name = "listas/"
   url = "lists/"
+
+  [[params.archivelinks]]
+  name = "fotos/"
+  url = "photos/"
+
+  [[params.archivelinks]]
+  name = "livros/"
+  url = "books/"
 
 [taxonomies]
    tag = "tags"

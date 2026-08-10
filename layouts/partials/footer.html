@@ -1,4 +1,10 @@
-<!-- <div class="footer"> -->
-<!--     Powered by <a href="https://gohugo.io/">Hugo</a> with -->
-<!--     <a href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a>.  -->
-<!-- </div> -->
+<div class="site-footer">
+    <hr />
+    <p class="footer-archive">
+      arquivo:
+      {{ range .Site.Params.archivelinks }}
+      <a href="{{ absURL .url }}">{{ .name }}</a>
+      {{ end }}
+    </p>
+    <p class="footer-note">Benchmarks publicados aqui saem com scripts e configs — números que você pode reproduzir.</p>
+</div>
