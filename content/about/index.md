@@ -8,7 +8,7 @@ Tudo o que publico aqui sai dessa pergunta. Faço benchmarks de Whisper, TTS e w
 
 ## O que estou construindo
 
-Estou pesquisando e prototipando, como projeto pessoal, um assistente de voz local em PT-BR: do wake word ao TTS, sem enviar áudio para a nuvem por padrão. Ainda é pesquisa, não produto. Publico as decisões de arquitetura, os números e os fracassos conforme acontecem, com scripts e configs para quem quiser reproduzir.
+Estou pesquisando e prototipando, como projeto pessoal, um assistente de voz local em PT-BR: do wake word ao TTS, sem enviar áudio para a nuvem por padrão. Ainda é pesquisa, não produto. Publico as decisões de arquitetura, os números e os fracassos conforme acontecem, com scripts e configs para quem quiser reproduzir.publico
 
 ## Ferramentas
 

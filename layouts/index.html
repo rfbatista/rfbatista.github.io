@@ -4,13 +4,12 @@
     <section class="title">
       <header>
         <h1 id="name">Renan Donato</h1>
+        <p>Faço IA rodar localmente, em português, em hardware acessível.</p>
         <p>
-          Faço IA rodar localmente, em português, em hardware acessível.
-        </p>
-        <p>
-          Trabalho com inferência de LLMs e estou pesquisando e construindo, em público,
-          um assistente de voz que roda em casa: do wake word ao TTS, em português brasileiro,
-          sem enviar suas conversas para a nuvem de ninguém. É um projeto pessoal, documentado aqui.
+          Trabalho com inferência de LLMs e estou pesquisando e construindo, em
+          público, um assistente de voz que roda em casa: do wake word ao TTS,
+          em português brasileiro, sem enviar suas conversas para a nuvem de
+          ninguém. É um projeto pessoal, documentado aqui.
         </p>
       </header>
       <dl>
@@ -22,20 +21,32 @@
       <h1>Sobre o que escrevo</h1>
       <dl>
         <dt>Benchmarks em PT-BR</dt>
-        <dd>Whisper, TTS e wake word em Raspberry Pi e ESP32: latência, qualidade e custo, com números que você pode reproduzir</dd>
+        <dd>
+          Whisper, TTS e wake word em Raspberry Pi e ESP32: latência, qualidade
+          e custo, com números que você pode reproduzir
+        </dd>
         <dt>Inferência explicada</dt>
-        <dd>Quantização, KV cache, llama.cpp vs vLLM, e o que isso significa para rodar IA na sua casa</dd>
+        <dd>
+          Quantização, KV cache, llama.cpp vs vLLM, e o que isso significa para
+          rodar IA na sua casa
+        </dd>
         <dt>Diário de construção</dt>
         <dd>As decisões de arquitetura do protótipo, fracassos incluídos</dd>
         <dt>Privacidade &amp; soberania</dt>
-        <dd>Local-first como arquitetura, LGPD e o que os assistentes de nuvem realmente enviam</dd>
+        <dd>
+          Local-first como arquitetura, LGPD e o que os assistentes de nuvem
+          realmente enviam
+        </dd>
       </dl>
     </section>
     <section class="projects">
       <h1>Projetos</h1>
       <dl>
         <dt>Assistente de voz local em PT-BR</dt>
-        <dd>Protótipo em pesquisa: wake word, ASR e TTS em português, em hardware de prateleira</dd>
+        <dd>
+          Protótipo em pesquisa: wake word, ASR e TTS em português, em hardware
+          de prateleira
+        </dd>
         <dt>Go Hydrate</dt>
         <dd>https://github.com/rfbatista/gohydrate</dd>
         <dt>My dotfiles</dt>
@@ -50,10 +61,13 @@
       <h1>Escritos recentes</h1>
 
       <div class="">
-        {{ range first 5 (where (where .Site.RegularPages "Section" "posts") "Draft" false) }}
+        {{ range first 5 (where (where .Site.RegularPages "Section" "posts")
+        "Draft" false) }}
         <div class="post">
           <div class="date">{{ .PublishDate.Format "02/01/2006" }}</div>
-          <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
+          <h1>
+            <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+          </h1>
         </div>
         {{ end }}
       </div>
