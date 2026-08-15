@@ -16,6 +16,4 @@ Go, Python, JavaScript/TypeScript, C++, C e Zig. Experiência com microsserviço
 
 ## Contato
 
-- E-mail: [contato@renandonato.com.br](mailto:contato@renandonato.com.br)
-- GitHub: [rfbatista](https://github.com/rfbatista)
-- LinkedIn: [renanbatista](https://www.linkedin.com/in/renanbatista/)
+E-mail: [contato@renandonato.com.br](mailto:contato@renandonato.com.br)
