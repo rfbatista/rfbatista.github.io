@@ -1,0 +1,19 @@
+{{- /*
+  Lista os idiomas alternativos da página atual.
+  Para cada idioma diferente do atual: se a página tem tradução, aponta para ela;
+  senão, aponta para a home daquele idioma.
+  Uso: {{ range partial "language-links.html" . }} .lang .name .url {{ end }}
+*/ -}}
+{{- $page := . -}}
+{{- $links := slice -}}
+{{- range .Site.Sites -}}
+  {{- $lang := .Language.Lang -}}
+  {{- if ne $lang $page.Site.Language.Lang -}}
+    {{- $url := .Home.Permalink -}}
+    {{- range $page.Translations -}}
+      {{- if eq .Language.Lang $lang -}}{{- $url = .Permalink -}}{{- end -}}
+    {{- end -}}
+    {{- $links = $links | append (dict "lang" $lang "name" .Language.LanguageName "url" $url) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $links -}}

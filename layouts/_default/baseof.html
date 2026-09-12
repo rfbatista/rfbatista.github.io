@@ -24,6 +24,12 @@
     {{ with .OutputFormats.Get "RSS" }}
       {{ printf `<link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
     {{ end }}
+    {{- if .IsTranslated }}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+    {{- range .Translations }}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+    {{- end }}
+    {{- end }}
     {{- partial "opengraph.html" . -}}
     {{- partial "twitter_cards.html" . -}}
     {{ template "_internal/google_analytics.html" . }}
@@ -37,12 +43,15 @@
             <div class="logo terminal-prompt">
               {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
               {{ $.Scratch.Add "path" .Site.BaseURL }}
-              <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~# 
+              <a href="{{ .Site.Home.Permalink }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~# 
               {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
           <nav class="terminal-menu">
             <ul vocab="https://schema.org/" typeof="BreadcrumbList">
                 {{ range .Site.Params.navlinks }}
-                <li><a href="{{ absURL .url }}" typeof="ListItem">{{ .name }}</a></li>
+                <li><a href="{{ absLangURL .url }}" typeof="ListItem">{{ .name }}</a></li>
+                {{ end }}
+                {{ range partial "language-links.html" . }}
+                <li class="lang-switch"><a href="{{ .url }}" hreflang="{{ .lang }}" title="{{ i18n "switchLanguage" }}" typeof="ListItem">{{ index (split .lang "-") 0 }}/</a></li>
                 {{ end }}
             </ul>
           </nav>

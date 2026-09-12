@@ -1,16 +1,23 @@
 baseurl = "https://rfbatista.github.io/"
 title = "rfbatista"
-languageCode = "pt-br"
 pygmentsUseClasses=true
 pygmentsCodeFences=true
+
+# ---------------------------------------------------------------------------
+# Multilíngue: PT-BR é o padrão e fica na raiz (URLs antigas preservadas);
+# inglês fica em /en/. Traduções usam sufixo de idioma no nome do arquivo:
+#   content/about/index.md      -> /about/
+#   content/about/index.en.md   -> /en/about/
+# Um post sem index.en.md simplesmente não aparece em /en/.
+# ---------------------------------------------------------------------------
+defaultContentLanguage = "pt-br"
+defaultContentLanguageInSubdir = false
 
 [services]
   [services.googleAnalytics]
     ID = 'G-T41ZMHMLD4'
 
 [params]
-  description = "Faço IA rodar localmente, em português, em hardware acessível. Benchmarks, inferência de LLMs e o diário de construção de um assistente de voz local em PT-BR."
-
   # Cutting off the page title to two chars for mobile (console-demo -> co)
   titleCutting = true
 
@@ -18,31 +25,55 @@ pygmentsCodeFences=true
   # To disable animations, please remove or comment animationStyle parameter
   animateStyle = "animated zoomIn fast"
 
+[languages]
+  [languages.pt-br]
+    languageName = "Português"
+    languageCode = "pt-br"
+    weight = 1
+    title = "rfbatista"
+    [languages.pt-br.params]
+      description = "Faço IA rodar localmente, em português, em hardware acessível. Benchmarks, inferência de LLMs e o diário de construção de um assistente de voz local em PT-BR."
 
-  [[params.navlinks]]
-  name = "escritos/"
-  url = "posts/"
+      [[languages.pt-br.params.navlinks]]
+      name = "escritos/"
+      url = "posts/"
 
-  [[params.navlinks]]
-  name = "sobre/"
-  url = "about/"
+      [[languages.pt-br.params.navlinks]]
+      name = "sobre/"
+      url = "about/"
 
-  # Arquivo — seções antigas, acessíveis pelo rodapé
-  [[params.archivelinks]]
-  name = "wiki/"
-  url = "wiki/"
+      # Arquivo — seções antigas, acessíveis pelo rodapé
+      [[languages.pt-br.params.archivelinks]]
+      name = "wiki/"
+      url = "wiki/"
 
-  [[params.archivelinks]]
-  name = "listas/"
-  url = "lists/"
+      [[languages.pt-br.params.archivelinks]]
+      name = "listas/"
+      url = "lists/"
 
-  [[params.archivelinks]]
-  name = "fotos/"
-  url = "photos/"
+      [[languages.pt-br.params.archivelinks]]
+      name = "fotos/"
+      url = "photos/"
 
-  [[params.archivelinks]]
-  name = "livros/"
-  url = "books/"
+      [[languages.pt-br.params.archivelinks]]
+      name = "livros/"
+      url = "books/"
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    weight = 2
+    title = "rfbatista"
+    [languages.en.params]
+      description = "I make AI run locally, in Portuguese, on affordable hardware. Benchmarks, LLM inference, and the build log of a local PT-BR voice assistant."
+
+      [[languages.en.params.navlinks]]
+      name = "writing/"
+      url = "posts/"
+
+      [[languages.en.params.navlinks]]
+      name = "about/"
+      url = "about/"
 
 [taxonomies]
    tag = "tags"

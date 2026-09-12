@@ -1,4 +1,4 @@
 {{ define "main" }}
-<h1>Page not found</h1>
-<p><a href="{{ .Site.BaseURL }}">Return to the home page</a>.</p>
+<h1>{{ i18n "pageNotFound" }}</h1>
+<p><a href="{{ .Site.Home.Permalink }}">{{ i18n "returnHome" }}</a>.</p>
 {{ end }}

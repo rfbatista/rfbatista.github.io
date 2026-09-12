@@ -7,7 +7,7 @@
   {{ range sort .Data.Pages "Date" "desc" }} {{ if not .Params.private }} {{ if
   ne .Draft true}}
   <div class="post">
-    <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
+    <div class="date">{{ .PublishDate.Format (i18n "dateFormatLong") }}</div>
     <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
   </div>
   {{ end }} {{ end }} {{ end }}

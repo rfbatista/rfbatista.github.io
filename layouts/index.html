@@ -58,13 +58,13 @@
       </dl>
     </section>
     <section class="posts">
-      <h1>Escritos recentes</h1>
+      <h1>{{ i18n "recentPosts" }}</h1>
 
       <div class="">
         {{ range first 5 (where (where .Site.RegularPages "Section" "posts")
         "Draft" false) }}
         <div class="post">
-          <div class="date">{{ .PublishDate.Format "02/01/2006" }}</div>
+          <div class="date">{{ .PublishDate.Format (i18n "dateFormatShort") }}</div>
           <h1>
             <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
           </h1>

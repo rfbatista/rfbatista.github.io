@@ -86,3 +86,17 @@ p > code {
   color: grey;
   font-size: 0.85em;
 }
+
+.site-footer .footer-lang {
+  color: grey;
+  font-size: 0.85em;
+}
+
+.site-footer .footer-lang a {
+  margin-left: 4px;
+}
+
+.posts-note {
+  color: grey;
+  font-size: 0.85em;
+}

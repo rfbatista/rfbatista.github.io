@@ -1,4 +1,8 @@
 <div class="site-footer">
+  <p class="footer-lang">
+    {{ i18n "switchLanguageFooter" }}
+    {{ range partial "language-links.html" . }}<a href="{{ .url }}" hreflang="{{ .lang }}">{{ .name }}</a>{{ end }}
+  </p>
   <!-- <hr /> -->
   <!-- <p class="footer-archive"> -->
   <!--   arquivo: -->

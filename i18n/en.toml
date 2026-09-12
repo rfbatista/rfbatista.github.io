@@ -1,0 +1,20 @@
+[dateFormatLong]
+other = "Jan. 2, 2006"
+
+[dateFormatShort]
+other = "2006-01-02"
+
+[recentPosts]
+other = "Recent writing"
+
+[switchLanguage]
+other = "Ler em português"
+
+[switchLanguageFooter]
+other = "This site is also available in"
+
+[pageNotFound]
+other = "Page not found"
+
+[returnHome]
+other = "Return to the home page"

@@ -1,0 +1,82 @@
+{{ define "main" }}
+<main>
+  <article>
+    <section class="title">
+      <header>
+        <h1 id="name">Renan Donato</h1>
+        <p>I make AI run locally, in Portuguese, on affordable hardware.</p>
+        <p>
+          I work on LLM inference and I'm researching and building a voice
+          assistant that runs at home: from wake word to TTS, in Brazilian
+          Portuguese, without sending your conversations to anyone's cloud.
+          It's a personal project, documented here.
+        </p>
+      </header>
+      <dl>
+        <dt>E-mail</dt>
+        <dd>contato@renandonato.com.br</dd>
+      </dl>
+    </section>
+    <section class="skills">
+      <h1>What I write about</h1>
+      <dl>
+        <dt>PT-BR benchmarks</dt>
+        <dd>
+          Whisper, TTS and wake word on Raspberry Pi and ESP32: latency,
+          quality and cost, with numbers you can reproduce
+        </dd>
+        <dt>Inference, explained</dt>
+        <dd>
+          Quantization, KV cache, llama.cpp vs vLLM, and what it all means for
+          running AI in your home
+        </dd>
+        <dt>Build log</dt>
+        <dd>The prototype's architecture decisions, failures included</dd>
+        <dt>Privacy &amp; sovereignty</dt>
+        <dd>
+          Local-first as architecture, Brazil's LGPD, and what cloud assistants
+          actually send out
+        </dd>
+      </dl>
+    </section>
+    <section class="projects">
+      <h1>Projects</h1>
+      <dl>
+        <dt>Local voice assistant in PT-BR</dt>
+        <dd>
+          Research prototype: wake word, ASR and TTS in Portuguese, on
+          off-the-shelf hardware
+        </dd>
+        <dt>Go Hydrate</dt>
+        <dd>https://github.com/rfbatista/gohydrate</dd>
+        <dt>My dotfiles</dt>
+        <dd>https://github.com/rfbatista/dotfiles</dd>
+        <dt>API Tooling</dt>
+        <dd>https://github.com/rfbatista/apitools</dd>
+        <dt>Captain Capybara (Game)</dt>
+        <dd>https://tinkergolem.itch.io/captain-capy</dd>
+      </dl>
+    </section>
+    <section class="posts">
+      <h1>{{ i18n "recentPosts" }}</h1>
+
+      <div class="">
+        {{ range first 5 (where (where .Site.RegularPages "Section" "posts")
+        "Draft" false) }}
+        <div class="post">
+          <div class="date">{{ .PublishDate.Format (i18n "dateFormatShort") }}</div>
+          <h1>
+            <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+          </h1>
+        </div>
+        {{ end }}
+      </div>
+      <p class="posts-note">
+        Most of my writing is in Portuguese. Posts that have an English version
+        show up here; the full archive is at <a href="{{ "/posts/" | absURL }}">escritos/</a>.
+      </p>
+    </section>
+  </article>
+</main>
+<br />
+{{ end }}
