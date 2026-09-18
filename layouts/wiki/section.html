@@ -1,10 +1,8 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-
-In this section I have a collection of notes and resources on different topics.
-The notes are not final, they are always a working progress, where I can organize and accumulate knowledge.
-
-<br />
+<h1 class="article-title">{{ .Title }}</h1>
+<div class="article-body">
+<p>In this section I have a collection of notes and resources on different topics.
+The notes are not final, they are always a working progress, where I can organize and accumulate knowledge.</p>
 
 <ul>
   {{ range $tag, $pages := .Site.Taxonomies.tags }}
@@ -23,5 +21,5 @@ The notes are not final, they are always a working progress, where I can organiz
     {{ end }}
   {{ end }}
 </ul>
-
+</div>
 {{ end }}

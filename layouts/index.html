@@ -1,78 +1,32 @@
 {{ define "main" }}
-<main>
-  <article>
-    <section class="title">
-      <header>
-        <h1 id="name">Renan Donato</h1>
-        <p>Faço IA rodar localmente, em português, em hardware acessível.</p>
-        <p>
-          Trabalho com inferência de LLMs e estou pesquisando e construindo um
-          assistente de voz que roda em casa: do wake word ao TTS, em português
-          brasileiro, sem enviar suas conversas para a nuvem de ninguém. É um
-          projeto pessoal, documentado aqui.
-        </p>
-      </header>
-      <dl>
-        <dt>E-mail</dt>
-        <dd>contato@renandonato.com.br</dd>
-      </dl>
-    </section>
-    <section class="skills">
-      <h1>Sobre o que escrevo</h1>
-      <dl>
-        <dt>Benchmarks em PT-BR</dt>
-        <dd>
-          Whisper, TTS e wake word em Raspberry Pi e ESP32: latência, qualidade
-          e custo, com números que você pode reproduzir
-        </dd>
-        <dt>Inferência explicada</dt>
-        <dd>
-          Quantização, KV cache, llama.cpp vs vLLM, e o que isso significa para
-          rodar IA na sua casa
-        </dd>
-        <dt>Diário de construção</dt>
-        <dd>As decisões de arquitetura do protótipo, fracassos incluídos</dd>
-        <dt>Privacidade &amp; soberania</dt>
-        <dd>
-          Local-first como arquitetura, LGPD e o que os assistentes de nuvem
-          realmente enviam
-        </dd>
-      </dl>
-    </section>
-    <section class="projects">
-      <h1>Projetos</h1>
-      <dl>
-        <dt>Assistente de voz local em PT-BR</dt>
-        <dd>
-          Protótipo em pesquisa: wake word, ASR e TTS em português, em hardware
-          de prateleira
-        </dd>
-        <dt>Go Hydrate</dt>
-        <dd>https://github.com/rfbatista/gohydrate</dd>
-        <dt>My dotfiles</dt>
-        <dd>https://github.com/rfbatista/dotfiles</dd>
-        <dt>API Tooling</dt>
-        <dd>https://github.com/rfbatista/apitools</dd>
-        <dt>Captain Capybara (Game)</dt>
-        <dd>https://tinkergolem.itch.io/captain-capy</dd>
-      </dl>
-    </section>
-    <section class="posts">
-      <h1>{{ i18n "recentPosts" }}</h1>
 
-      <div class="">
-        {{ range first 5 (where (where .Site.RegularPages "Section" "posts")
-        "Draft" false) }}
-        <div class="post">
-          <div class="date">{{ .PublishDate.Format (i18n "dateFormatShort") }}</div>
-          <h1>
-            <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
-          </h1>
+<div class="home-section">
+  <p class="eyebrow">Projetos</p>
+  <dl class="home-dl">
+    <div><dt>Assistente de voz local em PT-BR</dt><dd>Protótipo em pesquisa: wake word, ASR e TTS em português, em hardware de prateleira.</dd></div>
+    <div><dt>Go Hydrate</dt><dd><a href="https://github.com/rfbatista/gohydrate">github.com/rfbatista/gohydrate</a></dd></div>
+    <div><dt>My dotfiles</dt><dd><a href="https://github.com/rfbatista/dotfiles">github.com/rfbatista/dotfiles</a></dd></div>
+    <div><dt>API Tooling</dt><dd><a href="https://github.com/rfbatista/apitools">github.com/rfbatista/apitools</a></dd></div>
+    <div><dt>Captain Capybara (Game)</dt><dd><a href="https://tinkergolem.itch.io/captain-capy">tinkergolem.itch.io/captain-capy</a></dd></div>
+  </dl>
+</div>
+
+<div class="home-section">
+  <p class="eyebrow">{{ i18n "recentPosts" }}</p>
+  <div class="index-vol">
+    {{ range first 5 (where (where .Site.RegularPages "Section" "posts") "Draft" false) }}
+    <div class="index-entry">
+      <span class="index-entry-num">&rarr;</span>
+      <div>
+        <div class="entry-head">
+          <a href="{{ .Permalink }}" class="index-entry-title">{{ .Title }}</a>
+          <span class="entry-leader" aria-hidden="true"></span>
+          <span class="index-entry-date">{{ .Date.Format (i18n "dateFormatShort") }} &middot; {{ .ReadingTime }} min</span>
         </div>
-        {{ end }}
       </div>
-    </section>
-  </article>
-</main>
-<br />
+    </div>
+    {{ end }}
+  </div>
+  <p style="margin-top:1rem;"><a href="{{ "/posts/" | absURL }}">{{ i18n "indexTitle" }} &rarr;</a></p>
+</div>
 {{ end }}

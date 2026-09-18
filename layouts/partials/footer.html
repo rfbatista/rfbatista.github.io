@@ -1,14 +1,10 @@
 <div class="site-footer">
-  <p class="footer-lang">
-    {{ i18n "switchLanguageFooter" }}
-    {{ range partial "language-links.html" . }}<a href="{{ .url }}" hreflang="{{ .lang }}">{{ .name }}</a>{{ end }}
-  </p>
-  <!-- <hr /> -->
-  <!-- <p class="footer-archive"> -->
-  <!--   arquivo: -->
-  <!--   {{ range .Site.Params.archivelinks }} -->
-  <!--   <a href="{{ absURL .url }}">{{ .name }}</a> -->
-  <!--   {{ end }} -->
-  <!-- </p> -->
-  <!-- <p class="footer-note">Benchmarks publicados aqui saem com scripts e configs para você reproduzir os números.</p> -->
+  <div>
+    <strong>Arquivo</strong>
+    {{ range .Site.Params.archivelinks }}<a href="{{ absLangURL .url }}">{{ .name }}</a> {{ end }}
+  </div>
+  <div>
+    <strong>{{ i18n "switchLanguageFooter" }}</strong>
+    {{ range partial "language-links.html" . }}<a href="{{ .url }}" hreflang="{{ .lang }}">{{ .name }}</a> {{ end }}
+  </div>
 </div>

@@ -18,3 +18,24 @@ other = "Página não encontrada"
 
 [returnHome]
 other = "Voltar para a página inicial"
+
+[returnIndex]
+other = "voltar ao índice"
+
+[readingTime]
+other = "min de leitura"
+
+[draftsHeading]
+other = "Rascunhos"
+
+[indexTitle]
+other = "Índice Geral"
+
+[catalogedSince]
+other = "artigos catalogados desde"
+
+[inDraft]
+other = "em rascunho"
+
+[mostRecent]
+other = "recente"

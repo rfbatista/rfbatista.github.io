@@ -1,14 +1,18 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<h1 class="article-title">{{ .Title }}</h1>
+<p class="article-byline">
+  <b>{{ .Site.Title }}</b> &mdash; {{ .Date.Format (i18n "dateFormatLong") }} &middot; {{ .ReadingTime }} {{ i18n "readingTime" }}
+</p>
 
-{{ .PublishDate.Format (i18n "dateFormatLong") }}
-{{ with .Params.linkedin }}
-    // <a href="{{ . }}">Linkedin</a>
+{{ with .Description }}
+<div class="abstract-box"><p>{{ . }}</p></div>
 {{ end }}
-{{ with .Params.twitter }}
-    // <a href="{{ . }}">Twitter</a>
+
+{{ with .Params.tags }}
+<p class="tags">{{ delimit . " · " }}</p>
 {{ end }}
-<br/><br/>
-{{ .Content }}
-{{ template "_internal/disqus.html" . }}
+
+<div class="article-body">
+  {{ .Content }}
+</div>
 {{ end }}

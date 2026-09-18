@@ -18,3 +18,24 @@ other = "Page not found"
 
 [returnHome]
 other = "Return to the home page"
+
+[returnIndex]
+other = "back to index"
+
+[readingTime]
+other = "min read"
+
+[draftsHeading]
+other = "Drafts"
+
+[indexTitle]
+other = "General Index"
+
+[catalogedSince]
+other = "posts cataloged since"
+
+[inDraft]
+other = "in draft"
+
+[mostRecent]
+other = "latest"
