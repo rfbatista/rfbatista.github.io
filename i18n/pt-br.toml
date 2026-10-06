@@ -39,3 +39,6 @@ other = "em rascunho"
 
 [mostRecent]
 other = "recente"
+
+[toggleTheme]
+other = "Alternar tema dia/noite"

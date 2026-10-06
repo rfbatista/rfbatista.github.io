@@ -32,7 +32,8 @@ defaultContentLanguageInSubdir = false
     weight = 1
     title = "rfbatista"
     [languages.pt-br.params]
-      description = "Sou o Renan Donato, engenheiro de software no Brasil. Escrevo sobre sistemas, Go e inferência de LLMs — e mantenho aqui o diário de um projeto pessoal: um assistente de voz totalmente local, em português."
+      # description = "Sou o Renan Donato, engenheiro de software no Brasil. Escrevo sobre sistemas, Go e inferência de LLMs — e mantenho aqui o diário de um projeto pessoal: um assistente de voz totalmente local, em português."
+      description = "Sou o Renan Donato, engenheiro de software no Brasil. Escrevo sobre sistemas, Go e inferência de LLMs."
 
       [[languages.pt-br.params.navlinks]]
       name = "escritos/"
@@ -65,7 +66,8 @@ defaultContentLanguageInSubdir = false
     weight = 2
     title = "rfbatista"
     [languages.en.params]
-      description = "I'm Renan Donato, a software engineer in Brazil. I write about systems, Go, and LLM inference — and keep the build log of a personal project here: a fully local voice assistant, in Portuguese."
+      # description = "I'm Renan Donato, a software engineer in Brazil. I write about systems, Go, and LLM inference — and keep the build log of a personal project here: a fully local voice assistant, in Portuguese."
+      description = "I'm Renan Donato, a software engineer in Brazil. I write about systems, Go, and LLM inference."
 
       [[languages.en.params.navlinks]]
       name = "writing/"

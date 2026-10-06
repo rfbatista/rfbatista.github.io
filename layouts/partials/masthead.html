@@ -5,7 +5,8 @@
   <span>{{ .Site.BaseURL | replaceRE "^https?://" "" | strings.TrimSuffix "/" }}</span>
   <span>
     {{ .Site.Language.Lang }}
-    {{- range $langLinks }} &middot; <a href="{{ .url }}" hreflang="{{ .lang }}">{{ .lang }}</a>{{ end -}}
+    {{- range $langLinks }} &middot; <a href="{{ .url }}" hreflang="{{ .lang }}">{{ .lang }}</a>{{ end }}
+    &middot; {{ partial "theme-toggle.html" . }}
   </span>
 </div>
 <p class="site-name-big"><a href="{{ .Site.Home.Permalink }}" class="site-name" style="color:inherit;border:0;">{{ .Site.Title }}</a></p>
@@ -20,7 +21,8 @@
 <div class="topbar">
   <a href="{{ $back }}">&larr; {{ $backLabel }}</a>
   <span><a href="{{ .Site.Home.Permalink }}" class="site-name">{{ .Site.Title }}</a>
-    {{- range $langLinks }} &middot; <a href="{{ .url }}" hreflang="{{ .lang }}">{{ .lang }}</a>{{ end -}}
+    {{- range $langLinks }} &middot; <a href="{{ .url }}" hreflang="{{ .lang }}">{{ .lang }}</a>{{ end }}
+    &middot; {{ partial "theme-toggle.html" . }}
   </span>
 </div>
 {{- end -}}

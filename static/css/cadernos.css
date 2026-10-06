@@ -19,6 +19,27 @@
   --paper: #18171a; --ink: #eae7e0; --muted: #a29c8f; --accent: #e0954c; --hair: rgba(224,149,76,0.22);
 }
 
+/* ---------------- theme toggle ---------------- */
+.theme-toggle{
+  display:inline-flex; align-items:center; justify-content:center; vertical-align:-0.5em;
+  width:1.5rem; height:1.5rem; padding:0; margin-left:0.15em; line-height:1;
+  border:1px solid var(--hair); background:transparent; cursor:pointer; color:var(--muted);
+  transition: color .15s ease, border-color .15s ease, background-color .15s ease, transform .2s ease;
+}
+.theme-toggle:hover{
+  color: var(--accent); border-color: var(--accent);
+  background: color-mix(in oklab, var(--paper), var(--accent) 8%);
+}
+.theme-toggle:active{ transform: scale(0.92); }
+.theme-toggle svg{ width:0.85rem; height:0.85rem; }
+.theme-toggle .icon-moon{ display:none; }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun{ display:none; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon{ display:inline; }
+}
+:root[data-theme="dark"] .theme-toggle .icon-sun{ display:none; }
+:root[data-theme="dark"] .theme-toggle .icon-moon{ display:inline; }
+
 *{ box-sizing: border-box; }
 html,body{ margin:0; }
 body{

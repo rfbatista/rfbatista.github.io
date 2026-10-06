@@ -39,3 +39,6 @@ other = "in draft"
 
 [mostRecent]
 other = "latest"
+
+[toggleTheme]
+other = "Toggle day/night theme"

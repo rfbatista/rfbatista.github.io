@@ -4,11 +4,13 @@ title = "About"
 
 I'm Renan Donato, a software engineer in Brazil. I work on running language models in production, and there's a question that won't leave me alone: what has to be true for high-quality AI to run locally, in Portuguese, on hardware a Brazilian can actually afford?
 
-Everything I publish here comes out of that question. I benchmark Whisper, TTS and wake-word models in Brazilian Portuguese on Raspberry Pi and ESP32, I write about inference (quantization, voice latency, llama.cpp vs vLLM) always landing on what it means in practice, and I keep the build log of a fully local Portuguese voice assistant prototype.
+Everything I publish here comes out of that question. I benchmark Whisper, TTS and wake-word models in Brazilian Portuguese on Raspberry Pi and ESP32, I write about inference (quantization, voice latency, llama.cpp vs vLLM) always landing on what it means in practice<!-- , and I keep the build log of a fully local Portuguese voice assistant prototype -->.
 
+<!--
 ## What I'm building
 
 As a personal project, I'm researching and prototyping a local voice assistant in PT-BR: from wake word to TTS, with no audio sent to the cloud by default. It's still research, not a product. I publish the architecture decisions, the numbers and the failures as they happen, with scripts and configs for anyone who wants to reproduce them.
+-->
 
 ## Tools
 
