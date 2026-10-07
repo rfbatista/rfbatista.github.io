@@ -1,0 +1,3 @@
+{{- $n := partial "garden/stage.html" . -}}
+<span class="g s{{ $n }}" title="{{ i18n (printf "stage%d" $n) }}">{{ index (slice "○" "◐" "●") $n }}</span>
+{{- /**/ -}}

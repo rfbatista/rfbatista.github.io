@@ -1,0 +1,6 @@
+{{- /* Note maturity from front matter `stage`: 0 semente, 1 crescendo, 2 perene. Unset means semente. */ -}}
+{{- $s := lower (printf "%v" (.Params.stage | default "semente")) -}}
+{{- $n := 0 -}}
+{{- if in (slice "1" "crescendo" "broto" "growing" "budding") $s }}{{ $n = 1 }}{{ end -}}
+{{- if in (slice "2" "perene" "evergreen") $s }}{{ $n = 2 }}{{ end -}}
+{{- return $n -}}

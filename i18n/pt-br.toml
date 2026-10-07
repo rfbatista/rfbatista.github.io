@@ -1,8 +1,8 @@
 [dateFormatLong]
-other = "02/01/2006"
+other = "2 Jan 2006"
 
 [dateFormatShort]
-other = "02/01/2006"
+other = "2 Jan 2006"
 
 [recentPosts]
 other = "Escritos recentes"
@@ -42,3 +42,93 @@ other = "recente"
 
 [toggleTheme]
 other = "Alternar tema dia/noite"
+
+[mainNav]
+other = "principal"
+
+[archive]
+other = "arquivo"
+
+[now]
+other = "agora"
+
+[updated]
+other = "atualizado em"
+
+[writing]
+other = "escritos"
+
+[allWriting]
+other = "todos os escritos"
+
+[projects]
+other = "projetos"
+
+[fromGarden]
+other = "do jardim"
+
+[stage0]
+other = "semente"
+
+[stage1]
+other = "crescendo"
+
+[stage2]
+other = "perene"
+
+[stageHint0]
+other = "rascunho"
+
+[stageHint1]
+other = "tomando forma"
+
+[stageHint2]
+other = "revisada, estável"
+
+[planted]
+other = "plantada"
+
+[tended]
+other = "cuidada"
+
+[backlinks]
+other = "links para cá"
+
+[becamePost]
+other = "aparece nos escritos"
+
+[search]
+other = "buscar…"
+
+[groupBy]
+other = "por"
+
+[byTopic]
+other = "tema"
+
+[byRecent]
+other = "recentes"
+
+[byStage]
+other = "estágio"
+
+[collections]
+other = "coleções"
+
+[notes]
+other = "notas"
+
+[nothingFound]
+other = "Nada brotou com essa busca ainda."
+
+[pinned]
+other = "fixado"
+
+[dateMonth]
+other = "Jan 2006"
+
+[noPostsHere]
+other = "Nenhum escrito neste idioma ainda."
+
+[readInPortuguese]
+other = "ler em português"

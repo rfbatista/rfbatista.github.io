@@ -1,6 +1,6 @@
 {{ define "main" }}
-<h1>{{ .Page.Title }}</h1>
-{{ .Content }}
+<h1 class="title">{{ .Page.Title }}</h1>
+<div class="prose">{{ .Content }}</div>
 <div class="image-grid">
     {{ range sort .Data.Pages "Date" "desc" }}
         {{ if and (isset .Params "image") .Params.image }}

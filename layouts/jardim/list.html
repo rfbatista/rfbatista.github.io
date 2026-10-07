@@ -1,0 +1,99 @@
+{{ define "mainclass" }}wide{{ end }}
+{{ define "main" }}
+{{- $isRoot := eq .Parent.Kind "home" -}}
+{{- $notes := where .RegularPagesRecursive "Draft" false -}}
+{{- if not $isRoot }}<div class="crumb"><a href="{{ .Parent.Permalink }}">{{ .Parent.Title | lower }}</a></div>{{ end }}
+<h1 class="title">{{ .Title }}</h1>
+{{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
+<div class="prose">{{ .Content }}</div>
+
+{{- if $isRoot }}
+<div class="key">
+  {{- range $n := seq 0 2 }}
+  <span><span class="g s{{ $n }}">{{ index (slice "○" "◐" "●") $n }}</span> {{ i18n (printf "stage%d" $n) }} — {{ i18n (printf "stageHint%d" $n) }}</span>
+  {{- end }}
+</div>
+
+<div class="controls">
+  <input id="gq" type="search" placeholder="{{ i18n "search" }}" aria-label="{{ i18n "search" }}">
+  <span id="gmode">{{ i18n "groupBy" }} <button data-v="topic" aria-pressed="true">{{ i18n "byTopic" }}</button> · <button data-v="recent" aria-pressed="false">{{ i18n "byRecent" }}</button> · <button data-v="stage" aria-pressed="false">{{ i18n "byStage" }}</button></span>
+</div>
+{{- end }}
+
+{{- /* Server-rendered grouping by topic; the script below regroups by recent/stage and filters. */ -}}
+{{- $items := slice -}}
+{{- range $notes -}}
+  {{- $t := partial "garden/topic.html" . -}}
+  {{- $items = $items | append (dict "page" . "topic" $t.label "stage" (partial "garden/stage.html" .) "tended" .Lastmod) -}}
+{{- end }}
+<div id="garden">
+{{- $groups := dict -}}
+{{- range $items }}{{ $groups = merge $groups (dict .topic ((index $groups .topic | default slice) | append .)) }}{{ end }}
+{{- range $topic, $list := $groups }}
+<section class="bed">
+  <h2>{{ $topic }} <small>{{ len $list }}</small></h2>
+  <ul>
+    {{- range sort $list "tended" "desc" }}
+    <li class="s{{ .stage }}" data-title="{{ .page.Title | lower }}" data-topic="{{ .topic }}" data-stage="{{ .stage }}" data-tended="{{ .tended.Format "2006-01-02" }}" data-month="{{ partial "date.html" (dict "t" .tended "f" "dateMonth") }}">
+      {{ partial "garden/glyph.html" .page }}<span class="t"><a href="{{ .page.Permalink }}">{{ .page.Title }}</a></span><span class="d">{{ partial "date.html" (dict "t" .tended "f" "dateFormatShort") }}</span>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+</div>
+<p class="empty" id="gempty" hidden>{{ i18n "nothingFound" }}</p>
+
+{{- if $isRoot }}
+<section class="bed">
+  <h2>{{ i18n "collections" }}</h2>
+  <p class="coll">{{ range $i, $l := site.Params.archivelinks }}{{ if $i }} · {{ end }}<a href="{{ absURL $l.url }}">{{ $l.name }}</a>{{ end }}</p>
+</section>
+<p class="meta">{{ len $notes }} {{ i18n "notes" }} · {{ len $groups }} {{ i18n "byTopic" }}s</p>
+
+<script>
+(function(){
+  var root = document.getElementById("garden");
+  var items = Array.prototype.slice.call(root.querySelectorAll("li"));
+  var stages = [{{ i18n "stage2" }}, {{ i18n "stage1" }}, {{ i18n "stage0" }}];
+  var mode = "topic", q = "";
+  function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function keyOf(li){
+    if (mode === "recent") return li.dataset.month;
+    if (mode === "stage") return stages[2 - li.dataset.stage];
+    return li.dataset.topic;
+  }
+  function render(){
+    var shown = items.filter(function(li){ return !q || norm(li.dataset.title + " " + li.dataset.topic).indexOf(q) !== -1; });
+    if (mode === "topic") shown.sort(function(a,b){ return a.dataset.topic.localeCompare(b.dataset.topic) || b.dataset.tended.localeCompare(a.dataset.tended); });
+    if (mode === "recent") shown.sort(function(a,b){ return b.dataset.tended.localeCompare(a.dataset.tended); });
+    if (mode === "stage") shown.sort(function(a,b){ return b.dataset.stage - a.dataset.stage || b.dataset.tended.localeCompare(a.dataset.tended); });
+    var groups = [], byKey = {};
+    shown.forEach(function(li){
+      var k = keyOf(li);
+      if (!byKey[k]) { byKey[k] = []; groups.push(k); }
+      byKey[k].push(li);
+    });
+    root.replaceChildren.apply(root, groups.map(function(k){
+      var s = document.createElement("section"); s.className = "bed";
+      var h = document.createElement("h2"); h.textContent = k + " ";
+      var c = document.createElement("small"); c.textContent = byKey[k].length; h.appendChild(c);
+      var ul = document.createElement("ul"); byKey[k].forEach(function(li){ ul.appendChild(li); });
+      s.appendChild(h); s.appendChild(ul); return s;
+    }));
+    document.getElementById("gempty").hidden = shown.length > 0;
+  }
+  document.getElementById("gmode").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    this.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", x === b); });
+    mode = b.dataset.v; render();
+  });
+  var input = document.getElementById("gq");
+  input.addEventListener("input", function(){ q = norm(input.value.trim()); render(); });
+  addEventListener("keydown", function(e){
+    if (e.key === "/" && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); input.focus(); }
+  });
+})();
+</script>
+{{- end }}
+{{ end }}

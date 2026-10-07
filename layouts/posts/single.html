@@ -1,18 +1,12 @@
 {{ define "main" }}
-<h1 class="article-title">{{ .Title }}</h1>
-<p class="article-byline">
-  <b>{{ .Site.Title }}</b> &mdash; {{ .Date.Format (i18n "dateFormatLong") }} &middot; {{ .ReadingTime }} {{ i18n "readingTime" }}
+<h1 class="title">{{ .Title }}</h1>
+{{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
+<p class="meta">
+  {{- if not .Date.IsZero }}{{ partial "date.html" (dict "t" .Date "f" "dateFormatLong") }} · {{ end }}{{ .ReadingTime }} {{ i18n "readingTime" }}
+  {{- with .Params.tags }} · {{ delimit . ", " }}{{ end }}
+  {{- range .Translations }} · <a href="{{ .Permalink }}" hreflang="{{ .Language.Lang }}">{{ .Language.LanguageName | lower }}</a>{{ end }}
 </p>
-
-{{ with .Description }}
-<div class="abstract-box"><p>{{ . }}</p></div>
-{{ end }}
-
-{{ with .Params.tags }}
-<p class="tags">{{ delimit . " · " }}</p>
-{{ end }}
-
-<div class="article-body">
+<article class="prose">
   {{ .Content }}
-</div>
+</article>
 {{ end }}

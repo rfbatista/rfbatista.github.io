@@ -1,28 +1,14 @@
-{{- $isIndex := or .IsHome (and .IsSection (eq .Section "posts")) -}}
-{{- $langLinks := partial "language-links.html" . -}}
-{{- if $isIndex -}}
-<div class="masthead-top">
-  <span>{{ .Site.BaseURL | replaceRE "^https?://" "" | strings.TrimSuffix "/" }}</span>
-  <span>
-    {{ .Site.Language.Lang }}
-    {{- range $langLinks }} &middot; <a href="{{ .url }}" hreflang="{{ .lang }}">{{ .lang }}</a>{{ end }}
-    &middot; {{ partial "theme-toggle.html" . }}
-  </span>
-</div>
-<p class="site-name-big"><a href="{{ .Site.Home.Permalink }}" class="site-name" style="color:inherit;border:0;">{{ .Site.Title }}</a></p>
-{{ with .Site.Params.description }}<p class="site-tagline">{{ . }}</p>{{ end }}
-{{- else -}}
-{{- $back := .Site.Home.Permalink -}}
-{{- $backLabel := i18n "returnHome" -}}
-{{- if eq .Section "posts" -}}
-  {{- with .Site.GetPage "posts" -}}{{ $back = .Permalink }}{{ end -}}
-  {{- $backLabel = i18n "returnIndex" -}}
-{{- end -}}
-<div class="topbar">
-  <a href="{{ $back }}">&larr; {{ $backLabel }}</a>
-  <span><a href="{{ .Site.Home.Permalink }}" class="site-name">{{ .Site.Title }}</a>
-    {{- range $langLinks }} &middot; <a href="{{ .url }}" hreflang="{{ .lang }}">{{ .lang }}</a>{{ end }}
-    &middot; {{ partial "theme-toggle.html" . }}
-  </span>
-</div>
-{{- end -}}
+{{- $page := . -}}
+<header class="top">
+  <a class="name" href="{{ .Site.Home.Permalink }}">{{ .Site.Params.author }}</a>
+  <nav aria-label="{{ i18n "mainNav" }}">
+    {{- range .Site.Params.navlinks }}
+    {{- $url := cond (isset . "absolute") (absURL .url) (absLangURL .url) }}
+    <a href="{{ $url }}"{{ if and (not $page.IsHome) (eq $page.Section .section) }} aria-current="page"{{ end }}>{{ .name }}</a>
+    {{- end }}
+    {{- range partial "language-links.html" . }}
+    <a href="{{ .url }}" hreflang="{{ .lang }}" title="{{ .name }}">{{ .lang | replaceRE "-.*" "" }}</a>
+    {{- end }}
+    {{ partial "theme-toggle.html" . }}
+  </nav>
+</header>

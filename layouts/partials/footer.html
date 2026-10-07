@@ -1,10 +1,7 @@
-<div class="site-footer">
-  <div>
-    <strong>Arquivo</strong>
-    {{ range .Site.Params.archivelinks }}<a href="{{ absLangURL .url }}">{{ .name }}</a> {{ end }}
-  </div>
-  <div>
-    <strong>{{ i18n "switchLanguageFooter" }}</strong>
-    {{ range partial "language-links.html" . }}<a href="{{ .url }}" hreflang="{{ .lang }}">{{ .name }}</a> {{ end }}
-  </div>
-</div>
+<footer class="site">
+  <span>
+    {{- range $i, $l := .Site.Params.footerlinks }}{{ if $i }} · {{ end }}<a href="{{ $l.url }}"{{ if hasPrefix $l.url "http" }} class="ext"{{ end }}>{{ $l.name }}</a>{{ end }}
+    · <a href="{{ with .Site.Home.OutputFormats.Get "RSS" }}{{ .Permalink }}{{ end }}">rss</a>
+  </span>
+  <span>{{ i18n "archive" }}: {{ range $i, $l := .Site.Params.archivelinks }}{{ if $i }} · {{ end }}<a href="{{ absURL $l.url }}">{{ $l.name }}</a>{{ end }}</span>
+</footer>

@@ -1,4 +1,4 @@
-/* Monochrome syntax theme — ink/muted only, matches cadernos.css palette */
+/* Monochrome syntax theme — ink/muted only, matches site.css palette */
 .chroma { color: var(--ink); }
 .chroma .err { color: var(--accent); }
 .chroma .lnt, .chroma .ln { color: var(--muted); }

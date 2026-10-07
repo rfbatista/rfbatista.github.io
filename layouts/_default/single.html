@@ -1,6 +1,7 @@
 {{ define "main" }}
-<h1 class="article-title">{{ .Title }}</h1>
-<div class="article-body">
+<h1 class="title">{{ .Title | default (humanize .File.ContentBaseName) }}</h1>
+{{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
+<article class="prose">
   {{ .Content }}
-</div>
+</article>
 {{ end }}

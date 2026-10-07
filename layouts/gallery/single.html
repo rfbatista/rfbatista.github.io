@@ -1,5 +1,5 @@
 {{ define "main" }}
-<h1>{{ .Page.Title }}</h1>
+<h1 class="title">{{ .Page.Title }}</h1>
 
 {{ if and (isset .Params "image") .Params.image }}
     {{ $image := .Page.Resources.GetMatch .Params.image }}
@@ -9,7 +9,6 @@
     {{end}}
 {{ end }}
 
-{{ .Content }}
-{{ template "_internal/disqus.html" . }}
+<div class="prose">{{ .Content }}</div>
 
 {{ end }}

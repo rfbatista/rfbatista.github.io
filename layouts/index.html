@@ -1,32 +1,38 @@
 {{ define "main" }}
+<div class="prose">{{ .Content }}</div>
+{{ with .Params.now }}<p class="now"><b>{{ i18n "now" }}</b> — {{ . }}{{ with $.Params.nowDate }} <span class="k">{{ i18n "updated" }} {{ partial "date.html" (dict "t" (time .) "f" "dateFormatShort") }}.</span>{{ end }}</p>{{ end }}
 
-<div class="home-section">
-  <p class="eyebrow">Projetos</p>
-  <dl class="home-dl">
-    {{/* <div><dt>Assistente de voz local em PT-BR</dt><dd>Protótipo em pesquisa: wake word, ASR e TTS em português, em hardware de prateleira.</dd></div> */}}
-    <div><dt>Go Hydrate</dt><dd><a href="https://github.com/rfbatista/gohydrate">github.com/rfbatista/gohydrate</a></dd></div>
-    <div><dt>My dotfiles</dt><dd><a href="https://github.com/rfbatista/dotfiles">github.com/rfbatista/dotfiles</a></dd></div>
-    <div><dt>API Tooling</dt><dd><a href="https://github.com/rfbatista/apitools">github.com/rfbatista/apitools</a></dd></div>
-    <div><dt>Captain Capybara (Game)</dt><dd><a href="https://tinkergolem.itch.io/captain-capy">tinkergolem.itch.io/captain-capy</a></dd></div>
-  </dl>
-</div>
+{{- /* Posts: listed unless `unlisted = true`; `featured = true` pins to the top. */ -}}
+{{- $posts := where (where (where .Site.RegularPages "Section" "posts") "Draft" false) "Date.IsZero" false -}}
+{{- $posts = where $posts "Params.unlisted" "!=" true -}}
+{{- $featured := where $posts "Params.featured" true -}}
+{{- $rest := first (sub 6 (len $featured)) (complement $featured $posts) -}}
+{{- with $posts }}
+<h2 class="sec"><a href="{{ "posts/" | absLangURL }}">{{ i18n "writing" }}</a></h2>
+<ul class="list">
+  {{- range $featured | append $rest }}
+  <li><span class="d">{{ partial "date.html" (dict "t" .Date "f" "dateMonth") }}</span><span class="t"><a href="{{ .Permalink }}">{{ .Title }}</a>{{ if .Params.featured }}<span class="pin" title="{{ i18n "pinned" }}">✦</span>{{ end }}</span><span class="x">{{ .ReadingTime }} min</span></li>
+  {{- end }}
+</ul>
+<p class="more"><a href="{{ "posts/" | absLangURL }}">{{ i18n "allWriting" }} ({{ len $posts }}) →</a></p>
+{{- end }}
 
-<div class="home-section">
-  <p class="eyebrow">{{ i18n "recentPosts" }}</p>
-  <div class="index-vol">
-    {{ range first 5 (where (where .Site.RegularPages "Section" "posts") "Draft" false) }}
-    <div class="index-entry">
-      <span class="index-entry-num">&rarr;</span>
-      <div>
-        <div class="entry-head">
-          <a href="{{ .Permalink }}" class="index-entry-title">{{ .Title }}</a>
-          <span class="entry-leader" aria-hidden="true"></span>
-          <span class="index-entry-date">{{ .Date.Format (i18n "dateFormatShort") }} &middot; {{ .ReadingTime }} min</span>
-        </div>
-      </div>
-    </div>
-    {{ end }}
-  </div>
-  <p style="margin-top:1rem;"><a href="{{ "/posts/" | absURL }}">{{ i18n "indexTitle" }} &rarr;</a></p>
-</div>
+{{ with .Params.projects }}
+<h2 class="sec">{{ i18n "projects" }}</h2>
+<dl class="proj">
+  {{- range . }}
+  <div><dt><a href="{{ .url }}"{{ if hasPrefix .url "http" }} class="ext"{{ end }}>{{ .name }}</a></dt><span class="st{{ if .active }} on{{ end }}">{{ .status }}</span><dd>{{ .desc }}</dd></div>
+  {{- end }}
+</dl>
+{{ end }}
+
+{{- /* The garden is Portuguese-only; read it from the pt-br site so /en/ shows it too. */ -}}
+{{- $garden := site.GetPage "/jardim" -}}
+{{- range site.Sites }}{{ if eq .Language.Lang "pt-br" }}{{ $garden = .GetPage "/jardim" }}{{ end }}{{ end -}}
+{{- with $garden }}{{ with first 3 (sort (where .RegularPagesRecursive "Draft" false) "Lastmod" "desc") }}
+<h2 class="sec"><a href="{{ "jardim/" | absURL }}">{{ i18n "fromGarden" }}</a></h2>
+<p class="home-garden">
+  {{- range $i, $p := . }}{{ if $i }}{{ if eq $i 2 }} {{ if eq site.Language.Lang "en" }}and{{ else }}e{{ end }} {{ else }}, {{ end }}{{ end }}{{ partial "garden/glyph.html" $p }}<a href="{{ $p.Permalink }}">{{ $p.Title }}</a>{{ end }}.
+</p>
+{{- end }}{{ end }}
 {{ end }}

@@ -1,8 +1,8 @@
 [dateFormatLong]
-other = "Jan. 2, 2006"
+other = "2 Jan 2006"
 
 [dateFormatShort]
-other = "2006-01-02"
+other = "2 Jan 2006"
 
 [recentPosts]
 other = "Recent writing"
@@ -42,3 +42,93 @@ other = "latest"
 
 [toggleTheme]
 other = "Toggle day/night theme"
+
+[mainNav]
+other = "main"
+
+[archive]
+other = "archive"
+
+[now]
+other = "now"
+
+[updated]
+other = "updated"
+
+[writing]
+other = "writing"
+
+[allWriting]
+other = "all writing"
+
+[projects]
+other = "projects"
+
+[fromGarden]
+other = "from the garden"
+
+[stage0]
+other = "seedling"
+
+[stage1]
+other = "growing"
+
+[stage2]
+other = "evergreen"
+
+[stageHint0]
+other = "rough draft"
+
+[stageHint1]
+other = "taking shape"
+
+[stageHint2]
+other = "revised, stable"
+
+[planted]
+other = "planted"
+
+[tended]
+other = "tended"
+
+[backlinks]
+other = "links here"
+
+[becamePost]
+other = "appears in writing"
+
+[search]
+other = "search…"
+
+[groupBy]
+other = "by"
+
+[byTopic]
+other = "topic"
+
+[byRecent]
+other = "recent"
+
+[byStage]
+other = "stage"
+
+[collections]
+other = "collections"
+
+[notes]
+other = "notes"
+
+[nothingFound]
+other = "Nothing has sprouted for that search yet."
+
+[pinned]
+other = "pinned"
+
+[dateMonth]
+other = "Jan 2006"
+
+[noPostsHere]
+other = "No posts in English yet. Most of my writing is in Portuguese."
+
+[readInPortuguese]
+other = "read them in Portuguese"

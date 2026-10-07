@@ -1,0 +1,41 @@
+{{ define "main" }}
+{{- $topic := partial "garden/topic.html" . -}}
+{{- $stage := partial "garden/stage.html" . -}}
+<div class="crumb"><a href="{{ .FirstSection.Permalink }}">{{ .FirstSection.Title | lower }}</a>{{ with $topic.label }} › {{ . }}{{ end }}</div>
+<h1 class="title">{{ .Title }}</h1>
+{{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
+<p class="meta">
+  {{ partial "garden/glyph.html" . }} {{ i18n (printf "stage%d" $stage) }}
+  {{- if not .Date.IsZero }} · {{ i18n "planted" }} {{ partial "date.html" (dict "t" .Date "f" "dateFormatShort") }}{{ end }}
+  {{- if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }} · {{ i18n "tended" }} {{ partial "date.html" (dict "t" .Lastmod "f" "dateFormatShort") }}{{ end }}
+  · {{ .ReadingTime }} min
+</p>
+
+<article class="prose">
+  {{ .Content }}
+</article>
+
+{{- /* Backlinks: any page whose source mentions this note's URL (current or old /wiki/ alias). */ -}}
+{{- $targets := slice .RelPermalink -}}
+{{- range .Aliases }}{{ $targets = $targets | append . }}{{ end -}}
+{{- $self := .Permalink -}}
+{{- $back := slice -}}
+{{- range site.RegularPages -}}
+  {{- if ne .Permalink $self -}}
+    {{- $raw := .RawContent -}}
+    {{- $hit := false -}}
+    {{- range $targets }}{{ if in $raw . }}{{ $hit = true }}{{ end }}{{ end -}}
+    {{- if $hit }}{{ $back = $back | append . }}{{ end -}}
+  {{- end -}}
+{{- end }}
+{{- with $back }}
+<div class="after">
+  <h3>{{ i18n "backlinks" }}</h3>
+  <ul>
+    {{- range . }}
+    <li>{{ if eq .Section "jardim" }}{{ partial "garden/glyph.html" . }}{{ else }}<span class="g">·</span>{{ end }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ if ne .Section "jardim" }} <span class="k">({{ i18n "writing" }})</span>{{ end }}</li>
+    {{- end }}
+  </ul>
+</div>
+{{- end }}
+{{ end }}

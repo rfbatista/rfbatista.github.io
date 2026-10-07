@@ -17,13 +17,23 @@ defaultContentLanguageInSubdir = false
   [services.googleAnalytics]
     ID = 'G-T41ZMHMLD4'
 
-[params]
-  # Cutting off the page title to two chars for mobile (console-demo -> co)
-  titleCutting = true
+# "cuidada em" (last tended) on garden notes comes from the last git commit
+# that touched the file.
+enableGitInfo = true
 
-  # Set the animation style -- https://animate.style/
-  # To disable animations, please remove or comment animationStyle parameter
-  animateStyle = "animated zoomIn fast"
+[frontmatter]
+  lastmod = ["lastmod", ":git", "date"]
+
+[params]
+  author = "renan donato"
+
+  [[params.footerlinks]]
+  name = "e-mail"
+  url = "mailto:contato@renandonato.com.br"
+
+  [[params.footerlinks]]
+  name = "github"
+  url = "https://github.com/rfbatista"
 
 [languages]
   [languages.pt-br]
@@ -32,33 +42,35 @@ defaultContentLanguageInSubdir = false
     weight = 1
     title = "rfbatista"
     [languages.pt-br.params]
-      # description = "Sou o Renan Donato, engenheiro de software no Brasil. Escrevo sobre sistemas, Go e inferência de LLMs — e mantenho aqui o diário de um projeto pessoal: um assistente de voz totalmente local, em português."
       description = "Sou o Renan Donato, engenheiro de software no Brasil. Escrevo sobre sistemas, Go e inferência de LLMs."
 
       [[languages.pt-br.params.navlinks]]
-      name = "escritos/"
+      name = "escritos"
       url = "posts/"
+      section = "posts"
 
       [[languages.pt-br.params.navlinks]]
-      name = "sobre/"
+      name = "jardim"
+      url = "jardim/"
+      section = "jardim"
+
+      [[languages.pt-br.params.navlinks]]
+      name = "sobre"
       url = "about/"
+      section = "about"
 
-      # Arquivo — seções antigas, acessíveis pelo rodapé
+      # Coleções antigas, acessíveis pelo rodapé e pelo jardim
       [[languages.pt-br.params.archivelinks]]
-      name = "wiki/"
-      url = "wiki/"
+      name = "livros"
+      url = "books/"
 
       [[languages.pt-br.params.archivelinks]]
-      name = "listas/"
+      name = "listas"
       url = "lists/"
 
       [[languages.pt-br.params.archivelinks]]
-      name = "fotos/"
+      name = "fotos"
       url = "photos/"
-
-      [[languages.pt-br.params.archivelinks]]
-      name = "livros/"
-      url = "books/"
 
   [languages.en]
     languageName = "English"
@@ -66,16 +78,36 @@ defaultContentLanguageInSubdir = false
     weight = 2
     title = "rfbatista"
     [languages.en.params]
-      # description = "I'm Renan Donato, a software engineer in Brazil. I write about systems, Go, and LLM inference — and keep the build log of a personal project here: a fully local voice assistant, in Portuguese."
       description = "I'm Renan Donato, a software engineer in Brazil. I write about systems, Go, and LLM inference."
 
       [[languages.en.params.navlinks]]
-      name = "writing/"
+      name = "writing"
       url = "posts/"
+      section = "posts"
+
+      # The garden is Portuguese-only: link to the root-language section.
+      [[languages.en.params.navlinks]]
+      name = "garden"
+      url = "jardim/"
+      section = "jardim"
+      absolute = true
 
       [[languages.en.params.navlinks]]
-      name = "about/"
+      name = "about"
       url = "about/"
+      section = "about"
+
+      [[languages.en.params.archivelinks]]
+      name = "books"
+      url = "books/"
+
+      [[languages.en.params.archivelinks]]
+      name = "lists"
+      url = "lists/"
+
+      [[languages.en.params.archivelinks]]
+      name = "photos"
+      url = "photos/"
 
 [taxonomies]
    tag = "tags"

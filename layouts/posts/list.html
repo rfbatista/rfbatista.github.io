@@ -1,103 +1,45 @@
 {{ define "main" }}
-{{ $posts := where .Site.RegularPages "Section" "posts" }}
-{{ $dated := where $posts "Date.IsZero" false }}
-{{ $drafts := where $posts "Date.IsZero" true }}
-{{ $dated = sort $dated "Date" "asc" }}
-{{ $datedCount := len $dated }}
-{{ $draftCount := len $drafts }}
-{{ $mostRecent := "" }}
-{{ if gt $datedCount 0 }}{{ $mostRecent = (index $dated (sub $datedCount 1)).Permalink }}{{ end }}
+{{- $posts := where (where (where .Site.RegularPages "Section" "posts") "Date.IsZero" false) "Params.unlisted" "!=" true -}}
+<h1 class="title">{{ i18n "writing" }}</h1>
+<div class="prose">{{ .Content }}</div>
 
-<div class="index-head">
-  <h2 class="index-title">{{ i18n "indexTitle" }}</h2>
-  <span class="index-stats">
-    {{ if gt $datedCount 0 }}{{ $datedCount }} {{ i18n "catalogedSince" }} {{ (index $dated 0).Date.Year }}{{ end }}
-    {{ if gt $draftCount 0 }} &middot; {{ $draftCount }} {{ i18n "inDraft" }}{{ end }}
-  </span>
+{{- if not $posts }}
+{{- /* e.g. /en/posts/ before any post has a translation: point to the default-language archive. */ -}}
+{{- $root := "" -}}
+{{- range .Site.Sites }}{{ if eq .Language.Lang "pt-br" }}{{ with .GetPage "/posts" }}{{ $root = .Permalink }}{{ end }}{{ end }}{{ end }}
+<p>{{ i18n "noPostsHere" }} <a href="{{ $root }}" hreflang="pt-br">{{ i18n "readInPortuguese" }} →</a></p>
+{{- else }}
+<div class="controls">
+  <input id="pq" type="search" placeholder="{{ i18n "search" }}" aria-label="{{ i18n "search" }}">
 </div>
 
-<div class="index-controls">
-  <div class="search-row">
-    <input class="index-search" type="search" id="indexSearch" placeholder="{{ if eq .Site.Language.Lang "en" }}search the index&hellip;{{ else }}buscar no índice&hellip;{{ end }}" aria-label="{{ if eq .Site.Language.Lang "en" }}Search posts{{ else }}Buscar artigos{{ end }}">
-  </div>
-  <p class="index-results" id="indexResults"></p>
-</div>
-
-{{ $currentYear := "" }}
-{{ $num := 0 }}
-{{ range $dated }}
-  {{ $year := .Date.Format "2006" }}
-  {{ if ne $year $currentYear }}
-    {{ if ne $currentYear "" }}</div>{{ end }}
-    {{ $currentYear = $year }}
-    {{ $num = 0 }}
-    <div class="index-vol">
-      <p class="index-vol-heading">{{ $year }}</p>
-  {{ end }}
-  {{ $num = add $num 1 }}
-  <div class="index-entry" data-title="{{ .Title | lower }}">
-    <span class="index-entry-num">{{ printf "%02d" $num }}</span>
-    <div>
-      <div class="entry-head">
-        <a href="{{ .Permalink }}" class="index-entry-title">{{ .Title }}</a>
-        <span class="entry-leader" aria-hidden="true"></span>
-        <span class="index-entry-date">{{ .Date.Format (i18n "dateFormatShort") }} &middot; {{ .ReadingTime }} min{{ if eq .Permalink $mostRecent }}&nbsp;[{{ i18n "mostRecent" }}]{{ end }}</span>
-      </div>
-      {{ with .Params.description | default .Summary }}<p class="index-entry-abs">{{ . | plainify }}</p>{{ end }}
-    </div>
-  </div>
-{{ end }}
-{{ if ne $currentYear "" }}</div>{{ end }}
-
-{{ if gt $draftCount 0 }}
-<div class="index-vol">
-  <p class="index-vol-heading">{{ i18n "draftsHeading" }}</p>
-  {{ range sort $drafts "Title" "asc" }}
-  <div class="index-entry" data-title="{{ .Title | lower }}">
-    <span class="index-entry-num is-draft">&mdash;</span>
-    <div>
-      <div class="entry-head">
-        <a href="{{ .Permalink }}" class="index-entry-title">{{ .Title }}</a>
-        <span class="entry-leader" aria-hidden="true"></span>
-        <span class="index-entry-date">{{ .ReadingTime }} min</span>
-      </div>
-      {{ with .Params.description | default .Summary }}<p class="index-entry-abs">{{ . | plainify }}</p>{{ end }}
-    </div>
-  </div>
-  {{ end }}
-</div>
-{{ end }}
+{{- range $posts.GroupByDate "2006" }}
+<section class="bed">
+  <h2>{{ .Key }} <small>{{ len .Pages }}</small></h2>
+  <ul class="list">
+    {{- range .Pages }}
+    <li data-title="{{ .Title | lower }} {{ delimit (.Params.tags | default slice) " " | lower }}"><span class="d">{{ partial "date.html" (dict "t" .Date "f" "dateMonth") }}</span><span class="t"><a href="{{ .Permalink }}">{{ .Title }}</a>{{ if .Params.featured }}<span class="pin" title="{{ i18n "pinned" }}">✦</span>{{ end }}</span><span class="x">{{ .ReadingTime }} min</span></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+<p class="empty" id="pempty" hidden>{{ i18n "nothingFound" }}</p>
 
 <script>
 (function(){
-  var input = document.getElementById("indexSearch");
-  var results = document.getElementById("indexResults");
-  var entries = Array.prototype.slice.call(document.querySelectorAll(".index-entry"));
-  var vols = Array.prototype.slice.call(document.querySelectorAll(".index-vol"));
-  var total = entries.length;
-
-  function normalize(s){
-    return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-  }
-
-  function filter(){
-    var q = normalize(input.value.trim());
-    var shown = 0;
-    entries.forEach(function(e){
-      var hay = normalize(e.getAttribute("data-title") || "");
-      var match = q === "" || hay.indexOf(q) !== -1;
-      e.hidden = !match;
-      if(match) shown++;
-    });
-    vols.forEach(function(v){
-      var anyVisible = v.querySelectorAll(".index-entry:not([hidden])").length > 0;
-      v.hidden = !anyVisible;
-    });
-    results.textContent = shown + " / " + total;
-  }
-
-  input.addEventListener("input", filter);
-  filter();
+  var input = document.getElementById("pq");
+  var items = Array.prototype.slice.call(document.querySelectorAll(".bed li"));
+  function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  input.addEventListener("input", function(){
+    var q = norm(input.value.trim()), any = false;
+    items.forEach(function(li){ li.hidden = q && norm(li.dataset.title).indexOf(q) === -1; if (!li.hidden) any = true; });
+    document.querySelectorAll(".bed").forEach(function(s){ s.hidden = !s.querySelector("li:not([hidden])"); });
+    document.getElementById("pempty").hidden = any;
+  });
+  addEventListener("keydown", function(e){
+    if (e.key === "/" && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); input.focus(); }
+  });
 })();
 </script>
+{{- end }}
 {{ end }}

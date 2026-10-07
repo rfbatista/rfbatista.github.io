@@ -1,19 +1,10 @@
 {{ define "main" }}
-<h1 class="article-title">{{ .Page.Title }}</h1>
-<div class="article-body">{{ .Content }}</div>
-
-<div class="index-vol">
-  {{ range sort .Data.Pages "Date" "desc" }}{{ if not .Params.private }}{{ if ne .Draft true }}
-  <div class="index-entry">
-    <span class="index-entry-num">&rarr;</span>
-    <div>
-      <div class="entry-head">
-        <a href="{{ .Permalink }}" class="index-entry-title">{{ .Title }}</a>
-        <span class="entry-leader" aria-hidden="true"></span>
-        <span class="index-entry-date">{{ .Date.Format (i18n "dateFormatShort") }}</span>
-      </div>
-    </div>
-  </div>
-  {{ end }}{{ end }}{{ end }}
-</div>
+<h1 class="title">{{ .Title }}</h1>
+{{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
+<div class="prose">{{ .Content }}</div>
+<ul class="list">
+  {{- range sort .Pages "Date" "desc" }}{{ if not .Params.private }}
+  <li><span class="d">{{ if not .Date.IsZero }}{{ partial "date.html" (dict "t" .Date "f" "dateMonth") }}{{ end }}</span><span class="t"><a href="{{ .Permalink }}">{{ .Title }}</a></span></li>
+  {{- end }}{{ end }}
+</ul>
 {{ end }}

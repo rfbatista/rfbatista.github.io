@@ -2,7 +2,6 @@
 <html lang="{{ .Site.LanguageCode }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script>
       (function(){
         try {
@@ -13,23 +12,12 @@
         } catch (e) {}
       })();
     </script>
-    <title>{{ .Site.Title }}{{ $url := urls.Parse .Page.Permalink }}{{ $url.Path }}</title>
-    {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+    <title>{{ if .IsHome }}{{ .Site.Params.author }}{{ else }}{{ .Title }} — {{ .Site.Params.author }}{{ end }}</title>
+    {{ with .Description | default .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
-    <meta name="googlebot" content="index,follow,snippet,archive">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap">
-    <link rel="stylesheet" href="{{ "css/cadernos.css" | absURL }}?{{ .Lastmod.Unix }}">
-    <link rel="stylesheet" href="{{ "css/syntax.css" | absURL }}?{{ .Lastmod.Unix }}">
-    {{ `
-      <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    ` | safeHTML }}
-
+    <link rel="stylesheet" href="{{ "css/site.css" | absURL }}?{{ now.Unix }}">
+    <link rel="stylesheet" href="{{ "css/syntax.css" | absURL }}?{{ now.Unix }}">
     {{- partial "favicon.html" . -}}
     {{ with .OutputFormats.Get "RSS" }}
       {{ printf `<link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
@@ -43,15 +31,16 @@
     {{- partial "opengraph.html" . -}}
     {{- partial "twitter_cards.html" . -}}
     {{ template "_internal/google_analytics.html" . }}
-
     {{- partial "header.html" . -}}
 </head>
 <body>
+  <main class="{{ block "mainclass" . }}{{ end }}">
     {{ partial "masthead.html" . }}
-
-    {{ block "main" . }}
-    {{ end }}
-    {{ partial "footer.html" . }}
-    <script src="{{ "js/theme-toggle.js" | absURL }}" defer></script>
-  </body>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  <div class="pop" id="pop" aria-hidden="true"></div>
+  <script src="{{ "js/theme-toggle.js" | absURL }}?{{ now.Unix }}" defer></script>
+  <script src="{{ "js/preview.js" | absURL }}?{{ now.Unix }}" defer></script>
+</body>
 </html>

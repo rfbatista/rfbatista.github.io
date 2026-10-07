@@ -1,0 +1,5 @@
+{{- /* Topic = first folder under content/jardim/. Labels live in data/topics.toml. */ -}}
+{{- $key := "" -}}
+{{- with .File }}{{ $parts := split (strings.TrimSuffix "/" (replace .Dir "\\" "/")) "/" }}{{ if gt (len $parts) 1 }}{{ $key = index $parts 1 }}{{ end }}{{ end -}}
+{{- $label := index site.Data.topics $key | default (replaceRE "[-_]" " " $key) -}}
+{{- return (dict "key" $key "label" $label) -}}

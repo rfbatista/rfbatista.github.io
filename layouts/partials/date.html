@@ -1,0 +1,2 @@
+{{- /* Localized date without abbreviation dots ("mar." -> "mar"). Usage: partial "date.html" (dict "t" .Date "f" "dateMonth") */ -}}
+{{- replace (lower (time.Format (i18n .f) .t)) "." "" -}}
