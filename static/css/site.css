@@ -88,24 +88,47 @@ dl.proj .st.on{color:var(--mark)}
 .bed li.s0 a{color:var(--soft)}
 .empty{color:var(--faint);font-style:italic}
 
-/* article */
+/* article — sizes in em so they scale from the 18px body, not the 16px root */
 .prose{overflow-wrap:break-word}
-.prose h1{font-weight:500;font-size:1.3rem;margin:2.4rem 0 .5rem}
-.prose h2{font-weight:500;font-size:1.15rem;margin:2.4rem 0 .5rem}
-.prose h3,.prose h4{font-weight:500;font-size:1rem;margin:2rem 0 .4rem}
-.prose ul,.prose ol{padding-left:1.3rem;margin:0 0 1.05em}
-.prose li{margin:.2rem 0}
-.prose blockquote{margin:1.2rem 0;padding-left:1rem;border-left:2px solid var(--rule);color:var(--soft);font-style:italic}
-.prose hr{border:0;border-top:1px solid var(--rule);margin:2.4rem 0}
-.prose img{max-width:100%;height:auto}
-.prose table{border-collapse:collapse;width:100%;font-size:.88rem;margin:1.2rem 0 1.4rem;font-variant-numeric:lining-nums tabular-nums;display:block;overflow-x:auto}
-.prose th,.prose td{text-align:left;padding:.3rem .8rem .3rem 0;border-bottom:1px solid var(--rule)}
-.prose thead th{font-weight:500;color:var(--soft);border-bottom-color:var(--ink)}
-code{font:.82em var(--mono);background:var(--wash);padding:.08em .3em;border-radius:2px}
-pre{font:.8rem/1.55 var(--mono);background:var(--wash);padding:.9rem 1rem;overflow-x:auto;margin:1.2rem 0;border-radius:2px}
-pre code{background:none;padding:0;font-size:inherit}
-figure.highlight{margin:1.2rem 0}
-figure.highlight figcaption{font:.75rem var(--mono);color:var(--faint);margin-bottom:.3rem}
+.prose>:first-child{margin-top:0}
+.prose h1,.prose h2,.prose h3,.prose h4,.prose h5,.prose h6{line-height:1.25;letter-spacing:-.005em;scroll-margin-top:1.5rem}
+.prose h1{font-weight:400;font-size:1.55em;margin:2.6em 0 .55em}
+.prose h2{font-weight:400;font-size:1.3em;margin:2.2em 0 .5em}
+.prose h3{font-weight:600;font-size:1.05em;margin:1.9em 0 .4em}
+.prose h4,.prose h5,.prose h6{font-weight:600;font-size:.9em;margin:1.6em 0 .3em;color:var(--soft);letter-spacing:.02em}
+.prose h1+h2,.prose h2+h3,.prose h3+h4{margin-top:.8em}
+.prose strong{font-weight:600}
+.prose ul,.prose ol{padding-left:1.4rem;margin:0 0 1.05em}
+.prose li{margin:.25em 0;padding-left:.15em}
+.prose li::marker{color:var(--faint)}
+.prose ol>li::marker{font-variant-numeric:lining-nums tabular-nums}
+.prose li>ul,.prose li>ol{margin:.2em 0 .4em}
+.prose li>p{margin:0 0 .5em}
+.prose blockquote{margin:1.4em 0;padding-left:1rem;border-left:2px solid var(--rule);color:var(--soft);font-style:italic}
+.prose blockquote>:last-child{margin-bottom:0}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:2.6em auto;width:30%}
+.prose img{display:block;max-width:100%;height:auto;margin:1.6em auto;border-radius:2px}
+.prose p>img:only-child{margin:1.6em auto}
+.prose figure{margin:1.6em 0}
+.prose figcaption{font-size:.82rem;color:var(--faint);text-align:center;margin-top:.4rem}
+.prose .table{overflow-x:auto;margin:1.4em 0 1.6em}
+.prose table{border-collapse:collapse;min-width:100%;font-size:.88rem;font-variant-numeric:lining-nums tabular-nums}
+.prose th,.prose td{text-align:left;vertical-align:top;padding:.4rem .9rem .4rem 0;border-bottom:1px solid var(--rule)}
+.prose th:last-child,.prose td:last-child{padding-right:0}
+.prose thead th{font-weight:600;color:var(--soft);border-bottom-color:var(--under)}
+.prose kbd{font:.78em var(--mono);border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;padding:.05em .35em}
+.prose mark{background:var(--wash);color:inherit;box-shadow:inset 0 -.35em 0 color-mix(in srgb,var(--mark) 22%,transparent)}
+.prose del{color:var(--faint)}
+.prose dl{margin:0 0 1.05em}
+.prose dt{font-weight:600}
+.prose dd{margin:0 0 .5em 1.2rem;color:var(--soft)}
+code{font:.82em var(--mono);background:var(--wash);padding:.1em .32em;border-radius:3px;overflow-wrap:anywhere}
+pre{font:.8rem/1.6 var(--mono);background:var(--wash);padding:1rem 1.1rem;overflow-x:auto;margin:1.4em 0;border-radius:3px;tab-size:4}
+pre code{background:none;padding:0;font-size:inherit;overflow-wrap:normal}
+.prose a code{text-decoration:inherit}
+figure.highlight{margin:1.4em 0}
+figure.highlight pre{margin:0}
+figure.highlight figcaption{font:.75rem var(--mono);color:var(--faint);margin-bottom:.35rem;text-align:left}
 .footnotes{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--soft);line-height:1.5}
 .footnotes hr{display:none}
 .footnotes ol{padding-left:1.2rem}

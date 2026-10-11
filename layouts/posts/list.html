@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $posts := where (where (where .Site.RegularPages "Section" "posts") "Date.IsZero" false) "Params.unlisted" "!=" true -}}
+{{- $posts := where (where (where (where .Site.RegularPages "Section" "posts") "Draft" false) "Date.IsZero" false) "Params.unlisted" "!=" true -}}
 <h1 class="title">{{ i18n "writing" }}</h1>
 <div class="prose">{{ .Content }}</div>
 

@@ -1,27 +1,28 @@
-/* Monochrome syntax theme — ink/muted only, matches site.css palette */
+/* Quiet syntax theme: ink, soft and faint from site.css, with --mark as the one accent. */
 .chroma { color: var(--ink); }
-.chroma .err { color: var(--accent); }
-.chroma .lnt, .chroma .ln { color: var(--muted); }
+.chroma .err { color: var(--mark); }
+.chroma .lnt, .chroma .ln { color: var(--faint); margin-right: .8em; user-select: none; }
 .chroma .line { display: flex; }
 
+/* comments: faint italic */
 .chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs, .chroma .cp, .chroma .cpf {
-  color: var(--muted); font-style: italic;
+  color: var(--faint); font-style: italic;
 }
+/* keywords: weight only */
 .chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt {
-  color: var(--ink); font-weight: 700;
-}
-.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2,
-.chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss {
-  color: var(--muted); font-style: italic;
-}
-.chroma .nf, .chroma .fm, .chroma .nc, .chroma .nn, .chroma .nb, .chroma .bp, .chroma .nd {
   color: var(--ink); font-weight: 600;
 }
-.chroma .nt { color: var(--ink); font-weight: 700; }
-.chroma .na { color: var(--muted); }
-.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo {
-  color: var(--ink);
+/* strings: the accent, so they never read as comments */
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2,
+.chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss {
+  color: var(--mark);
 }
-.chroma .o, .chroma .ow { color: var(--ink); }
-.chroma .gd { color: var(--accent); }
-.chroma .gi { color: var(--ink); font-weight:700; }
+.chroma .nf, .chroma .fm, .chroma .nc, .chroma .nn, .chroma .nd { color: var(--ink); font-weight: 600; }
+.chroma .nb, .chroma .bp { color: var(--soft); }
+.chroma .nt { color: var(--ink); font-weight: 600; }
+.chroma .na { color: var(--soft); }
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo { color: var(--mark); }
+.chroma .o, .chroma .ow, .chroma .p { color: var(--soft); }
+.chroma .gd { color: var(--mark); }
+.chroma .gi { color: var(--ink); font-weight: 600; }
+.chroma .gh, .chroma .gu { color: var(--faint); }
