@@ -1,8 +1,14 @@
 {{ define "mainclass" }}wide{{ end }}
 {{ define "main" }}
-{{- $isRoot := eq .Parent.Kind "home" -}}
+{{- /* The garden is Portuguese-only: a translated section index (e.g. /en/jardim/leituras/) lists the default-language notes. */ -}}
+{{- $section := . -}}
 {{- $notes := where .RegularPagesRecursive "Draft" false -}}
-{{- if not $isRoot }}<div class="crumb"><a href="{{ .Parent.Permalink }}">{{ .Parent.Title | lower }}</a></div>{{ end }}
+{{- if not $notes }}{{ range .Translations }}{{ if eq .Language.Lang "pt-br" }}{{ $section = . }}{{ $notes = where .RegularPagesRecursive "Draft" false }}{{ end }}{{ end }}{{ end -}}
+{{- $isRoot := eq $section.Parent.Kind "home" -}}
+{{- /* Shelf notes (front matter `shelf = true`: books, links) stay out of the searchable garden on the root page. */ -}}
+{{- $shelf := slice -}}
+{{- if $isRoot }}{{ $shelf = where $notes "Params.shelf" true }}{{ $notes = where $notes "Params.shelf" "!=" true }}{{ end -}}
+{{- if not $isRoot }}<div class="crumb"><a href="{{ $section.Parent.Permalink }}">{{ $section.Parent.Title | lower }}</a></div>{{ end }}
 <h1 class="title">{{ .Title }}</h1>
 {{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
 <div class="prose">{{ .Content }}</div>
@@ -44,11 +50,42 @@
 </div>
 <p class="empty" id="gempty" hidden>{{ i18n "nothingFound" }}</p>
 
-{{- if $isRoot }}
+{{- /* Antilibrary: books not read yet, from data/antilibrary.toml; heading and intro come from the section's `toread` front matter. */ -}}
+{{- with .Params.toread }}
 <section class="bed">
-  <h2>{{ i18n "collections" }}</h2>
-  <p class="coll">{{ range $i, $l := site.Params.archivelinks }}{{ if $i }} · {{ end }}<a href="{{ absURL $l.url }}">{{ $l.name }}</a>{{ end }}</p>
+  {{- $books := hugo.Data.antilibrary.books | default slice }}
+  <h2>{{ .title }} <small>{{ len $books }}</small></h2>
+  {{ with .intro }}<div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>{{ end }}
+  {{- with $books }}
+  <ul>
+    {{- range . }}
+    <li><span class="g" title="{{ i18n "toRead" }}">◌</span><span class="t">{{ with .url }}<a href="{{ . }}">{{ end }}{{ .title }}{{ if .url }}</a>{{ end }}</span>{{ with .author }}<span class="d">{{ . }}</span>{{ end }}</li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="empty">{{ i18n "nothingToRead" }}</p>
+  {{- end }}
 </section>
+{{- end }}
+
+{{- if $isRoot }}
+{{- with $shelf }}
+<h2 class="sec">{{ i18n "shelf" }}</h2>
+{{- $shelfGroups := dict -}}
+{{- range . }}{{ $t := (partial "garden/topic.html" .).label }}{{ $shelfGroups = merge $shelfGroups (dict $t ((index $shelfGroups $t | default slice) | append .)) }}{{ end }}
+{{- range $topic, $list := $shelfGroups }}
+<section class="bed">
+  <h2>{{ $topic }} <small>{{ len $list }}</small></h2>
+  <ul>
+    {{- range $list.ByTitle }}
+    <li class="s{{ partial "garden/stage.html" . }}">
+      {{ partial "garden/glyph.html" . }}<span class="t"><a href="{{ .Permalink }}">{{ .Title }}</a></span><span class="d">{{ partial "date.html" (dict "t" .Lastmod "f" "dateFormatShort") }}</span>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}
 <p class="meta">{{ len $notes }} {{ i18n "notes" }} · {{ len $groups }} {{ i18n "byTopic" }}s</p>
 
 <script>

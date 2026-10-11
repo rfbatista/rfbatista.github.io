@@ -46,8 +46,8 @@ other = "Alternar tema dia/noite"
 [mainNav]
 other = "principal"
 
-[archive]
-other = "arquivo"
+[photos]
+other = "fotos"
 
 [now]
 other = "agora"
@@ -112,8 +112,14 @@ other = "recentes"
 [byStage]
 other = "estágio"
 
-[collections]
-other = "coleções"
+[shelf]
+other = "estante"
+
+[toRead]
+other = "para ler"
+
+[nothingToRead]
+other = "A lista ainda está vazia."
 
 [notes]
 other = "notas"

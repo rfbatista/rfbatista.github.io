@@ -1,0 +1,11 @@
+# Antilibrary: books I want to read, shown under "Para ler" on /jardim/leituras/.
+# Order is kept as written. `author` and `url` are optional.
+#
+# [[books]]
+# title = "Book title"
+# author = "Author Name"
+# url = "https://..."
+
+[[books]]
+title = "Tiny Experiments: How to Live Freely in a Goal-Obsessed World"
+author = "Anne-Laure Le Cunff"

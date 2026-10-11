@@ -1,4 +1,5 @@
 +++
+aliases = ["/books/designing-data-intensive-applications/"]
 title = "Designing Data Intensive Application"
 date = "2024-04-09"
 tags = ["database", "book"]

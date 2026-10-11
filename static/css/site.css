@@ -87,7 +87,6 @@ dl.proj .st.on{color:var(--mark)}
 .bed li .d{color:var(--faint);font-size:.82rem;font-variant-numeric:oldstyle-nums tabular-nums;white-space:nowrap}
 .bed li.s0 a{color:var(--soft)}
 .empty{color:var(--faint);font-style:italic}
-.coll{color:var(--soft);font-size:.95rem}
 
 /* article */
 .prose{overflow-wrap:break-word}

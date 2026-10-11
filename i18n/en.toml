@@ -46,8 +46,8 @@ other = "Toggle day/night theme"
 [mainNav]
 other = "main"
 
-[archive]
-other = "archive"
+[photos]
+other = "photos"
 
 [now]
 other = "now"
@@ -112,8 +112,14 @@ other = "recent"
 [byStage]
 other = "stage"
 
-[collections]
-other = "collections"
+[shelf]
+other = "shelf"
+
+[toRead]
+other = "to read"
+
+[nothingToRead]
+other = "The list is empty for now."
 
 [notes]
 other = "notes"

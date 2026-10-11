@@ -1,4 +1,5 @@
 +++
+aliases = ["/books/the-7-habits-of-highly-effective-people/"]
 title = "The 7 Habits of Highly Effective People"
 date = "2024-03-16"
 tags = ["book", "mindset"]

@@ -59,19 +59,6 @@ enableGitInfo = true
       url = "about/"
       section = "about"
 
-      # Coleções antigas, acessíveis pelo rodapé e pelo jardim
-      [[languages.pt-br.params.archivelinks]]
-      name = "livros"
-      url = "books/"
-
-      [[languages.pt-br.params.archivelinks]]
-      name = "listas"
-      url = "lists/"
-
-      [[languages.pt-br.params.archivelinks]]
-      name = "fotos"
-      url = "photos/"
-
   [languages.en]
     languageName = "English"
     languageCode = "en"
@@ -96,18 +83,6 @@ enableGitInfo = true
       name = "about"
       url = "about/"
       section = "about"
-
-      [[languages.en.params.archivelinks]]
-      name = "books"
-      url = "books/"
-
-      [[languages.en.params.archivelinks]]
-      name = "lists"
-      url = "lists/"
-
-      [[languages.en.params.archivelinks]]
-      name = "photos"
-      url = "photos/"
 
 [taxonomies]
    tag = "tags"

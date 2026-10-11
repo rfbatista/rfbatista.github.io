@@ -23,6 +23,8 @@ Most of this site is written in Portuguese, because the work itself is about
 Portuguese. Posts that have an English version appear under
 [writing](/en/posts/); the full archive lives at [escritos](/posts/).
 
+In my spare time I take [a few photos](/photos/), mostly of Shoyu.
+
 ## Contact
 
 E-mail: [contato@renandonato.com.br](mailto:contato@renandonato.com.br)

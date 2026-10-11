@@ -16,6 +16,8 @@ que juntam software e hardware, aqueles em que o código sai da tela e interage
 com o mundo físico. O maior deles (que já virou hobby) é um assistente de voz em
 português, uma espécie de alternativa caseira à Alexa ou ao Google Home.
 
+Nas horas vagas tiro [algumas fotos](/photos/), quase todas do Shoyu.
+
 ## Contato
 
 E-mail: [contato@renandonato.com.br](mailto:contato@renandonato.com.br)

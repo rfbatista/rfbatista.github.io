@@ -1,4 +1,5 @@
 +++
+aliases = ["/books/the-algorithm-design/"]
 title = "The Algorithms Design Manual"
 date = "2024-01-04"
 tags = ["Algorithms", "Data Structures"]

@@ -1,4 +1,5 @@
 +++
+aliases = ["/books/100-go-mistakes/"]
 title = "100 Go Mistakes"
 date = "2024-03-16"
 tags = ["go", "book"]

@@ -1,3 +1,9 @@
++++
+title = "Links que guardei"
+aliases = ["/lists/"]
+shelf = true
++++
+
 # Blogs and Personal Website
 
 - https://www.noghartt.dev/
