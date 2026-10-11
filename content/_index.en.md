@@ -28,6 +28,8 @@ desc = "Neovim, tmux, zsh. My environment, versioned."
 status = "always"
 +++
 
-Hi, I'm Renan, a software engineer in Brazil. I work on LLM inference in production and spend the rest of my time on Go, systems, and one question I can't shake: what has to be true for good AI to run locally, in Portuguese, on hardware people here can actually afford?
+Hi, I'm Renan, a software engineer in Brazil.
 
-Most of my [writing](/en/posts/) is in Portuguese; posts with an English version show up here. The [garden](/jardim/) is my open notebook: study notes and half-formed ideas, in Portuguese, that I revisit over time.
+Most of my [writing](/en/posts/) is in Portuguese; posts with an English version
+show up here. The [garden](/jardim/) is my open notebook: study notes and
+half-formed ideas, in Portuguese, that I revisit over time.

@@ -29,6 +29,8 @@ desc = "Neovim, tmux, zsh. Meu ambiente, versionado."
 status = "sempre"
 +++
 
-Oi, sou o Renan, engenheiro de software no Brasil. Trabalho com inferência de LLMs em produção e passo o resto do tempo com Go, sistemas e uma pergunta que não me larga: o que precisa ser verdade para IA boa rodar localmente, em português, num hardware que cabe no bolso de quem mora aqui?
+Oi, sou o Renan, engenheiro de software.
 
-Este site tem duas partes. Os [escritos](/posts/) são textos terminados, que escolhi publicar. O [jardim](/jardim/) é meu caderno aberto: notas de estudo, leituras e ideias pela metade, que vou revisando com o tempo.
+Este site tem duas partes. Os [escritos](/posts/) são textos terminados, que
+escolhi publicar. O [jardim](/jardim/) é meu caderno aberto: notas de estudo,
+leituras e ideias pela metade, que vou revisando com o tempo.

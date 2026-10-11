@@ -2,19 +2,19 @@
 title = "Sobre"
 +++
 
-Sou o Renan Donato, engenheiro de software no Brasil. Trabalho com inferência de modelos de linguagem em produção, e tem uma pergunta que não me larga: o que precisa ser verdade para IA de qualidade rodar localmente, em português, em hardware que cabe no bolso do brasileiro?
+Olá, eu sou o Renan, engenheiro de software. Trabalho com desenvolvimento
+desde 2017. Antes disso, passei alguns anos na indústria programando CLPs e
+IHMs, que foi onde aprendi que código também move coisas de verdade.
 
-Tudo o que publico aqui sai dessa pergunta. Faço benchmarks de Whisper, TTS e wake word em PT-BR rodando em Raspberry Pi e ESP32, escrevo sobre inferência (quantização, latência de voz, llama.cpp vs vLLM) sempre aterrissando no que isso significa na prática<!-- , e mantenho o diário de construção de um protótipo de assistente de voz totalmente local em português -->.
+Sempre gostei de construir coisas. A engenharia costuma ser vista como algo
+exato, mas pra mim construir é um processo criativo, e só dá certo quando você
+entende as pessoas para quem está construindo. A programação me atraiu
+justamente por isso: com ela, uma ideia pode chegar a muita gente.
 
-<!--
-## O que estou construindo
-
-Estou pesquisando e prototipando, como projeto pessoal, um assistente de voz local em PT-BR: do wake word ao TTS, sem enviar áudio para a nuvem por padrão. Ainda é pesquisa, não produto. Publico as decisões de arquitetura, os números e os fracassos conforme acontecem, com scripts e configs para quem quiser reproduzir.
--->
-
-## Ferramentas
-
-Go, Python, JavaScript/TypeScript, C++, C e Zig. Experiência com microsserviços em nuvem, programação de sistemas e, nos últimos anos, inferência e serving de LLMs.
+Hoje trabalho principalmente com web, mas tenho um carinho especial por projetos
+que juntam software e hardware, aqueles em que o código sai da tela e interage
+com o mundo físico. O maior deles (que já virou hobby) é um assistente de voz em
+português, uma espécie de alternativa caseira à Alexa ou ao Google Home.
 
 ## Contato
 
