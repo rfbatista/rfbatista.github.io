@@ -1,71 +1,52 @@
 +++
-title = "Installing tp-link ac 600 driver in arch linux"
+title = "Instalando o driver do TP-Link AC600 no Arch Linux"
 date = "2025-03-31"
 tags = ["linux"]
 categories = ["post"]
 draft = false
 +++
 
-First install dkms and linux-headers then restart.
+Comprei um adaptador Wi-Fi USB TP-Link AC600, espetei no meu Arch e nada aconteceu. O kernel não vem com driver para o chip Realtek dele, então você precisa instalar um por conta própria. A versão curta: instale o `dkms` e os headers do kernel, depois o `rtl8821au-dkms-git` do AUR. O resto do post é isso com os comandos.
 
-Then from the AUR install rtl8821au-dkms-git then restart
+## Passo 1: instalar o DKMS e os headers do kernel
 
-If you've recently purchased a TP-Link AC600 wireless adapter and are trying to get it working on Arch Linux, you'll need to install the appropriate drivers. Here's a step-by-step guide to setting it up.
+O DKMS recompila módulos de kernel que não fazem parte da árvore oficial toda vez que o kernel atualiza, o que no Arch acontece com frequência. Ele precisa dos headers do kernel que você está rodando:
 
-# Prerequisites
-
-Before installing the driver, make sure you have dkms and linux-headers installed. These are essential for compiling and managing kernel modules.
-
-## Step 1: Install DKMS and Linux Headers
-
-Open a terminal and run the following command:
-
-```
+```sh
 sudo pacman -S dkms linux-headers
 ```
 
-Once the installation is complete, restart your system:
+Se você usa outro kernel, instale os headers correspondentes: `linux-lts-headers` para o `linux-lts`, `linux-zen-headers` para o `linux-zen`, e assim por diante. Errar isso é o motivo mais comum de o módulo não compilar sem avisar nada.
 
-```
+Reinicie para garantir que está rodando o kernel a que esses headers pertencem:
+
+```sh
 sudo reboot
 ```
 
-## Step 2: Install the Driver from AUR
+## Passo 2: instalar o driver do AUR
 
-The driver for the TP-Link AC600 adapter is available in the Arch User Repository (AUR) under the package rtl8821au-dkms-git. To install it, use an AUR helper like yay:
+O driver está empacotado como `rtl8821au-dkms-git`. Com um AUR helper como o `yay`:
 
-```
+```sh
 yay -S rtl8821au-dkms-git
 ```
 
-Alternatively, if you don’t have an AUR helper installed, you can manually clone and build the package:
+Sem helper, clone e compile na mão:
 
-```
+```sh
 git clone https://aur.archlinux.org/rtl8821au-dkms-git.git
 cd rtl8821au-dkms-git
 makepkg -si
 ```
 
-## Step 3: Restart Your System
+## Passo 3: reiniciar e conferir
 
-Once the driver is installed, reboot your system to apply the changes:
+Reinicie mais uma vez e veja se o módulo carregou e se a interface apareceu:
 
-```
-sudo reboot
-```
-
-Step 4: Verify the Installation
-
-After restarting, check if the adapter is recognized by running:
-
-```
+```sh
+lsmod | grep 8821
 ip link
 ```
 
-or
-
-```
-lsmod | grep 8821
-```
-
-If everything is set up correctly, your TP-Link AC600 adapter should now be working on Arch Linux.
+Deve aparecer uma interface sem fio nova (normalmente começando com `wl`). Daí em diante é conectar do jeito de sempre, com `iwctl`, NetworkManager ou o que você usar.
