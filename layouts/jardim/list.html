@@ -50,24 +50,6 @@
 </div>
 <p class="empty" id="gempty" hidden>{{ i18n "nothingFound" }}</p>
 
-{{- /* Antilibrary: books not read yet, from data/antilibrary.toml; heading and intro come from the section's `toread` front matter. */ -}}
-{{- with .Params.toread }}
-<section class="bed">
-  {{- $books := hugo.Data.antilibrary.books | default slice }}
-  <h2>{{ .title }} <small>{{ len $books }}</small></h2>
-  {{ with .intro }}<div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>{{ end }}
-  {{- with $books }}
-  <ul>
-    {{- range . }}
-    <li><span class="g" title="{{ i18n "toRead" }}">◌</span><span class="t">{{ with .url }}<a href="{{ . }}">{{ end }}{{ .title }}{{ if .url }}</a>{{ end }}</span>{{ with .author }}<span class="d">{{ . }}</span>{{ end }}</li>
-    {{- end }}
-  </ul>
-  {{- else }}
-  <p class="empty">{{ i18n "nothingToRead" }}</p>
-  {{- end }}
-</section>
-{{- end }}
-
 {{- if $isRoot }}
 {{- with $shelf }}
 <h2 class="sec">{{ i18n "shelf" }}</h2>

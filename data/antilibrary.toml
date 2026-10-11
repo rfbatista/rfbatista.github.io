@@ -1,4 +1,4 @@
-# Antilibrary: books I want to read, shown under "Para ler" on /jardim/leituras/.
+# Antilibrary: books I want to read, shown on /jardim/para-ler/ (content/jardim/para-ler/).
 # Order is kept as written. `author` and `url` are optional.
 #
 # [[books]]
@@ -9,3 +9,35 @@
 [[books]]
 title = "Tiny Experiments: How to Live Freely in a Goal-Obsessed World"
 author = "Anne-Laure Le Cunff"
+
+[[books]]
+title = "The Penguin Modern Classics Book"
+author = "Henry Eliot"
+
+[[books]]
+title = "The Human Animal: A Personal View of the Human Species"
+author = "Desmond Morris"
+
+[[books]]
+title = "Reflexos do mundo: Trabalhar e viver"
+author = "Fabien Toulmé"
+
+[[books]]
+title = "The Making of Prince of Persia: Journals 1985-1993"
+author = "Jordan Mechner"
+
+[[books]]
+title = "A cidade e suas muralhas incertas"
+author = "Haruki Murakami"
+
+[[books]]
+title = "Building Scientific Apparatus: A Practical Guide to Design and Construction"
+author = "John H. Moore et al."
+
+[[books]]
+title = "The Origins of Efficiency"
+author = "Brian Potter"
+
+[[books]]
+title = "Maintenance of Everything: Part One"
+author = "Stewart Brand"

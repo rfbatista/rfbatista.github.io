@@ -1,0 +1,13 @@
+{{- /* Books I want to read, from data/antilibrary.toml (shared by every language). */ -}}
+{{- $books := hugo.Data.antilibrary.books | default slice -}}
+<section class="bed">
+  {{- with $books }}
+  <ul>
+    {{- range . }}
+    <li><span class="g" title="{{ i18n "toRead" }}">◌</span><span class="t">{{ with .url }}<a href="{{ . }}">{{ end }}{{ .title }}{{ if .url }}</a>{{ end }}</span>{{ with .author }}<span class="d">{{ . }}</span>{{ end }}</li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="empty">{{ i18n "nothingToRead" }}</p>
+  {{- end }}
+</section>

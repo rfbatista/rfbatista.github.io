@@ -1,7 +1,10 @@
 {{ define "main" }}
 {{- $topic := partial "garden/topic.html" . -}}
 {{- $stage := partial "garden/stage.html" . -}}
-<div class="crumb"><a href="{{ .FirstSection.Permalink }}">{{ .FirstSection.Title | lower }}</a>{{ with $topic.label }} › {{ . }}{{ end }}</div>
+{{- /* The English garden root isn't rendered; point the crumb at the Portuguese one. */ -}}
+{{- $rootURL := .FirstSection.Permalink -}}
+{{- if not $rootURL }}{{ range .FirstSection.Translations }}{{ if eq .Language.Lang "pt-br" }}{{ $rootURL = .Permalink }}{{ end }}{{ end }}{{ end }}
+<div class="crumb"><a href="{{ $rootURL }}">{{ .FirstSection.Title | lower }}</a>{{ with $topic.label }} › {{ . }}{{ end }}</div>
 <h1 class="title">{{ .Title }}</h1>
 {{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
 <p class="meta">
