@@ -6,14 +6,18 @@ shelf = true
 
 # Blogs and Personal Website
 
-- https://www.noghartt.dev/
-- https://fs.blog/
-- https://100r.co/site/home.html
-- https://www.kalzumeus.com/
-- https://dotink.co/
-- https://martin.kleppmann.com/
+- <https://www.noghartt.dev/>
+- <https://fs.blog/>
+- <https://100r.co/site/home.html>
+- <https://www.kalzumeus.com/>
+- <https://dotink.co/>
+- <https://martin.kleppmann.com/>
 
 - [John Washam](https://startupnextdoor.com/)
+
+# Learn
+
+- <https://cloudmash.dev>
 
 ## Software Architecture
 
@@ -37,12 +41,12 @@ shelf = true
 
 # Music
 
-https://www.youtube.com/@spiritual_brother
+<https://www.youtube.com/@spiritual_brother>
 
 ## Youtube Channels
 
-- https://www.youtube.com/@distrotube
-- https://www.youtube.com/@mlopslearners
+- <https://www.youtube.com/@distrotube>
+- <https://www.youtube.com/@mlopslearners>
 
 ## Real-time applications
 
@@ -50,14 +54,14 @@ https://www.youtube.com/@spiritual_brother
 
 ## Talks
 
-Scaling Yourself - https://www.youtube.com/watch?v=FS1mnISoG7U
+Scaling Yourself - <https://www.youtube.com/watch?v=FS1mnISoG7U>
 [Lone Star Ruby Conference 2010 Real Software Engineering by Glenn Vanderburg](https://www.youtube.com/watch?v=NP9AIUT9nos)
 
 # MLOps
 
-- https://home.mlops.community/
-- https://home.mlops.community/public/blogs/the-minimum-set-of-must-haves-for-mlops
+- <https://home.mlops.community/>
+- <https://home.mlops.community/public/blogs/the-minimum-set-of-must-haves-for-mlops>
 
 ## LLAMA.CPP
 
-- https://blog.steelph0enix.dev/posts/llama-cpp-guide/
+- <https://blog.steelph0enix.dev/posts/llama-cpp-guide/>
