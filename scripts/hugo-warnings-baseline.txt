@@ -1,3 +1,6 @@
+# Known baseline: deprecation warnings the site already printed before the Projects page.
+# Each line is an exact Hugo message. They wait on a later cleanup; do not add new ones.
+# scripts/check.sh fails on any other WARN or ERROR line.
 WARN  deprecated: project config key languages.pt-br.languageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.pt-br.locale instead.
 WARN  deprecated: project config key languages.pt-br.languageName was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.pt-br.label instead.
 WARN  deprecated: project config key languages.en.languageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.en.locale instead.

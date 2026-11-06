@@ -178,6 +178,8 @@ def test_projects_pages_are_translations_and_in_sitemap():
     en = page("/en/projects/").replace('"', "")
     check(re.search(r"<a href=\S*/en/projects/ hreflang=en", pt) is not None, "/projetos/: no switch to the English page")
     check(re.search(r"<a href=\S*/projetos/ hreflang=pt-br", en) is not None, "/en/projects/: no switch to the Portuguese page")
+    for stray in ["/en/en/projects/", "/en/projetos/"]:
+        check(not (PUBLIC / stray.strip("/") / "index.html").exists(), f"{stray}: stray Projects page was generated")
     # /sitemap.xml is an index of one sitemap per language.
     for lang, url in [("pt-br", "/projetos/"), ("en", "/en/projects/")]:
         sm = (PUBLIC / lang / "sitemap.xml").read_text(encoding="utf-8")
