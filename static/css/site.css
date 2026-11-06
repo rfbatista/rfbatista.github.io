@@ -180,3 +180,23 @@ footer.site a:hover{color:var(--ink)}
 /* No hover on touch: give list titles and project names a visible underline cue (R18). Links in running text keep their own underline. */
 @media (hover:none){ul.list .t a,dl.proj dt a{text-decoration-color:var(--soft)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* page: home */
+main.home h1.lede{font-family:var(--serif);font-weight:500;font-size:2.5rem;line-height:1.12;letter-spacing:-.012em;margin:0 0 1.1rem;text-wrap:balance;hyphens:manual}
+main.home .prose{color:var(--soft);hyphens:manual;max-width:32rem}
+main.home .prose a{color:var(--ink)}
+main.home h2.sec{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:3.4rem 0 .8rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+main.home h2.sec a{color:inherit}
+main.home ul.list li{padding:.4rem 0}
+main.home ul.list .t{font-size:1.04rem}
+main.home dl.proj div{padding:.55rem 0}
+main.home dl.proj dt{font-size:1.04rem}
+main.home .more{margin-top:1rem}
+main.home .home-garden{color:var(--ink)}
+main.home h2.sec::before{content:"";display:block;width:1.6rem;height:2px;background:var(--mark);margin:-.7rem 0 .7rem}
+main.home h2.sec{border-top:0;padding-top:.9rem;color:var(--soft);font-weight:700;margin-top:4.2rem}
+main.home dl.proj dd.st.on{color:var(--faint)}
+main.home ul.list .t a,main.home dl.proj dt a,main.home .home-garden a{text-decoration-color:color-mix(in srgb,currentColor 30%,transparent)}
+main.home .more{text-transform:uppercase;letter-spacing:.08em;font-size:.74rem}
+@media (max-width:560px){main.home h1.lede{font-size:2rem}main.home h2.sec{margin-top:3.4rem}}
+/* end page: home */

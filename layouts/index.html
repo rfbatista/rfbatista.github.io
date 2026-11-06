@@ -1,4 +1,6 @@
+{{ define "mainclass" }}home{{ end }}
 {{ define "main" }}
+<h1 class="lede">{{ .Params.lede | default .Title }}</h1>
 <div class="prose">{{ .Content }}</div>
 {{ with .Params.now }}<p class="now"><b>{{ i18n "now" }}</b> — {{ . }}{{ with $.Params.nowDate }} <span class="k">{{ i18n "updated" }} {{ partial "date.html" (dict "t" (time .) "f" "dateFormatShort") }}.</span>{{ end }}</p>{{ end }}
 
