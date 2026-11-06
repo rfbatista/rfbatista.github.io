@@ -200,3 +200,30 @@ main.home ul.list .t a,main.home dl.proj dt a,main.home .home-garden a{text-deco
 main.home .more{text-transform:uppercase;letter-spacing:.08em;font-size:.74rem}
 @media (max-width:560px){main.home h1.lede{font-size:2rem}main.home h2.sec{margin-top:3.4rem}}
 /* end page: home */
+
+/* page: post */
+/* Post headings are demoted one level in markup (R05); the l<N> class keeps the size of the level written in markdown. */
+.prose .l1{font-weight:600;font-size:1.42em;margin:2.6em 0 .55em}
+.prose .l2{font-weight:600;font-size:1.28em;margin:2.5em 0 .5em;letter-spacing:.005em}
+.prose .l3{font-weight:600;font-size:1.06em;margin:1.9em 0 .4em}
+.prose .l4,.prose .l5,.prose .l6{font-weight:500;font-size:.84em;margin:1.6em 0 .3em;color:var(--soft);letter-spacing:.03em}
+.prose .l1+.l2,.prose .l2+.l3,.prose .l3+.l4{margin-top:.8em}
+/* Code blocks (R08): an edge shadow shows on the side that still has code to scroll to, and the focus ring marks the keyboard stop. */
+article.prose pre{
+  background:
+    linear-gradient(to right,var(--wash) 1.2rem,transparent) left center/2.4rem 100% no-repeat local,
+    linear-gradient(to left,var(--wash) 1.2rem,transparent) right center/2.4rem 100% no-repeat local,
+    linear-gradient(to right,color-mix(in srgb,var(--ink) 22%,transparent),transparent) left center/.7rem 100% no-repeat scroll,
+    linear-gradient(to left,color-mix(in srgb,var(--ink) 22%,transparent),transparent) right center/.7rem 100% no-repeat scroll,
+    var(--wash);
+  border-left:2px solid var(--mark);border-radius:0 3px 3px 0;box-shadow:inset 0 0 0 1px var(--rule);
+}
+article.prose pre:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+article.prose figure.highlight figcaption{text-align:left;margin:0 0 .3rem}
+@media (max-width:30rem){
+  article.prose pre{font-size:.76rem;padding:.9rem .9rem;margin-inline:-.2rem}
+}
+/* Writing list: the year heading and its count sit on a rule, like a stamped label. */
+.bed h2{border-bottom:1px solid var(--rule);padding-bottom:.3rem;margin-bottom:.5rem;letter-spacing:.1em;font-size:.86rem;color:var(--soft)}
+.bed li{padding:.3rem 0}
+/* end page: post */

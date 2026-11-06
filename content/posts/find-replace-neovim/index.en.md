@@ -12,13 +12,13 @@ Renaming something across a whole project is one of those tasks that makes peopl
 
 Run `:Telescope live_grep` and type the word or pattern you want to replace.
 
-![](./1.png)
+![Telescope live grep in Neovim: the Results list shows six matches for "opusdecod" and the Grep Preview pane shows the matching Go file.](./1.png)
 
 ## Step 2: send the results to the quickfix list
 
 With the results on screen, press `Ctrl + q`. Telescope sends every match to the quickfix list.
 
-![](./2.png)
+![Neovim quickfix list open under a Go file, listing the same six matches, each as file path, line and column.](./2.png)
 
 ## Step 3: replace
 
@@ -30,7 +30,7 @@ Now run the substitution on every entry of the list:
 
 `:cdo` runs the command that follows on each entry of the quickfix list, so the `s/search/replace/g` is applied only to the lines Telescope found. Add a `c` at the end (`s/search/replace/gc`) if you want to confirm each change.
 
-![](./3.png)
+![Quickfix list with the command line showing :cdo s/opusdecod/opusdecoder/g, ready to run.](./3.png)
 
 ## Step 4: save everything
 

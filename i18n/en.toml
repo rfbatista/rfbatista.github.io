@@ -147,3 +147,6 @@ other = "earlier"
 
 [allProjects]
 other = "all projects"
+
+[codeBlock]
+other = "Code"

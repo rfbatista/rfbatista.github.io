@@ -469,12 +469,70 @@ def test_home_is_scoped_and_intro_not_hyphenated():
     m = re.search(r"/\* page: home \*/(.*?)/\* end page: home \*/", css, re.S)
     check(m, "site.css lacks the page: home block")
     if m:
-        check(css.rstrip().endswith("/* end page: home */"), "page: home block must be last in site.css")
         for sel in re.findall(r"([^{}]+)\{", m.group(1)):
             for part in sel.split(","):
                 check(part.strip().startswith(("main.home", "@media")), f"home rule not scoped: {part.strip()}")
         check("hyphens:auto" not in m.group(1), "Home intro must not hyphenate")
     check('class="home' in page("/") or "class=home" in page("/"), "Home main lacks the home class")
+
+def post_pages():
+    """Generated post pages (an article.prose under a posts/ path), both languages."""
+    out = []
+    for f, html in content_pages():
+        rel = f.relative_to(PUBLIC).as_posix()
+        if re.search(r"(^|/)posts/[^/]+/index\.html$", rel) and re.search(r"<article class=\"?prose", html):
+            out.append((rel, html))
+    return out
+
+
+def test_post_title_is_the_only_h1_and_body_headings_are_demoted():
+    """R05: exactly one h1 per post page; the markdown h1/h2 of a post body sit one level lower."""
+    posts = post_pages()
+    check(len(posts) >= 8, f"found only {len(posts)} post pages")
+    for rel, html in posts:
+        check(len(re.findall(r"<h1\b", html)) == 1, f"{rel}: expected exactly one h1")
+    html = page("/en/posts/find-replace-neovim/")
+    body = re.search(r"<article class=\"?prose.*?</article>", html, re.S).group(0)
+    check(not re.search(r"<h1\b", body) and len(re.findall(r"<h3\b", body)) == 4 and len(re.findall(r"<h2\b", body)) == 1,
+          "the neovim post's four '## Step' headings are not h3 and its '# References' not h2")
+
+
+def test_post_year_headings_exclude_the_count_from_their_name():
+    for url in ["/posts/", "/en/posts/"]:
+        html = page(url)
+        heads = re.findall(r"<h2>(.*?)</h2>", html, re.S)
+        check(heads, f"{url}: no year headings")
+        for h in heads:
+            name = re.sub(r"<small[^>]*aria-hidden=\"?true\"?[^>]*>.*?</small>", "", h, flags=re.S)
+            name = re.sub(r"<[^>]+>", "", name).strip()
+            check(re.fullmatch(r"\d{4}", name), f"{url}: year heading name is not just the year: {name!r}")
+
+
+def test_post_neovim_images_have_alt_text_in_both_languages():
+    for url in ["/posts/find-replace-neovim/", "/en/posts/find-replace-neovim/"]:
+        imgs = re.findall(r"<img\b[^>]*>", page(url))
+        check(len(imgs) == 3, f"{url}: expected 3 images, found {len(imgs)}")
+        for tag in imgs:
+            m = re.search(r"\balt=(?:\"([^\"]*)\"|([^\s>]+))", tag)
+            check(m and (m.group(1) or m.group(2)).strip(), f"{url}: image without alt: {tag[:80]}")
+
+
+def test_post_code_blocks_are_focusable_and_labelled():
+    """R08: every pre scrolls by keyboard and has an accessible name."""
+    seen = 0
+    for rel, html in post_pages():
+        for tag in re.findall(r"<pre\b[^>]*>", html):
+            seen += 1
+            check(re.search(r"tabindex=\"?0", tag), f"{rel}: pre without tabindex=0: {tag[:60]}")
+            check(re.search(r"role=\"?region", tag) and re.search(r"aria-label=", tag), f"{rel}: pre without region label: {tag[:60]}")
+    check(seen > 5, f"only {seen} code blocks found")
+
+
+def test_post_code_blocks_show_an_overflow_cue():
+    css = site_css()
+    block = css[css.find("/* page: post */"):css.find("/* end page: post */")]
+    check(block, "no page: post CSS block")
+    check(re.search(r"pre[^{]*\{[^}]*(background[^;]*\blocal\b|mask|box-shadow)", block), "code blocks have no overflow cue")
 
 
 TESTS = [
@@ -502,6 +560,12 @@ TESTS = [
     test_home_has_exactly_one_h1,
     test_home_featured_projects_dl_is_valid_and_private_is_unlinked,
     test_home_is_scoped_and_intro_not_hyphenated,
+
+    test_post_title_is_the_only_h1_and_body_headings_are_demoted,
+    test_post_year_headings_exclude_the_count_from_their_name,
+    test_post_neovim_images_have_alt_text_in_both_languages,
+    test_post_code_blocks_are_focusable_and_labelled,
+    test_post_code_blocks_show_an_overflow_cue,
 ]
 
 for t in TESTS:
