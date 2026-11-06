@@ -8,3 +8,6 @@ install:
 
 check:
 	sh ./scripts/check.sh
+
+browser-check:
+	sh ./scripts/browser-check.sh
