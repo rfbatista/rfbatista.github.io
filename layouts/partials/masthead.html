@@ -1,13 +1,13 @@
 {{- $page := . -}}
 <header class="top">
-  <a class="name" href="{{ .Site.Home.Permalink }}">{{ .Site.Params.author }}</a>
+  <a class="name" href="{{ .Site.Home.Permalink }}">rfbatista</a>
   <nav aria-label="{{ i18n "mainNav" }}">
     {{- range .Site.Params.navlinks }}
     {{- $url := cond (isset . "absolute") (absURL .url) (absLangURL .url) }}
     <a href="{{ $url }}"{{ if and (not $page.IsHome) (eq $page.Section .section) }} aria-current="page"{{ end }}>{{ .name }}</a>
     {{- end }}
     {{- range partial "language-links.html" . }}
-    <a href="{{ .url }}" hreflang="{{ .lang }}" title="{{ .name }}">{{ .lang | replaceRE "-.*" "" }}</a>
+    <a href="{{ .url }}" hreflang="{{ .lang }}" lang="{{ .lang | replaceRE "-.*" "" }}" aria-label="{{ .lang | replaceRE "-.*" "" }}: {{ .name }}" title="{{ .name }}">{{ .lang | replaceRE "-.*" "" }}</a>
     {{- end }}
     {{ partial "theme-toggle.html" . }}
   </nav>

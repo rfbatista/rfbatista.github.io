@@ -383,6 +383,49 @@ def test_hyphenation_only_in_running_text():
     check(re.search(r"code\{[^}]*hyphens:none", css), "inline code is not protected from hyphenation")
 
 
+def content_pages():
+    """Generated pages that carry the site chrome (not redirects, 404 or the feed)."""
+    out = []
+    for f in all_pages():
+        html = f.read_text(encoding="utf-8")
+        if '<header class=top>' in html or '<header class="top">' in html:
+            out.append((f, html))
+    return out
+
+
+def test_wordmark_is_in_every_header_and_links_home():
+    pages = content_pages()
+    check(len(pages) > 50, f"found only {len(pages)} pages with the site header")
+    for f, html in pages:
+        rel = f.relative_to(PUBLIC)
+        m = re.search(r'<header class="?top"?>\s*<a class="?name"? href="?([^" >]+)"?[^>]*>(.*?)</a>', html, re.S)
+        if not m:
+            failures.append(f"{rel}: no Wordmark link at the start of the header")
+            continue
+        text = re.sub(r"<[^>]+>", "", m.group(2))
+        check(text == "rfbatista", f"{rel}: Wordmark text is {text!r}")
+        en = re.search(r'<html lang="?en', html) is not None
+        check(m.group(1).rstrip("/").endswith("/en") if en else not m.group(1).rstrip("/").endswith("/en"),
+              f"{rel}: Wordmark links to {m.group(1)}, not the home of its language")
+
+
+def test_browser_title_starts_with_the_brand():
+    for f, html in content_pages():
+        t = re.search(r"<title>(.*?)</title>", html, re.S)
+        check(t and t.group(1).startswith("rfbatista"), f"{f.relative_to(PUBLIC)}: title is {t.group(1) if t else None!r}")
+
+
+def test_language_links_and_toggle_are_labelled():
+    for f, html in content_pages():
+        rel = f.relative_to(PUBLIC)
+        header = re.search(r"<header class=\"?top\"?>.*?</header>", html, re.S).group(0)
+        for tag in re.findall(r"<a [^>]*hreflang=[^>]*>", header):
+            check(re.search(r'\blang="?\w', tag), f"{rel}: language link has no lang: {tag}")
+            check("aria-label=" in tag, f"{rel}: language link has no accessible name: {tag}")
+        btn = re.search(r"<button[^>]*theme-toggle[^>]*>", html)
+        check(btn and "aria-pressed=" in btn.group(0), f"{rel}: theme toggle has no aria-pressed")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -400,6 +443,9 @@ TESTS = [
     test_mark_and_soft_stay_accessible,
     test_heading_face_carries_headings_and_metadata,
     test_hyphenation_only_in_running_text,
+    test_wordmark_is_in_every_header_and_links_home,
+    test_browser_title_starts_with_the_brand,
+    test_language_links_and_toggle_are_labelled,
 ]
 
 for t in TESTS:

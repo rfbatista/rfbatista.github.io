@@ -53,7 +53,13 @@ for (const theme of ["light", "dark"]) {
       const res = await page.evaluate(() => axe.run(document, {
         runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"] },
       }));
+      // Hit areas (R06): header and footer controls are at least 24x24 CSS px, the theme toggle 44px at 375.
+      const small = await page.evaluate((w) => [...document.querySelectorAll("header.top a, header.top button, footer.site a")].map((e) => {
+        const r = e.getBoundingClientRect(); const min = e.matches(".theme-toggle") && w <= 400 ? 44 : 24;
+        return r.width < min || r.height < min ? `${e.textContent.trim().slice(0, 12)} ${Math.round(r.width)}x${Math.round(r.height)}` : null;
+      }).filter(Boolean), +w);
       const violations = res.violations.map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.length }));
+      if (small.length) violations.push({ id: "hit-area", impact: "serious", nodes: small.length, detail: small });
       report.push({ page: name, width: +w, theme, cls: +cls.toFixed(4), fonts, violations });
       const bad = violations.length > 0 || cls > CLS_LIMIT;
       if (bad) failed = true;
