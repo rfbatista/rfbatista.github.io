@@ -324,6 +324,65 @@ def test_font_licences_ship_with_the_fonts():
         check(any((PUBLIC / "fonts").glob(f"LICENSE-{name}*")), f"no licence file for {name} in fonts/")
 
 
+def site_css():
+    return (PUBLIC / "css" / "site.css").read_text(encoding="utf-8")
+
+
+def luminance(hex_colour):
+    c = [int(hex_colour.lstrip("#")[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    c = [v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4 for v in c]
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def contrast(a, b):
+    la, lb = sorted((luminance(a), luminance(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+def theme_tokens():
+    """{"light": {token: hex}, "dark": {token: hex}} from the :root blocks of site.css."""
+    css = site_css()
+    out = {}
+    light = re.search(r":root\{(.*?)\}", css, re.S).group(1)
+    dark = re.search(r":root\[data-theme=dark\]\{(.*?)\}", css, re.S).group(1)
+    for name, body in (("light", light), ("dark", dark)):
+        out[name] = dict(re.findall(r"--(\w+):(#[0-9a-fA-F]{6})", body))
+    return out
+
+
+def test_faint_text_passes_wcag_aa_in_both_themes():
+    for theme, t in theme_tokens().items():
+        for bg in ("bg", "wash"):
+            ratio = contrast(t["faint"], t[bg])
+            check(ratio >= 4.5, f"--faint on --{bg} ({theme}) is {ratio:.2f}:1, want >= 4.5")
+
+
+def test_mark_and_soft_stay_accessible():
+    for theme, t in theme_tokens().items():
+        for token in ("soft", "mark", "ink"):
+            for bg in ("bg", "wash"):
+                ratio = contrast(t[token], t[bg])
+                check(ratio >= 4.5, f"--{token} on --{bg} ({theme}) is {ratio:.2f}:1, want >= 4.5")
+
+
+def test_heading_face_carries_headings_and_metadata():
+    css = site_css()
+    check("--sans:" in css, "no --sans token for the Heading face")
+    for sel in ("h1.title", "h2.sec", "ul.list .d", ".meta", ".top nav"):
+        check(re.search(re.escape(sel) + r"\{[^}]*(font-family:var\(--sans\)|font:[^;}]*var\(--sans\))", css),
+              f"{sel} is not set in the Heading face")
+    check("oldstyle-nums" not in css, "oldstyle-nums is still in site.css")
+    check("lining-nums" in css, "no lining-nums on metadata")
+
+
+def test_hyphenation_only_in_running_text():
+    css = site_css()
+    check(not re.search(r"(^|\})p\{[^}]*hyphens:auto", css), "bare `p` hyphenates: titles' siblings and the Home intro would split")
+    check(re.search(r"article\.prose[^{]*\{[^}]*hyphens:auto", css), "running text in posts does not hyphenate")
+    check(not re.search(r"overflow-wrap:anywhere", css), "inline code may still break mid-word (overflow-wrap:anywhere)")
+    check(re.search(r"code\{[^}]*hyphens:none", css), "inline code is not protected from hyphenation")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -337,6 +396,10 @@ TESTS = [
     test_fallback_faces_have_metric_overrides,
     test_reading_face_is_preloaded_on_every_page,
     test_font_licences_ship_with_the_fonts,
+    test_faint_text_passes_wcag_aa_in_both_themes,
+    test_mark_and_soft_stay_accessible,
+    test_heading_face_carries_headings_and_metadata,
+    test_hyphenation_only_in_running_text,
 ]
 
 for t in TESTS:
