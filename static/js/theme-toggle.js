@@ -12,9 +12,12 @@
     } catch (e) {}
   }
 
+  // aria-pressed is true while the dark theme is on.
   document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+    btn.setAttribute("aria-pressed", currentTheme() === "dark" ? "true" : "false");
     btn.addEventListener("click", function () {
       setTheme(currentTheme() === "dark" ? "light" : "dark");
+      btn.setAttribute("aria-pressed", currentTheme() === "dark" ? "true" : "false");
     });
   });
 })();

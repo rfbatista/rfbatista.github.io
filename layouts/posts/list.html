@@ -14,8 +14,8 @@
 </div>
 
 {{- range $posts.GroupByDate "2006" }}
-<section class="bed">
-  <h2>{{ .Key }} <small>{{ len .Pages }}</small></h2>
+<section class="bed bed-year">
+  <h2>{{ .Key }} <small aria-hidden="true">{{ len .Pages }}</small></h2>
   <ul class="list">
     {{- range .Pages }}
     <li data-title="{{ .Title | lower }} {{ delimit (.Params.tags | default slice) " " | lower }}"><span class="d">{{ partial "date.html" (dict "t" .Date "f" "dateMonth") }}</span><span class="t"><a href="{{ .Permalink }}">{{ .Title }}</a>{{ if .Params.featured }}<span class="pin" title="{{ i18n "pinned" }}">✦</span>{{ end }}</span><span class="x">{{ .ReadingTime }} min</span></li>

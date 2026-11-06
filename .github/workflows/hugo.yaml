@@ -60,6 +60,8 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"          
+      - name: Check generated site
+        run: make check
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

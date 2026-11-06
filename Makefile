@@ -5,3 +5,9 @@ deploy:
 install:
 	sh ./scripts/install.sh
 	
+
+check:
+	sh ./scripts/check.sh
+
+browser-check:
+	sh ./scripts/browser-check.sh

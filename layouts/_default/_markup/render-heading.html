@@ -1,0 +1,9 @@
+{{- /* The page title is the h1, so no markdown heading may be an h1 (R05).
+       A page whose first heading is "#" has its whole outline demoted one level; a page that starts at "##" already
+       sits right under the title, so only a stray "#" moves down to h2. Either way no level is skipped.
+       The l<N> class keeps the size of the level written in markdown. */ -}}
+{{- $raw := .Page.RawContent | replaceRE "(?s)(```|~~~).*?(```|~~~)" "" -}}
+{{- $first := index (findRE `(?m)^#{1,6} ` $raw 1) 0 | default "## " | strings.TrimSpace | len -}}
+{{- $level := cond (eq $first 1) (add .Level 1) (math.Max .Level 2) | int -}}
+{{- $level = math.Min $level 6 | int -}}
+<h{{ $level }} id="{{ .Anchor }}" class="l{{ .Level }}">{{ .Text | safeHTML }}</h{{ $level }}>

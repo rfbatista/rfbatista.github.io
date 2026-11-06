@@ -138,3 +138,15 @@ other = "Nenhum escrito neste idioma ainda."
 
 [readInPortuguese]
 other = "ler em português"
+
+[projectsActive]
+other = "em andamento"
+
+[projectsEarlier]
+other = "anteriores"
+
+[allProjects]
+other = "todos os projetos"
+
+[codeBlock]
+other = "Código"
