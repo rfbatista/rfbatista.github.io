@@ -55,6 +55,11 @@ enableGitInfo = true
       section = "jardim"
 
       [[languages.pt-br.params.navlinks]]
+      name = "projetos"
+      url = "projetos/"
+      section = "projetos"
+
+      [[languages.pt-br.params.navlinks]]
       name = "sobre"
       url = "about/"
       section = "about"
@@ -78,6 +83,11 @@ enableGitInfo = true
       url = "jardim/"
       section = "jardim"
       absolute = true
+
+      [[languages.en.params.navlinks]]
+      name = "projects"
+      url = "projects/"
+      section = "projetos"
 
       [[languages.en.params.navlinks]]
       name = "about"

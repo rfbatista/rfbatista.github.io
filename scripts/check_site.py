@@ -83,6 +83,40 @@ class ProjectsParser(HTMLParser):
                 self._cur["desc_html"] += data
 
 
+class NavParser(HTMLParser):
+    """Collects the main navigation's links as (text, href, aria-current)."""
+
+    def __init__(self):
+        super().__init__()
+        self.links = []
+        self._nav = False
+        self._cur = None
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag == "nav":
+            self._nav = True
+        elif tag == "a" and self._nav:
+            self._cur = [ "", a.get("href"), a.get("aria-current") ]
+            self.links.append(self._cur)
+
+    def handle_endtag(self, tag):
+        if tag == "nav":
+            self._nav = False
+        elif tag == "a":
+            self._cur = None
+
+    def handle_data(self, data):
+        if self._cur is not None:
+            self._cur[0] += data
+
+
+def nav(url):
+    p = NavParser()
+    p.feed(page(url))
+    return p.links
+
+
 def projects(url):
     p = ProjectsParser()
     p.feed(page(url))
@@ -156,6 +190,22 @@ def test_flyer_description_links_to_the_post():
     check(bool(flyer) and "/posts/procedure-layout-generation/" in flyer[0]["desc_html"], "flyer description does not link to its post")
 
 
+def test_nav_links_to_the_projects_page():
+    base = "https://rfbatista.github.io"
+    want = {
+        "pt": (["escritos", "jardim", "projetos", "sobre"], f"{base}/projetos/"),
+        "en": (["writing", "garden", "projects", "about"], f"{base}/en/projects/"),
+    }
+    for url, lang in [("/", "pt"), ("/projetos/", "pt"), ("/en/", "en"), ("/en/projects/", "en")]:
+        names, href = want[lang]
+        links = nav(url)
+        check([l[0] for l in links[:4]] == names, f"{url}: nav is {[l[0] for l in links[:4]]}, want {names}")
+        entry = [l for l in links if l[0] == names[2]]
+        check(bool(entry) and entry[0][1] == href, f"{url}: nav {names[2]!r} does not link to {href}")
+        is_projects_page = url in ("/projetos/", "/en/projects/")
+        check(bool(entry) and (entry[0][2] == "page") == is_projects_page, f"{url}: aria-current on the projects link should be {is_projects_page}")
+
+
 def test_existing_pages_still_render():
     for url in ["/", "/en/", "/posts/", "/jardim/", "/about/", "/en/about/"]:
         check("<h" in page(url) or url == "/", f"{url}: renders no content")
@@ -166,6 +216,7 @@ TESTS = [
     test_projects_pages,
     test_projects_pages_are_translations_and_in_sitemap,
     test_flyer_description_links_to_the_post,
+    test_nav_links_to_the_projects_page,
 ]
 
 for t in TESTS:
