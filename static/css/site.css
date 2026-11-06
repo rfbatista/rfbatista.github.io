@@ -72,8 +72,10 @@ ul.list .x{color:var(--faint);font:500 .82rem/1.5 var(--sans);font-variant-numer
 dl.proj{margin:0}
 dl.proj div{display:grid;grid-template-columns:1fr auto;column-gap:1rem;padding:.35rem 0}
 dl.proj dd{margin:0;grid-column:1;color:var(--soft);font-size:.92rem;line-height:1.45}
-dl.proj .st{grid-column:2;grid-row:1;font:500 .78rem/1.5 var(--sans);color:var(--faint)}
-dl.proj .st.on{color:var(--mark)}
+dl.proj dd.st{grid-column:2;grid-row:1;font:500 .78rem/1.5 var(--sans);color:var(--faint)}
+dl.proj dd.st.on{color:var(--mark)}
+/* A Private project has no link: plain text, not underlined, set apart from the linked names. */
+dl.proj .priv{color:var(--soft);font-style:italic}
 dl.proj .meta{font-size:.76rem;color:var(--faint);margin-left:.4rem}
 
 /* garden */
@@ -175,4 +177,6 @@ footer.site a:hover{color:var(--ink)}
   ul.list .x{display:none}
   h1.title{font-size:1.8rem}
 }
+/* No hover on touch: give list titles and project names a visible underline cue (R18). Links in running text keep their own underline. */
+@media (hover:none){ul.list .t a,dl.proj dt a{text-decoration-color:var(--soft)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}

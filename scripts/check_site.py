@@ -43,7 +43,7 @@ class ProjectsParser(HTMLParser):
             self._depth_dl += 1
         elif self._depth_dl and tag == "dt":
             self._cur = {"name": "", "href": None, "ext": False, "status": "",
-                         "active": False, "desc": "", "desc_html": "", "meta": ""}
+                         "active": False, "private_marked": False, "desc": "", "desc_html": "", "meta": ""}
             self.entries.append(self._cur)
             if self.groups:
                 self.groups[-1]["entries"].append(self._cur)
@@ -51,13 +51,16 @@ class ProjectsParser(HTMLParser):
         elif self._cur and tag == "a" and self._in == "name":
             self._cur["href"] = a.get("href")
             self._cur["ext"] = "ext" in cls
-        elif self._cur and tag == "span" and "st" in cls:
+        elif self._cur and tag == "dd" and "st" in cls:
             self._cur["active"] = "on" in cls
             self._in = "status"
+            self._status_dd = True
         elif self._cur and tag == "span" and "meta" in cls:
             self._in = "meta"
         elif self._cur and tag == "dd":
             self._in = "desc"
+        elif self._cur and tag == "span" and "priv" in cls:
+            self._cur["private_marked"] = True
         elif self._cur and self._in == "desc":
             self._cur["desc_html"] += self.get_starttag_text()
 
@@ -69,7 +72,7 @@ class ProjectsParser(HTMLParser):
             self._cur = None
         elif tag == "dt" and self._in == "name":
             self._in = None
-        elif tag in ("span", "dd") and self._in in ("status", "meta", "desc"):
+        elif tag in ("span", "dd") and self._in in ("status", "meta", "desc") and not (tag == "span" and self._in == "status"):
             self._in = None
         elif self._cur and self._in == "desc":
             self._cur["desc_html"] += f"</{tag}>"
@@ -167,6 +170,7 @@ def test_projects_pages():
             check(e["desc"] == want[2 + lang], f"{url}: {e['name']} desc {e['desc']!r}")
             if e["name"] in PRIVATE:
                 check(e["href"] is None, f"{url}: {e['name']} must not link")
+                check(e["private_marked"], f"{url}: {e['name']} is not visibly marked as not linked")
             else:
                 check(bool(e["href"]), f"{url}: {e['name']} has no link")
         check(all(e["active"] for e in p.groups[0]["entries"]), f"{url}: active labels not highlighted")
@@ -426,6 +430,23 @@ def test_language_links_and_toggle_are_labelled():
         check(btn and "aria-pressed=" in btn.group(0), f"{rel}: theme toggle has no aria-pressed")
 
 
+def test_project_list_markup_is_a_valid_description_list():
+    """R10: only dt and dd inside each dl > div; the Status label is a dd, not a stray span."""
+    for url in ["/", "/en/", "/projetos/", "/en/projects/"]:
+        html = page(url)
+        for dl in re.findall(r"<dl class=\"?proj\"?>(.*?)</dl>", html, re.S):
+            for group in re.findall(r"<div>(.*?)</div>", dl, re.S):
+                rest = re.sub(r"<(dt|dd)[^>]*>.*?</\1>", "", group, flags=re.S).strip()
+                check(not rest, f"{url}: stray markup directly inside a dl > div: {rest[:60]}")
+                check(re.search(r"<dt\b", group) and re.search(r"<dd[^>]*\bst\b", group), f"{url}: entry lacks dt or Status dd")
+
+
+def test_link_cue_on_touch_for_list_titles():
+    css = site_css()
+    check(re.search(r"@media \(hover:none\)\{[^@]*ul\.list \.t a[^@]*dl\.proj dt a|@media \(hover:none\)\{[^@]*dl\.proj dt a[^@]*ul\.list \.t a", css),
+          "no visible link cue under (hover:none) for list titles and project names")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -446,6 +467,8 @@ TESTS = [
     test_wordmark_is_in_every_header_and_links_home,
     test_browser_title_starts_with_the_brand,
     test_language_links_and_toggle_are_labelled,
+    test_project_list_markup_is_a_valid_description_list,
+    test_link_cue_on_touch_for_list_titles,
 ]
 
 for t in TESTS:
