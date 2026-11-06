@@ -138,3 +138,12 @@ other = "No posts in English yet. Most of my writing is in Portuguese."
 
 [readInPortuguese]
 other = "read them in Portuguese"
+
+[projectsActive]
+other = "active"
+
+[projectsEarlier]
+other = "earlier"
+
+[allProjects]
+other = "all projects"

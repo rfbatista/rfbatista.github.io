@@ -1,0 +1,95 @@
+# Project list: every Project the blog shows, in both languages (ADR 0001).
+# One entry per Project; the Projects page and the home page both read this file.
+#
+#   name      display name
+#   url       link target; leave out for a private project with nothing to link
+#   year      year started; Projects without one sort last in their group
+#   stack     main language/stack (optional)
+#   active    true = Active project (amber label), false = Earlier project
+#   featured  true = also shown on the home page (optional)
+#   desc      one line per language; markdown, so a word can link to a post
+#   status    short label per language, free text
+#
+# Within a group the order is year, newest first; ties keep the order below.
+# The home page shows the featured Projects in the order below.
+
+[[project]]
+name = "harness"
+url = "https://github.com/rfbatista/harness"
+year = 2026
+stack = "Go"
+active = true
+featured = true
+desc = { pt = "Meu harness para agentes de código, com meu jeito e meu gosto.", en = "My own harness for coding agents, built my way." }
+status = { pt = "agentes", en = "agents" }
+
+[[project]]
+name = "spillway"
+url = "https://github.com/rfbatista/spillway"
+year = 2026
+stack = "Go"
+active = true
+featured = true
+desc = { pt = "Proxy reverso para backends de LLM que respeita rate limits.", en = "A rate-limit-aware reverse proxy for LLM backends." }
+status = { pt = "proxy", en = "proxy" }
+
+[[project]]
+name = "llmkit"
+year = 2026
+stack = "Go"
+active = true
+desc = { pt = "Roda agentes de código como sessões gerenciadas.", en = "Runs coding agents as managed sessions." }
+status = { pt = "privado", en = "private" }
+
+[[project]]
+name = "harnesskit"
+year = 2026
+stack = "Go"
+active = true
+desc = { pt = "Blocos em Go para apps que dirigem agentes: skills, ferramentas e MCP.", en = "Go building blocks for apps that drive coding agents: skills, tools and MCP." }
+status = { pt = "privado", en = "private" }
+
+[[project]]
+name = "dotfiles"
+url = "https://github.com/rfbatista/dotfiles"
+year = 2021
+stack = "Lua"
+active = true
+desc = { pt = "Neovim, tmux, zsh. Meu ambiente, versionado.", en = "Neovim, tmux, zsh. My environment, versioned." }
+status = { pt = "sempre", en = "always" }
+
+[[project]]
+name = "flyer-layout-generator"
+url = "https://github.com/rfbatista/flyer-layout-generator"
+year = 2024
+stack = "Go"
+active = false
+desc = { pt = "Gera layouts de flyers proceduralmente; escrevi sobre isso em um [post](/posts/procedure-layout-generation/).", en = "Procedurally generates flyer layouts; I wrote a [post](/posts/procedure-layout-generation/) about it." }
+status = { pt = "algoritmo", en = "algorithm" }
+
+[[project]]
+name = "API Tooling"
+url = "https://github.com/rfbatista/apitools"
+year = 2024
+stack = "Go"
+active = false
+desc = { pt = "Ferramentas code-first para APIs REST: a API é definida em Go e a documentação sai do código.", en = "Code-first REST API tooling: the API is defined in Go code and the docs are generated from it." }
+status = { pt = "ferramenta", en = "tool" }
+
+[[project]]
+name = "Go Hydrate"
+url = "https://github.com/rfbatista/gohydrate"
+year = 2023
+stack = "Go"
+active = false
+featured = true
+desc = { pt = "Renderiza aplicações React a partir de Go, no estilo do Next.js.", en = "Renders React applications from Go, Next.js-style." }
+status = { pt = "go", en = "go" }
+
+[[project]]
+name = "Captain Capybara"
+url = "https://tinkergolem.itch.io/captain-capy"
+active = false
+featured = true
+desc = { pt = "Jogo de game jam com fases procedurais.", en = "Game jam game with procedural levels." }
+status = { pt = "jogo", en = "game" }

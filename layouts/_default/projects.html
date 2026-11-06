@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1 class="title">{{ .Title }}</h1>
+<div class="prose">{{ .Content }}</div>
+{{- $all := partial "projects-list.html" . }}
+{{- range slice (dict "key" "projectsActive" "on" true) (dict "key" "projectsEarlier" "on" false) }}
+{{- $group := where $all "active" .on }}
+{{- if $group }}
+<h2 class="sec">{{ i18n .key }}</h2>
+{{ partial "project-entries.html" $group }}
+{{- end }}
+{{- end }}
+{{ end }}

@@ -1,0 +1,9 @@
+{{- /* <dl class="proj"> entries for a list of Projects from projects-list.html. */ -}}
+<dl class="proj">
+  {{- range . }}
+  {{- $meta := slice -}}
+  {{- with .stack }}{{ $meta = $meta | append . }}{{ end -}}
+  {{- if .year }}{{ $meta = $meta | append (string .year) }}{{ end }}
+  <div><dt>{{ if .url }}<a href="{{ .url }}"{{ if hasPrefix .url "http" }} class="ext"{{ end }}>{{ .name }}</a>{{ else }}{{ .name }}{{ end }}{{ with $meta }} <span class="meta">{{ delimit . " · " }}</span>{{ end }}</dt><span class="st{{ if .active }} on{{ end }}">{{ .status }}</span><dd>{{ .desc }}</dd></div>
+  {{- end }}
+</dl>

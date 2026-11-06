@@ -1,0 +1,20 @@
+{{- /*
+  The Project list (data/projects.toml) resolved for the current language.
+  Returns Projects as dicts: name, url, year, stack, active, featured, status, desc (safe HTML).
+  Sorted by year, newest first; Projects with no year last; ties keep list order.
+*/ -}}
+{{- $lang := cond (eq site.Language.Lang "en") "en" "pt" -}}
+{{- $out := slice -}}
+{{- range hugo.Data.projects.project -}}
+  {{- $out = $out | append (dict
+    "name" .name
+    "url" (.url | default "")
+    "year" (.year | default 0)
+    "stack" (.stack | default "")
+    "active" .active
+    "featured" (.featured | default false)
+    "status" (index .status $lang)
+    "desc" (index .desc $lang | markdownify)
+  ) -}}
+{{- end -}}
+{{- return (sort $out "year" "desc") -}}
