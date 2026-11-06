@@ -26,7 +26,10 @@ trap 'rm -rf "$out"; [ -z "${srv:-}" ] || kill "$srv" 2>/dev/null || true' EXIT
 
 python3 -m http.server "$port" --bind 127.0.0.1 --directory "$out" >/dev/null 2>&1 &
 srv=$!
-sleep 1
+until python3 -c "import urllib.request,sys;urllib.request.urlopen('http://127.0.0.1:$port/')" 2>/dev/null; do sleep 0.2; done
 
-BROWSER_CHECK_BASE="http://127.0.0.1:$port" BROWSER_CHECK_OUT="$shots" \
-  NODE_PATH="$tools/node_modules" node "$here/browser-check.mjs"
+export BROWSER_CHECK_BASE="http://127.0.0.1:$port" BROWSER_CHECK_OUT="$shots" NODE_PATH="$tools/node_modules"
+status=0
+node "$here/browser-check.mjs" || status=1
+node "$here/browser-check-post.mjs" || status=1
+exit $status

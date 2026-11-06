@@ -1,5 +1,5 @@
 // Seam B extra: at 375px a long code block shows an overflow cue and scrolls by keyboard.
-// Env: BROWSER_CHECK_BASE, BROWSER_CHECK_OUT. Run: NODE_PATH=<tools>/node_modules node scripts/browser-check-post.mjs
+// Env: BROWSER_CHECK_BASE, BROWSER_CHECK_OUT. Run by browser-check.sh after the main pass.
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");

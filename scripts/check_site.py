@@ -54,7 +54,6 @@ class ProjectsParser(HTMLParser):
         elif self._cur and tag == "dd" and "st" in cls:
             self._cur["active"] = "on" in cls
             self._in = "status"
-            self._status_dd = True
         elif self._cur and tag == "span" and "meta" in cls:
             self._in = "meta"
         elif self._cur and tag == "dd":
@@ -259,7 +258,7 @@ def font_file(url):
 def test_fonts_are_self_hosted():
     faces = font_faces()
     check(faces, "no @font-face in the site's CSS")
-    for body, urls in faces:
+    for _, urls in faces:
         for u in urls:
             check("://" not in u or u.startswith("data:"), f"@font-face source outside the site: {u}")
             check(font_file(u).is_file(), f"@font-face source not in the built site: {u}")
@@ -291,8 +290,6 @@ def test_latin_budget_and_extended_on_demand():
         if "size-adjust" in body or not urls:
             continue
         for u in urls:
-            if "local(" in body and not u:
-                continue
             if LATIN_EXT in u:
                 check("unicode-range" in body, f"Latin Extended face has no unicode-range: {u}")
             else:
@@ -469,11 +466,14 @@ def test_home_is_scoped_and_intro_not_hyphenated():
     m = re.search(r"/\* page: home \*/(.*?)/\* end page: home \*/", css, re.S)
     check(m, "site.css lacks the page: home block")
     if m:
-        for sel in re.findall(r"([^{}]+)\{", m.group(1)):
+        block = re.sub(r"/\*.*?\*/", "", m.group(1), flags=re.S)
+        for sel in re.findall(r"([^{}]+)\{", block):
             for part in sel.split(","):
-                check(part.strip().startswith(("main.home", "@media")), f"home rule not scoped: {part.strip()}")
+                part = re.sub(r"^\s*@media[^{]*$", "", part).strip()
+                check(not part or part.startswith("main.home"), f"home rule not scoped: {part}")
         check("hyphens:auto" not in m.group(1), "Home intro must not hyphenate")
     check('class="home' in page("/") or "class=home" in page("/"), "Home main lacks the home class")
+
 
 def post_pages():
     """Generated post pages (an article.prose under a posts/ path), both languages."""
@@ -551,6 +551,7 @@ def test_headings_do_not_skip_levels_in_content_pages():
                 prev = lv
     check(not bad, f"heading levels skip on {len(bad)} pages, first: {bad[:3]}")
 
+
 def test_about_projects_pages_are_scoped_for_the_page_block():
     for url, cls in [("/about/", "ap-about"), ("/en/about/", "ap-about"),
                      ("/projetos/", "ap-projects"), ("/en/projects/", "ap-projects")]:
@@ -607,7 +608,6 @@ TESTS = [
     test_home_has_exactly_one_h1,
     test_home_featured_projects_dl_is_valid_and_private_is_unlinked,
     test_home_is_scoped_and_intro_not_hyphenated,
-
     test_post_title_is_the_only_h1_and_body_headings_are_demoted,
     test_post_year_headings_exclude_the_count_from_their_name,
     test_post_neovim_images_have_alt_text_in_both_languages,
@@ -615,7 +615,6 @@ TESTS = [
     test_post_code_blocks_show_an_overflow_cue,
     test_headings_do_not_skip_levels_in_content_pages,
     test_page_blocks_do_not_restyle_the_garden,
-
     test_about_projects_pages_are_scoped_for_the_page_block,
     test_about_projects_css_block_is_scoped,
 ]

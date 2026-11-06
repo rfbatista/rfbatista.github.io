@@ -185,19 +185,17 @@ footer.site a:hover{color:var(--ink)}
 main.home h1.lede{font-family:var(--serif);font-weight:500;font-size:2.5rem;line-height:1.12;letter-spacing:-.012em;margin:0 0 1.1rem;text-wrap:balance;hyphens:manual}
 main.home .prose{color:var(--soft);hyphens:manual;max-width:32rem}
 main.home .prose a{color:var(--ink)}
-main.home h2.sec{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:3.4rem 0 .8rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+main.home h2.sec{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin:4.2rem 0 .8rem;padding-top:.9rem}
 main.home h2.sec a{color:inherit}
+main.home h2.sec::before{content:"";display:block;width:1.6rem;height:2px;background:var(--mark);margin:-.7rem 0 .7rem}
 main.home ul.list li{padding:.4rem 0}
 main.home ul.list .t{font-size:1.04rem}
 main.home dl.proj div{padding:.55rem 0}
 main.home dl.proj dt{font-size:1.04rem}
-main.home .more{margin-top:1rem}
+main.home .more{margin-top:1rem;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem}
 main.home .home-garden{color:var(--ink)}
-main.home h2.sec::before{content:"";display:block;width:1.6rem;height:2px;background:var(--mark);margin:-.7rem 0 .7rem}
-main.home h2.sec{border-top:0;padding-top:.9rem;color:var(--soft);font-weight:700;margin-top:4.2rem}
-main.home dl.proj dd.st.on{color:var(--faint)}
-main.home ul.list .t a,main.home dl.proj dt a,main.home .home-garden a{text-decoration-color:color-mix(in srgb,currentColor 30%,transparent)}
-main.home .more{text-transform:uppercase;letter-spacing:.08em;font-size:.74rem}
+/* Softer underlines where a pointer can hover; on touch the shared (hover:none) cue stays at full strength (R18). */
+@media (hover:hover){main.home ul.list .t a,main.home dl.proj dt a,main.home .home-garden a{text-decoration-color:color-mix(in srgb,currentColor 30%,transparent)}}
 @media (max-width:560px){main.home h1.lede{font-size:2rem}main.home h2.sec{margin-top:3.4rem}}
 /* end page: home */
 
@@ -238,14 +236,11 @@ article.prose figure.highlight figcaption{text-align:left;margin:0 0 .3rem}
 .ap-about .prose a{text-decoration-thickness:1px;text-underline-offset:.2em}
 .ap-projects .prose{margin-bottom:.5rem}
 .ap-projects h2.sec{font:600 .95rem/1.4 var(--sans);letter-spacing:.01em;color:var(--soft);margin:4rem 0 .6rem;padding-bottom:.6rem;border-bottom:1px solid var(--rule)}
-.ap-projects dl.proj div{padding:.95rem 0;row-gap:.2rem;border-bottom:1px solid var(--rule)}
+.ap-projects dl.proj div{padding:.95rem 0;row-gap:.2rem;border-bottom:1px solid var(--rule);grid-template-columns:minmax(0,1fr) 6.5rem}
 .ap-projects dl.proj div:last-child{border-bottom:0}
-.ap-projects dl.proj div{grid-template-columns:minmax(0,1fr) 6.5rem}
-.ap-projects dl.proj dd.st{text-align:right}
-.ap-projects dl.proj .meta{font-size:.78rem}
-.ap-projects dl.proj .meta{white-space:nowrap}
+.ap-projects dl.proj .meta{font-size:.78rem;white-space:nowrap}
 .ap-projects dl.proj dt{font-size:1.08rem;line-height:1.35}
 .ap-projects dl.proj dd:not(.st){margin-top:.15rem}
-.ap-projects dl.proj dd.st{font-size:.8rem;font-weight:500;padding-top:.25rem}
+.ap-projects dl.proj dd.st{text-align:right;font-size:.8rem;font-weight:500;padding-top:.25rem}
 @media (max-width:560px){.ap-projects dl.proj div{grid-template-columns:minmax(0,1fr) 5.6rem}.ap-projects h2.sec{margin-top:3rem}}
 /* end page: about-projects */
