@@ -486,15 +486,15 @@ def post_pages():
 
 
 def test_post_title_is_the_only_h1_and_body_headings_are_demoted():
-    """R05: exactly one h1 per post page; the markdown h1/h2 of a post body sit one level lower."""
+    """R05: exactly one h1 per post page; no markdown heading is an h1."""
     posts = post_pages()
     check(len(posts) >= 8, f"found only {len(posts)} post pages")
     for rel, html in posts:
         check(len(re.findall(r"<h1\b", html)) == 1, f"{rel}: expected exactly one h1")
     html = page("/en/posts/find-replace-neovim/")
     body = re.search(r"<article class=\"?prose.*?</article>", html, re.S).group(0)
-    check(not re.search(r"<h1\b", body) and len(re.findall(r"<h3\b", body)) == 4 and len(re.findall(r"<h2\b", body)) == 1,
-          "the neovim post's four '## Step' headings are not h3 and its '# References' not h2")
+    check(not re.search(r"<h1\b", body) and len(re.findall(r"<h2\b", body)) == 5 and not re.search(r"<h3\b", body),
+          "the neovim post's four '## Step' headings and its stray '# References' should all be h2, with no skipped level")
 
 
 def test_post_year_headings_exclude_the_count_from_their_name():
@@ -535,6 +535,23 @@ def test_post_code_blocks_show_an_overflow_cue():
     check(re.search(r"pre[^{]*\{[^}]*(background[^;]*\blocal\b|mask|box-shadow)", block), "code blocks have no overflow cue")
 
 
+def test_headings_do_not_skip_levels_in_content_pages():
+    """The heading render hook demotes only pages that use "#": no page jumps from h1 to h3."""
+    bad = []
+    for sub in ("posts", "en/posts", "about", "en/about"):  # garden notes skip levels in their own markdown
+        for f in (PUBLIC / sub).rglob("index.html"):
+            html = f.read_text(encoding="utf-8")
+            main = re.search(r"<main.*?</main>", html, re.S)
+            levels = [int(x) for x in re.findall(r"<h([1-6])[ >]", main.group(0) if main else "")]
+            prev = 0
+            for lv in levels:
+                if lv > prev + 1:
+                    bad.append(str(f.relative_to(PUBLIC)))
+                    break
+                prev = lv
+    check(not bad, f"heading levels skip on {len(bad)} pages, first: {bad[:3]}")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -566,6 +583,7 @@ TESTS = [
     test_post_neovim_images_have_alt_text_in_both_languages,
     test_post_code_blocks_are_focusable_and_labelled,
     test_post_code_blocks_show_an_overflow_cue,
+    test_headings_do_not_skip_levels_in_content_pages,
 ]
 
 for t in TESTS:
