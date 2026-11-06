@@ -1,0 +1,3 @@
+{{- /* The page title is the h1: demote post headings one level (R05). The l<N> class keeps the size of the level written in markdown. */ -}}
+{{- $level := math.Min (add .Level 1) 6 | int -}}
+<h{{ $level }} id="{{ .Anchor }}" class="l{{ .Level }}">{{ .Text | safeHTML }}</h{{ $level }}>

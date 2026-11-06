@@ -12,13 +12,13 @@ Renomear alguma coisa no projeto inteiro é uma daquelas tarefas que fazem muita
 
 Rode `:Telescope live_grep` e digite a palavra ou o padrão que você quer substituir.
 
-![](./1.png)
+![Telescope live grep no Neovim: a lista Results mostra seis ocorrências de "opusdecod" e o painel Grep Preview mostra o arquivo Go correspondente.](./1.png)
 
 ## Passo 2: mandar os resultados para a quickfix list
 
 Com os resultados na tela, aperte `Ctrl + q`. O Telescope manda todas as ocorrências para a quickfix list.
 
-![](./2.png)
+![Quickfix list do Neovim aberta embaixo de um arquivo Go, com as mesmas seis ocorrências, cada uma com caminho, linha e coluna.](./2.png)
 
 ## Passo 3: substituir
 
@@ -30,7 +30,7 @@ Agora rode a substituição em cada item da lista:
 
 O `:cdo` executa o comando seguinte em cada item da quickfix list, então o `s/busca/troca/g` só é aplicado nas linhas que o Telescope encontrou. Coloque um `c` no final (`s/busca/troca/gc`) se quiser confirmar cada troca.
 
-![](./3.png)
+![Quickfix list com a linha de comando mostrando :cdo s/opusdecod/opusdecoder/g, pronta para executar.](./3.png)
 
 ## Passo 4: salvar tudo
 

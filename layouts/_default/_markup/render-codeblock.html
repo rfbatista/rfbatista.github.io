@@ -13,14 +13,14 @@
   </figcaption>
 {{- end }}
 {{- if transform.CanHighlight .Type }}
-  <pre tabindex="0" class="chroma"
+  <pre tabindex="0" role="region" aria-label="{{ with .Type }}{{ i18n "codeBlock" }}: {{ . }}{{ else }}{{ i18n "codeBlock" }}{{ end }}" class="chroma"
     ><code class="language-{{ .Type }}" data-lang="{{ .Type }}">
     {{- with transform.HighlightCodeBlock . -}}
       {{ .Inner }}
     {{- end -}}
   </code></pre>
 {{- else }}
-  <pre tabindex="0"
+  <pre tabindex="0" role="region" aria-label="{{ with .Type }}{{ i18n "codeBlock" }}: {{ . }}{{ else }}{{ i18n "codeBlock" }}{{ end }}"
     ><code class="language-{{ .Type }}" data-lang="{{ .Type }}"
       >{{ .Inner }}</code></pre>
 {{- end }}
