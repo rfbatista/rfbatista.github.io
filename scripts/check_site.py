@@ -447,6 +447,36 @@ def test_link_cue_on_touch_for_list_titles():
           "no visible link cue under (hover:none) for list titles and project names")
 
 
+def test_home_has_exactly_one_h1():
+    for url in ["/", "/en/"]:
+        check(len(re.findall(r"<h1[\s>]", page(url))) == 1, f"{url}: Home must have exactly one h1")
+
+
+def test_home_featured_projects_dl_is_valid_and_private_is_unlinked():
+    for url in ["/", "/en/"]:
+        html = page(url)
+        dls = re.findall(r"<dl class=\"?proj\"?>(.*?)</dl>", html, re.S)
+        check(dls, f"{url}: no Featured projects dl")
+        for dl in dls:
+            for group in re.findall(r"<div>(.*?)</div>", dl, re.S):
+                check(re.search(r"<dd[^>]*\bst\b", group), f"{url}: entry lacks Status dd")
+                if 'class=priv' in group or 'class="priv"' in group:
+                    check("<a " not in re.sub(r"<dd.*", "", group, flags=re.S), f"{url}: Private project is linked")
+
+
+def test_home_is_scoped_and_intro_not_hyphenated():
+    css = site_css()
+    m = re.search(r"/\* page: home \*/(.*?)/\* end page: home \*/", css, re.S)
+    check(m, "site.css lacks the page: home block")
+    if m:
+        check(css.rstrip().endswith("/* end page: home */"), "page: home block must be last in site.css")
+        for sel in re.findall(r"([^{}]+)\{", m.group(1)):
+            for part in sel.split(","):
+                check(part.strip().startswith(("main.home", "@media")), f"home rule not scoped: {part.strip()}")
+        check("hyphens:auto" not in m.group(1), "Home intro must not hyphenate")
+    check('class="home' in page("/") or "class=home" in page("/"), "Home main lacks the home class")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -469,6 +499,9 @@ TESTS = [
     test_language_links_and_toggle_are_labelled,
     test_project_list_markup_is_a_valid_description_list,
     test_link_cue_on_touch_for_list_titles,
+    test_home_has_exactly_one_h1,
+    test_home_featured_projects_dl_is_valid_and_private_is_unlinked,
+    test_home_is_scoped_and_intro_not_hyphenated,
 ]
 
 for t in TESTS:
