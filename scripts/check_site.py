@@ -551,6 +551,24 @@ def test_headings_do_not_skip_levels_in_content_pages():
                 prev = lv
     check(not bad, f"heading levels skip on {len(bad)} pages, first: {bad[:3]}")
 
+def test_about_projects_pages_are_scoped_for_the_page_block():
+    for url, cls in [("/about/", "ap-about"), ("/en/about/", "ap-about"),
+                     ("/projetos/", "ap-projects"), ("/en/projects/", "ap-projects")]:
+        html = page(url)
+        if not html:
+            continue
+        check(re.search(r'<main class="?[^">]*\b%s\b' % cls, html), f"{url}: main lacks .{cls}")
+
+
+def test_about_projects_css_block_is_scoped():
+    css = site_css()
+    m = re.search(r"/\* page: about-projects \*/(.*?)/\* end page: about-projects \*/", css, re.S)
+    check(m, "page: about-projects block missing from site.css")
+    if m:
+        for sel in re.findall(r"(?:^|\})\s*([^{}@]+)\{", m.group(1)):
+            check(all(x.strip().startswith(".ap-") for x in sel.split(",")), f"unscoped selector in page block: {sel.strip()[:60]}")
+        check(":root" not in m.group(1), "page block must not touch :root tokens")
+
 
 TESTS = [
     test_existing_pages_still_render,
@@ -584,6 +602,9 @@ TESTS = [
     test_post_code_blocks_are_focusable_and_labelled,
     test_post_code_blocks_show_an_overflow_cue,
     test_headings_do_not_skip_levels_in_content_pages,
+
+    test_about_projects_pages_are_scoped_for_the_page_block,
+    test_about_projects_css_block_is_scoped,
 ]
 
 for t in TESTS:

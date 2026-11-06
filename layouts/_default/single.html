@@ -1,3 +1,4 @@
+{{ define "mainclass" }}{{ if hasPrefix .File.Dir "about" }}ap-about{{ end }}{{ end }}
 {{ define "main" }}
 <h1 class="title">{{ .Title | default (humanize .File.ContentBaseName) }}</h1>
 {{ with .Description }}<p class="desc">{{ . }}</p>{{ end }}
