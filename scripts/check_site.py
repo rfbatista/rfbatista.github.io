@@ -447,6 +447,25 @@ def test_link_cue_on_touch_for_list_titles():
           "no visible link cue under (hover:none) for list titles and project names")
 
 
+def test_about_projects_pages_are_scoped_for_the_page_block():
+    for url, cls in [("/about/", "ap-about"), ("/en/about/", "ap-about"),
+                     ("/projetos/", "ap-projects"), ("/en/projects/", "ap-projects")]:
+        html = page(url)
+        if not html:
+            continue
+        check(re.search(r'<main class="?[^">]*\b%s\b' % cls, html), f"{url}: main lacks .{cls}")
+
+
+def test_about_projects_css_block_is_last_and_scoped():
+    css = site_css()
+    m = re.search(r"/\* page: about-projects \*/(.*)/\* end page: about-projects \*/\s*$", css, re.S)
+    check(m, "page: about-projects block missing or not at the end of site.css")
+    if m:
+        for sel in re.findall(r"(?:^|\})\s*([^{}@]+)\{", m.group(1)):
+            check(all(x.strip().startswith(".ap-") for x in sel.split(",")), f"unscoped selector in page block: {sel.strip()[:60]}")
+        check(":root" not in m.group(1), "page block must not touch :root tokens")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -469,6 +488,8 @@ TESTS = [
     test_language_links_and_toggle_are_labelled,
     test_project_list_markup_is_a_valid_description_list,
     test_link_cue_on_touch_for_list_titles,
+    test_about_projects_pages_are_scoped_for_the_page_block,
+    test_about_projects_css_block_is_last_and_scoped,
 ]
 
 for t in TESTS:
