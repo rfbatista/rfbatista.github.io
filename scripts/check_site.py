@@ -570,6 +570,18 @@ def test_about_projects_css_block_is_scoped():
         check(":root" not in m.group(1), "page block must not touch :root tokens")
 
 
+def test_page_blocks_do_not_restyle_the_garden():
+    """Garden and Photos only take the new type: no page block may restyle the Garden's own classes."""
+    css = site_css()
+    garden = (".bed", ".key", ".controls", ".g", ".empty", ".image-grid")
+    for block in re.findall(r"/\* page: [\w-]+ \*/(.*?)/\* end page: [\w-]+ \*/", css, re.S):
+        for sel in re.findall(r"(?:^|\})\s*([^{}@/]+)\{", block):
+            for one in sel.split(","):
+                one = one.strip()
+                check(not any(one == g or one.startswith(g + " ") or one.startswith(g + ".") or one.startswith(g + ":") for g in garden),
+                      f"a page block restyles Garden/Photos: {one}")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -602,6 +614,7 @@ TESTS = [
     test_post_code_blocks_are_focusable_and_labelled,
     test_post_code_blocks_show_an_overflow_cue,
     test_headings_do_not_skip_levels_in_content_pages,
+    test_page_blocks_do_not_restyle_the_garden,
 
     test_about_projects_pages_are_scoped_for_the_page_block,
     test_about_projects_css_block_is_scoped,

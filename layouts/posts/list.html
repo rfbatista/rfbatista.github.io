@@ -14,7 +14,7 @@
 </div>
 
 {{- range $posts.GroupByDate "2006" }}
-<section class="bed">
+<section class="bed bed-year">
   <h2>{{ .Key }} <small aria-hidden="true">{{ len .Pages }}</small></h2>
   <ul class="list">
     {{- range .Pages }}
