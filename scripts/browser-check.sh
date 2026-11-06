@@ -6,7 +6,7 @@
 set -eu
 
 here=$(cd "$(dirname "$0")" && pwd)
-root=$(dirname "$here")
+root=${BROWSER_CHECK_ROOT:-$(dirname "$here")}
 label=${1:-run}
 shots=${2:-${TMPDIR:-/tmp}/blog-browser-check/$label}
 tools=${BROWSER_CHECK_TOOLS:-$HOME/.cache/blog-browser-check}
@@ -17,13 +17,14 @@ if [ ! -d "$tools/node_modules/playwright" ] || [ ! -d "$tools/node_modules/axe-
   (cd "$tools" && npx playwright install chromium >/dev/null)
 fi
 
+port=${PORT:-1399}
 out=$(mktemp -d)
 trap 'rm -rf "$out"; [ -z "${srv:-}" ] || kill "$srv" 2>/dev/null || true' EXIT
 # No --gc: it deletes the tracked resources/_gen images.
-(cd "$root" && hugo --minify -d "$out" >/dev/null 2>&1)
+# Local baseURL: the pages must load their own CSS and fonts, not the live site's.
+(cd "$root" && hugo --minify --baseURL "http://127.0.0.1:$port/" -d "$out" >/dev/null 2>&1)
 
-port=${PORT:-1399}
-(cd "$out" && python3 -I -m http.server "$port" --bind 127.0.0.1 >/dev/null 2>&1) &
+python3 -m http.server "$port" --bind 127.0.0.1 --directory "$out" >/dev/null 2>&1 &
 srv=$!
 sleep 1
 

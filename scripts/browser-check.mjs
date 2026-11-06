@@ -39,10 +39,14 @@ for (const theme of ["light", "dark"]) {
           for (const e of l.getEntries()) if (!e.hadRecentInput) window.__cls += e.value;
         }).observe({ type: "layout-shift", buffered: true });
       });
+      // Delay the web fonts so the swap happens after first paint: the shift it causes is what we measure.
+      await page.route("**/*.woff2", async (r) => { await new Promise((ok) => setTimeout(ok, 700)); await r.continue(); });
       const resp = await page.goto(base + path, { waitUntil: "load" });
       if (!resp || resp.status() !== 200) { console.log(`FAIL ${name}: HTTP ${resp?.status()}`); failed = true; await page.close(); continue; }
+      await page.waitForFunction(() => [...document.fonts].some((f) => f.status === "loaded"), null, { timeout: 5000 }).catch(() => {});
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(300);
+      const fonts = await page.evaluate(() => [...document.fonts].filter((f) => f.status === "loaded").map((f) => `${f.family} ${f.weight}${f.style === "italic" ? "i" : ""}`));
       const cls = await page.evaluate(() => window.__cls);
       await page.screenshot({ path: `${out}/${name}-${w}-${theme}.png`, fullPage: true });
       await page.evaluate(axeSrc);
@@ -50,7 +54,7 @@ for (const theme of ["light", "dark"]) {
         runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"] },
       }));
       const violations = res.violations.map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.length }));
-      report.push({ page: name, width: +w, theme, cls: +cls.toFixed(4), violations });
+      report.push({ page: name, width: +w, theme, cls: +cls.toFixed(4), fonts, violations });
       const bad = violations.length > 0 || cls > CLS_LIMIT;
       if (bad) failed = true;
       console.log(`${bad ? "FAIL" : "ok  "} ${name} ${w} ${theme} cls=${cls.toFixed(4)} ${violations.map((v) => `${v.id}×${v.nodes}`).join(" ")}`);

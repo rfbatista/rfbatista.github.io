@@ -230,6 +230,100 @@ def test_existing_pages_still_render():
         check("<h" in page(url) or url == "/", f"{url}: renders no content")
 
 
+def all_pages():
+    return sorted(PUBLIC.rglob("*.html"))
+
+
+def font_faces():
+    """[(css text of one @font-face, its src urls)] from the site's own stylesheets."""
+    faces = []
+    for css in (PUBLIC / "css").glob("*.css"):
+        for m in re.finditer(r"@font-face\s*\{(.*?)\}", css.read_text(encoding="utf-8"), re.S):
+            faces.append((m.group(1), re.findall(r"url\(\s*['\"]?([^)'\"]+)", m.group(1))))
+    return faces
+
+
+LATIN_EXT = "latin-ext"
+
+
+def font_file(url):
+    """The built file a @font-face url points to (relative to css/, or site-absolute)."""
+    u = url.split("?")[0]
+    return (PUBLIC / "css" / u).resolve() if not u.startswith("/") else PUBLIC / u.lstrip("/")
+
+
+def test_fonts_are_self_hosted():
+    faces = font_faces()
+    check(faces, "no @font-face in the site's CSS")
+    for body, urls in faces:
+        for u in urls:
+            check("://" not in u or u.startswith("data:"), f"@font-face source outside the site: {u}")
+            check(font_file(u).is_file(), f"@font-face source not in the built site: {u}")
+    for f in all_pages():
+        html = f.read_text(encoding="utf-8")
+        check(not re.search(r"fonts\.(googleapis|gstatic)\.com|use\.typekit|fonts\.bunny", html),
+              f"{f.relative_to(PUBLIC)}: references a third-party font host")
+    for css in (PUBLIC / "css").glob("*.css"):
+        check(not re.search(r"fonts\.(googleapis|gstatic)\.com", css.read_text(encoding="utf-8")),
+              f"{css.name}: references a third-party font host")
+
+
+def test_font_families_and_weights():
+    have = set()
+    for body, _ in font_faces():
+        fam = re.search(r"font-family:\s*['\"]?([^;'\"]+)", body)
+        wt = re.search(r"font-weight:\s*([^;]+)", body)
+        st = re.search(r"font-style:\s*(\w+)", body)
+        if fam and wt:
+            have.add((fam.group(1).strip(), wt.group(1).strip(), (st.group(1) if st else "normal")))
+    for want in [("Spectral", "400", "normal"), ("Spectral", "400", "italic"), ("Spectral", "600", "normal"),
+                 ("Familjen Grotesk", "500", "normal"), ("Familjen Grotesk", "600", "normal")]:
+        check(want in have, f"missing @font-face {want}")
+
+
+def test_latin_budget_and_extended_on_demand():
+    latin = 0
+    for body, urls in font_faces():
+        if "size-adjust" in body or not urls:
+            continue
+        for u in urls:
+            if "local(" in body and not u:
+                continue
+            if LATIN_EXT in u:
+                check("unicode-range" in body, f"Latin Extended face has no unicode-range: {u}")
+            else:
+                check("unicode-range" in body, f"Latin face has no unicode-range: {u}")
+                f = font_file(u)
+                if f.is_file():
+                    latin += f.stat().st_size
+    check(0 < latin <= 120 * 1024, f"Latin-subset WOFF2 total is {latin / 1024:.1f} KB, want 0 < size <= 120 KB")
+
+
+def test_fallback_faces_have_metric_overrides():
+    fb = [b for b, _ in font_faces() if "local(" in b]
+    check(len(fb) >= 3, "want tuned local() fallback faces for the Reading and Heading face")
+    for b in fb:
+        for prop in ("size-adjust", "ascent-override", "descent-override"):
+            check(prop in b, f"fallback face lacks {prop}")
+
+
+def test_reading_face_is_preloaded_on_every_page():
+    for f in all_pages():
+        if f.name != "index.html" or "sitemap" in str(f):
+            continue
+        html = f.read_text(encoding="utf-8")
+        if "<html" not in html or "http-equiv=refresh" in html.replace('"', ""):
+            continue
+        check(re.search(r'<link[^>]+rel=["\']?preload["\']?[^>]+spectral-latin-400-normal\.woff2[^>]*>', html)
+              and re.search(r'as=["\']?font', html) and "crossorigin" in html,
+              f"{f.relative_to(PUBLIC)}: no preload of the Reading face")
+
+
+def test_font_licences_ship_with_the_fonts():
+    for name in ("spectral", "familjen-grotesk"):
+        check(any((PUBLIC / "fonts").glob(f"LICENSE-{name}*")), f"no licence file for {name} in fonts/")
+
+
 TESTS = [
     test_existing_pages_still_render,
     test_projects_pages,
@@ -237,6 +331,12 @@ TESTS = [
     test_flyer_description_links_to_the_post,
     test_nav_links_to_the_projects_page,
     test_home_pages_show_only_featured_projects,
+    test_fonts_are_self_hosted,
+    test_font_families_and_weights,
+    test_latin_budget_and_extended_on_demand,
+    test_fallback_faces_have_metric_overrides,
+    test_reading_face_is_preloaded_on_every_page,
+    test_font_licences_ship_with_the_fonts,
 ]
 
 for t in TESTS:

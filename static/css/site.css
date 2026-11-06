@@ -2,7 +2,8 @@
 
 :root{
   --bg:#fcfbf8; --ink:#1b1b1a; --soft:#57554f; --faint:#8d8a82; --rule:#e4e1d9; --under:#c9c5ba; --mark:#9a4b14; --wash:#f3f1ec;
-  --serif:"Iowan Old Style","Charter","Source Serif 4","Palatino Linotype",Georgia,serif;
+  --serif:"Spectral","Spectral Fallback Georgia","Spectral Fallback Times",Georgia,"Times New Roman",serif;
+  --sans:"Familjen Grotesk","Familjen Fallback",Arial,"Helvetica Neue",sans-serif;
   --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
   --measure:34rem;
 }
@@ -13,7 +14,7 @@
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.62 var(--serif);font-variant-numeric:oldstyle-nums;padding:0 20px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:19.5px/1.62 var(--serif);font-variant-numeric:oldstyle-nums;padding:0 20px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--ink);color:var(--bg)}
 main{max-width:var(--measure);margin:0 auto;padding:4.5rem 0 5rem}
 main.wide{max-width:40rem}
@@ -161,7 +162,7 @@ footer.site a:hover{color:var(--ink)}
 .pop i{display:block;font-style:normal;font-size:.78rem;color:var(--faint);margin-bottom:.4rem}
 
 @media (max-width:560px){
-  body{font-size:17px}
+  body{font-size:18.5px}
   main{padding-top:2.5rem}
   .top{flex-direction:column;gap:.4rem;margin-bottom:2.4rem}
   ul.list .d{flex-basis:4rem}

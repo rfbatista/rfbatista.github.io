@@ -16,6 +16,8 @@
     {{ with .Description | default .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="preload" href="{{ "fonts/spectral-latin-400-normal.woff2" | absURL }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ "css/fonts.css" | absURL }}?{{ now.Unix }}">
     <link rel="stylesheet" href="{{ "css/site.css" | absURL }}?{{ now.Unix }}">
     <link rel="stylesheet" href="{{ "css/syntax.css" | absURL }}?{{ now.Unix }}">
     {{- partial "favicon.html" . -}}
