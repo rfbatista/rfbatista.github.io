@@ -206,6 +206,23 @@ def test_nav_links_to_the_projects_page():
         check(bool(entry) and (entry[0][2] == "page") == is_projects_page, f"{url}: aria-current on the projects link should be {is_projects_page}")
 
 
+def test_home_pages_show_only_featured_projects():
+    featured = ["harness", "spillway", "Go Hydrate", "Captain Capybara"]
+    for url, lang, link_text, href in [
+        ("/", 0, "todos os projetos →", "https://rfbatista.github.io/projetos/"),
+        ("/en/", 1, "all projects →", "https://rfbatista.github.io/en/projects/"),
+    ]:
+        html = page(url)
+        p = projects(url)
+        check([e["name"] for e in p.entries] == featured, f"{url}: featured projects {[e['name'] for e in p.entries]}")
+        for e in p.entries:
+            want = TEXT.get(e["name"])
+            if want:
+                check(e["desc"] == want[2 + lang] and e["status"] == want[lang], f"{url}: {e['name']} text differs from the Project list")
+        m = re.search(r'<p class=more><a href=%s>([^<]*)</a>' % re.escape(href), html.replace('"', ""))
+        check(m is not None and m.group(1).strip() == link_text, f"{url}: no {link_text!r} link to {href}")
+
+
 def test_existing_pages_still_render():
     for url in ["/", "/en/", "/posts/", "/jardim/", "/about/", "/en/about/"]:
         check("<h" in page(url) or url == "/", f"{url}: renders no content")
@@ -217,6 +234,7 @@ TESTS = [
     test_projects_pages_are_translations_and_in_sitemap,
     test_flyer_description_links_to_the_post,
     test_nav_links_to_the_projects_page,
+    test_home_pages_show_only_featured_projects,
 ]
 
 for t in TESTS:

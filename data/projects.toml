@@ -11,7 +11,7 @@
 #   status    short label per language, free text
 #
 # Within a group the order is year, newest first; ties keep the order below.
-# The home page shows the featured Projects in the order below.
+# The home page shows the featured Projects, sorted the same way.
 
 [[project]]
 name = "harness"

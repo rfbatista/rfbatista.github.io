@@ -17,14 +17,13 @@
 <p class="more"><a href="{{ "posts/" | absLangURL }}">{{ i18n "allWriting" }} ({{ len $posts }}) →</a></p>
 {{- end }}
 
-{{ with .Params.projects }}
+{{- with where (partial "projects-list.html" .) "featured" true }}
 <h2 class="sec">{{ i18n "projects" }}</h2>
-<dl class="proj">
-  {{- range . }}
-  <div><dt><a href="{{ .url }}"{{ if hasPrefix .url "http" }} class="ext"{{ end }}>{{ .name }}</a></dt><span class="st{{ if .active }} on{{ end }}">{{ .status }}</span><dd>{{ .desc }}</dd></div>
-  {{- end }}
-</dl>
-{{ end }}
+{{ partial "project-entries.html" (dict "projects" . "meta" false) }}
+{{- with site.GetPage "/projetos" }}
+<p class="more"><a href="{{ .Permalink }}">{{ i18n "allProjects" }} →</a></p>
+{{- end }}
+{{- end }}
 
 {{- /* The garden is Portuguese-only; read it from the pt-br site so /en/ shows it too. */ -}}
 {{- $garden := site.GetPage "/jardim" -}}

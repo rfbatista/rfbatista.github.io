@@ -6,7 +6,7 @@
 {{- $group := where $all "active" .on }}
 {{- if $group }}
 <h2 class="sec">{{ i18n .key }}</h2>
-{{ partial "project-entries.html" $group }}
+{{ partial "project-entries.html" (dict "projects" $group "meta" true) }}
 {{- end }}
 {{- end }}
 {{ end }}
