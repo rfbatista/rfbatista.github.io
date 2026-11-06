@@ -5,3 +5,6 @@ deploy:
 install:
 	sh ./scripts/install.sh
 	
+
+check:
+	sh ./scripts/check.sh

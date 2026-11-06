@@ -1,0 +1,8 @@
+WARN  deprecated: project config key languages.pt-br.languageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.pt-br.locale instead.
+WARN  deprecated: project config key languages.pt-br.languageName was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.pt-br.label instead.
+WARN  deprecated: project config key languages.en.languageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.en.locale instead.
+WARN  deprecated: project config key languages.en.languageName was deprecated in Hugo v0.158.0 and will be removed in a future release. Use languages.en.label instead.
+WARN  deprecated: .Site.LanguageCode was deprecated in Hugo v0.158.0 and will be removed in a future release. Use .Site.Language.Locale instead.
+WARN  deprecated: .Site.Sites and .Page.Sites was deprecated in Hugo v0.156.0 and will be removed in a future release. Use hugo.Sites instead.
+WARN  deprecated: .Language.LanguageName was deprecated in Hugo v0.158.0 and will be removed in a future release. Use .Language.Label instead.
+WARN  deprecated: .Site.Data was deprecated in Hugo v0.156.0 and will be removed in a future release. Use hugo.Data instead.
