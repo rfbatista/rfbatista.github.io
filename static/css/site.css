@@ -33,7 +33,7 @@ h1,h2,h3,h4,h5,h6{text-wrap:balance;hyphens:manual}
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:3.2rem}
 .top .name{font:600 1.7rem/1 var(--sans);letter-spacing:-.02em;font-variant-ligatures:none;text-decoration:none}
 /* The amber full stop is decoration, drawn in CSS: the link's text stays "rfbatista". */
-.top .name::after{content:".";color:var(--mark);font-size:1.25em;margin-left:.02em}
+.top .name::after{content:"." / "";color:var(--mark);font-size:1.25em;margin-left:.02em}
 .top nav{display:flex;gap:1rem;align-items:baseline;font:500 .88rem/1.4 var(--sans);letter-spacing:.01em;flex-wrap:wrap}
 /* Hit areas of at least 24px: padding grows the target, the negative margin keeps the layout. */
 .top nav a{color:var(--soft);text-decoration:none;display:inline-block;padding:.4rem .4rem;margin:-.4rem -.4rem}
