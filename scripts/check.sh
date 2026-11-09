@@ -7,7 +7,7 @@ HUGO_VERSION=0.166.0 # keep in sync with .github/workflows/hugo.yaml
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(dirname "$here")
 
-if ! hugo version | grep -q "hugo v$HUGO_VERSION[+ ]"; then
+if ! hugo version | grep -q "hugo v$HUGO_VERSION[-+ ]"; then
   echo "check: needs Hugo $HUGO_VERSION, found: $(hugo version 2>&1 | head -1)" >&2
   exit 1
 fi
